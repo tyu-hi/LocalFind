@@ -1,85 +1,60 @@
 import React, { useState } from 'react';
+//import Form from 'React/Form';
 
-
-// Define the type for the restaurant object
-interface Restaurant {
-  name: string;
-  address: string;
-  imageUrl: string;
-}
-
-const AddRestaurantForm: React.FC = () => {
-  // State to store the restaurant object
-  const [restaurant, setRestaurant] = useState<Restaurant>({
-    name: '',
-    address: '',
-    imageUrl: '',
-  });
-
-  // Event handler for input changes
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    // Update the restaurant object with the new value
-    setRestaurant((prevRestaurant) => ({
-      ...prevRestaurant,
-      [name]: value,
-    }));
-  };
-
-  // Event handler for form submission
-  const handleSubmit = (e: React.FormEvent) => {
+const AddRestaurantForm = () => {
+  const submitForm = (e) => {
     e.preventDefault();
-    // Do something with the restaurant object (e.g., send it to a server)
-    console.log('Submitted Restaurant:', restaurant);
-    // Reset the form after submission
-    setRestaurant({
-      name: '',
-      address: '',
-      imageUrl: '',
-    });
+
+    const formData = new FormData(e.target);
+    const payload = Object.fromEntries(formData);
+    // Handle the payload as needed (e.g., send it to a server)
+    console.log(payload) //we will change what we do with this object later.
   };
 
   return (
     <div>
       <h2>Add a Restaurant</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Restaurant Name:
-          <input
+      <form onSubmit={submitForm}>
+        <Form.Group className="mb-3">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
             type="text"
             name="name"
-            value={restaurant.name}
-            onChange={handleInputChange}
-            required
+            placeholder="Enter Name"
           />
-        </label>
-        <br />
+        </Form.Group>
 
-        <label>
-          Restaurant Address:
-          <input
+        <Form.Group className="mb-3">
+          <Form.Label>Address</Form.Label>
+          <Form.Control
             type="text"
             name="address"
-            value={restaurant.address}
-            onChange={handleInputChange}
-            required
+            placeholder="Enter Address"
           />
-        </label>
-        <br />
+        </Form.Group>
 
-        <label>
-          Image URL:
-          <input
-            type="url"
-            name="imageUrl"
-            value={restaurant.imageUrl}
-            onChange={handleInputChange}
-            required
+        <Form.Group className="mb-3">
+          <Form.Label>Restaurant Picture</Form.Label>
+          <Form.Control
+            type="file"
+            name="restaurantPicture"
+            accept="image/*"
           />
-        </label>
-        <br />
+        </Form.Group>
 
-        <button type="submit">Add Restaurant</button>
+        <Form.Group className="mb-3">
+          <Form.Label>Food Style</Form.Label>
+          <Form.Control
+            as="select"
+            name="foodStyle"
+          >
+            <option value="italian">Italian</option>
+            <option value="mexican">Mexican</option>
+            <option value="chinese">Chinese</option>
+            {/* Add more options as needed */}
+          </Form.Control>
+        </Form.Group>
+
       </form>
     </div>
   );
