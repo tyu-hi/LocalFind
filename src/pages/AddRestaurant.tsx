@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap'; // Example using Reactstrap forms
 
 const AddRestaurantForm = () => {
-  const submitForm = (e) => {
+  const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -14,7 +14,7 @@ const AddRestaurantForm = () => {
   return (
     <div>
       <h2>Add a Restaurant</h2>
-      <form onSubmit={submitForm}>
+      <Form onSubmit={submitForm}>
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -54,8 +54,8 @@ const AddRestaurantForm = () => {
             {/* Add more options as needed */}
           </Form.Control>
         </Form.Group>
-      <GamepadButton> Submit</GamepadButton>
-      </form>
+      <Button variant="primary" type="submit">Submit</Button>
+      </Form>
     </div>
   );
 };
