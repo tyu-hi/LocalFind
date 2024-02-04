@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import Form from 'React/Form';
+import Form from 'React/Form';
 
 const AddRestaurantForm = () => {
   const submitForm = (e) => {
