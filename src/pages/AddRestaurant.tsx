@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Form from 'React/Form';
+import { Form, FormGroup, Label, Input, Button } from 'reactstrap'; // Example using Reactstrap forms
 
 const AddRestaurantForm = () => {
   const submitForm = (e) => {
@@ -54,7 +54,7 @@ const AddRestaurantForm = () => {
             {/* Add more options as needed */}
           </Form.Control>
         </Form.Group>
-
+      <GamepadButton> Submit</GamepadButton>
       </form>
     </div>
   );
