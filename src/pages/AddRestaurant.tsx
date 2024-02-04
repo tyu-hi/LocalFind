@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap'; // Example using Reactstrap forms
+import { Form, Button } from 'react-bootstrap'; // Example using Reactstrap forms
 
 const AddRestaurantForm = () => {
   const submitForm = (e: React.FormEvent) => {
@@ -14,7 +14,7 @@ const AddRestaurantForm = () => {
   return (
     <div>
       <h2>Add a Restaurant</h2>
-      <Form onSubmit={submitForm}>
+      <form onSubmit={submitForm}>
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -48,6 +48,7 @@ const AddRestaurantForm = () => {
             as="select"
             name="foodStyle"
           >
+            <option value="">Select Food Style</option>
             <option value="italian">Italian</option>
             <option value="mexican">Mexican</option>
             <option value="chinese">Chinese</option>
@@ -55,7 +56,7 @@ const AddRestaurantForm = () => {
           </Form.Control>
         </Form.Group>
       <Button variant="primary" type="submit">Submit</Button>
-      </Form>
+      </form>
     </div>
   );
 };
