@@ -1,13 +1,13 @@
 
 import './App.css'
-import AddRestaurantForm from './pages/AddRestaurant'
 import HomePage from './pages/HomePage'
+import LoginPage from './pages/LoginPage'
 
 function App() {
   return (
       <div>
         <HomePage/>
-        <AddRestaurantForm/>
+        <LoginPage/>
       </div>
   )
 }
