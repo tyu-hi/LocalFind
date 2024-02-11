@@ -13,7 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
+nav {
+	display: flex;
+	align-items: center;
+	margin-left: auto; /* Add this line to align items to the right */
+  }
 
 header {
 	display: flex;
@@ -88,3 +92,17 @@ nav {
 		font-size: 1.5rem;
 	}
 }
+
+.bar {
+	display: flex;
+	margin-right: 15%;
+	margin-left: 15%;
+	margin-top: 150px; /* Add margin-top to create buffer space below the navbar */
+  }
+  
+  .searchbar {
+	border-radius: 15px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	width: 100%; /* Adjust the width as needed */
+  }
