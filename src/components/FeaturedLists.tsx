@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import './FeaturedList.css'; // Import the CSS file
 
 function FeaturedList() {
