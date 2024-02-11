@@ -10,9 +10,7 @@ function App() {
   return (
       <div>
         <Navbar/>
-        <HomePage/>
-        <LoginPage/>
-        <AddRestuarant/>
+
       </div>
   )
 }

@@ -1,20 +1,35 @@
-import React from 'react';
-//import './src/index.css';
-
+import React, { useRef } from 'react'
+import { FaBars, FaTimes } from "react-icons/fa";
 
 function Navbar() {
-  return (
-    <div className="flex-container">
-      <h1 className="logo"><a href="#">Local Find</a></h1>
-      <ul className="navigation">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Demo</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </div>
-  );
+
+    const navRef = useRef<HTMLDivElement>(null);
+
+	const showNavbar = () => {
+        if (navRef.current) { // Check if navRef.current exists
+            navRef.current.classList.toggle("responsive_nav");
+        }
+    };
+
+	return (
+		<header>
+			<h3>LOGO</h3>
+			<nav ref={navRef}>
+				<a href="/#">Sign Up!</a>
+				<a href="/#">Login</a>
+				<button
+					className="nav-btn nav-close-btn"
+					onClick={showNavbar}>
+					<FaTimes />
+				</button>
+			</nav>
+			<button
+				className="nav-btn"
+				onClick={showNavbar}>
+				<FaBars />
+			</button>
+		</header>
+	);
 }
 
 
