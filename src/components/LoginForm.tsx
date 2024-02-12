@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import {FIREBASE_AUTH} from "../firebase/firebase";
 import {signInWithEmailAndPassword} from "firebase/auth";
 
 
-const SignIn = () => {
+const LoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const auth = FIREBASE_AUTH;
@@ -41,5 +41,5 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default LoginForm;
 
