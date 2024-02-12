@@ -6,8 +6,6 @@ import ProfilePage from './pages/ProfilePage';
 import SignUp from './components/SignUp';
 
 
-//sign up page is temp. we shouldn't have another page just to sign up
-
 const App: React.FC = () => {
   return (
     <Router>
