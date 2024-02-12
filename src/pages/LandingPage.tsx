@@ -11,7 +11,7 @@ import RecommendedRestaurants from './components/ReccomendedRestaurants'
 
 //import { Navbar } from 'react-bootstrap'
 
-function App() {
+function LandingPage() {
   return (
       <div>
         <Navbar/>

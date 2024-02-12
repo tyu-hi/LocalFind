@@ -55,7 +55,9 @@ const AddRestaurantForm = () => {
             {/* Add more options as needed */}
           </Form.Control>
         </Form.Group>
-      <Button variant="primary" type="submit">Submit</Button>
+        <Button variant="primary" type="submit">
+        Submit
+        </Button>
       </form>
     </div>
   );
