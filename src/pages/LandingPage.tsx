@@ -1,27 +1,24 @@
 
-import './App.css'
-import HomePage from './pages/HomePage'
-import LoginPage from './pages/LoginPage'
-import AddRestuarant from './pages/AddRestaurant'
-import Navbar from './components/NavBar'
-import SearchBar from './components/SearchBar'
-import Cards from './components/FeaturedLists'
-import Footer  from './components/Footer'
-import RecommendedRestaurants from './components/ReccomendedRestaurants'
+//import AddRestuarant from './pages/AddRestaurant'
+import NavBar from '../components/NavBar'
+import SearchBar from '../components/SearchBar'
+import FeaturedLists from '../components/FeaturedLists'
+import Footer from '../components/Footer'
+import RecommendedRestaurants from '../components/ReccomendedRestaurants'
 
 //import { Navbar } from 'react-bootstrap'
 
-function LandingPage() {
+const LandingPage = () => {
   return (
       <div>
-        <Navbar/>
+        <NavBar/>
         <SearchBar/>
-        <Cards />
+        <FeaturedLists />
         <RecommendedRestaurants />
-       <Footer />
+        <Footer />
         
       </div>
   )
 }
 
-export default App
+export default LandingPage
