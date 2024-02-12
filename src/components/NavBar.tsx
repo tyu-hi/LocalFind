@@ -1,7 +1,8 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
+import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from "react-icons/fa";
 
-function Navbar() {
+const NavBar = () => {
 
     const navRef = useRef<HTMLDivElement>(null);
 
@@ -16,7 +17,8 @@ function Navbar() {
 			<h3>LOGO</h3>
 			<nav ref={navRef}>
 				<a href="/#">Sign Up!</a>
-				<a href="/#">Login</a>
+				<Link to="/login">Login</Link>
+				
 				<button
 					className="nav-btn nav-close-btn"
 					onClick={showNavbar}>
@@ -33,4 +35,4 @@ function Navbar() {
 }
 
 
-export default Navbar;
+export default NavBar;
