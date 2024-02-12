@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {FIREBASE_AUTH} from "../firebase/firebase";
 import {createUserWithEmailAndPassword} from "firebase/auth";
+import { Link } from "react-router-dom";
 
 
 const SignUp = () => {
@@ -49,6 +50,8 @@ const SignUp = () => {
                 onChange = {(e) => setPassword(e.target.value)}></input>
                 <button type = "submit">Sign Up</button>
             </form>
+
+            Already have an account? <Link to="/login">Login</Link>
         </div>
 
     );
