@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import {FIREBASE_AUTH} from "../firebase/firebase";
 import {createUserWithEmailAndPassword} from "firebase/auth";
 

@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 
 const RecommendedRestaurants = () => {
   // Function to generate restaurant cards
