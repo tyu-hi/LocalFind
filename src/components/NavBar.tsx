@@ -17,6 +17,7 @@ const NavBar = () => {
 			<h3>LOGO</h3>
 			<nav ref={navRef}>
 				<Link to="/profile">Temp Profile</Link>
+				<Link to="/addrestraunt">Temp Add Restraunt</Link>
 				<Link to="/signup">Sign up</Link>
 				<Link to="/login">Login</Link>
 				

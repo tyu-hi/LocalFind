@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import SignUp from './components/SignUp';
+import AddRestaurantPage from './pages/AddRestaurantPage';
 
 
 const App: React.FC = () => {
@@ -14,6 +15,7 @@ const App: React.FC = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage/>} />
         <Route path="/signup" element={<SignUp/>} />
+        <Route path="/addrestraunt" element={<AddRestaurantPage/>} />
       </Routes>
     </Router>
   );
