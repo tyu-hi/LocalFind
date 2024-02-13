@@ -1,14 +1,40 @@
-import React, { useState } from 'react';
+//import React from 'react';
 import { Form, Button } from 'react-bootstrap'; // Example using Reactstrap forms
 
-const AddRestaurantForm = () => {
-  const submitForm = (e: React.FormEvent) => {
+//firestore
+import { FIREBASE_FIRESTORE } from '../firebase/firebase';
+
+const AddRestaurantForm: React.FC = () => {
+  const submitForm = async (e: React.FormEvent<HTMLFormElement>) => { //form element?
     e.preventDefault();
 
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.currentTarget);
+    /* //Tingyu's:
+    const payload: Record<string, string> = {}; //payload type, edited this section 
+    formData.forEach((value, key) => {
+      payload[key] = value.toString();
+    });
+    */
+
+    //Inman's:
     const payload = Object.fromEntries(formData);
     // Handle the payload as needed (e.g., send it to a server)
     console.log(payload) //we will change what we do with this object later.
+    
+
+    /*
+    //Firestore implementation, but "collection" issue
+    try {
+      const firestore = FIREBASE_FIRESTORE;
+      await firestore.collection('restaurants').add(payload);
+      console.log('Added restaurant successfully!');
+        //or navigate to another page, or show sucess message
+    } catch (error) {
+      console.error('Error adding restraunt: ', error);
+    }
+    */
+    
+
   };
 
   return (
@@ -56,7 +82,7 @@ const AddRestaurantForm = () => {
           </Form.Control>
         </Form.Group>
         <Button variant="primary" type="submit">
-        Submit
+            Submit
         </Button>
       </form>
     </div>
