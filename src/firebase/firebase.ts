@@ -3,7 +3,8 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-
+import {collection} from "firebase/firestore";
+import {getDocs} from "firebase/firestore";
 //import { getStorage } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -30,5 +31,18 @@ const FIREBASE_AUTH = getAuth(FIREBASE_APP);
 
 // Initialize Firestore
 const FIREBASE_FIRESTORE = getFirestore(FIREBASE_APP);
+
+const colRef = collection(FIREBASE_FIRESTORE, 'Restaurants ')
+
+getDocs(colRef).then((snapshot) => {
+  let restaurants = []
+  snapshot.docs.forEach((doc) => {
+    restaurants.push({...doc.data(), id: doc.id})
+  })
+  console.log(restaurants)
+})
+.catch(err => {
+  console.log("SMTHS WRONG")
+})
 
 export { FIREBASE_APP, FIREBASE_ANALYTICS, FIREBASE_AUTH, FIREBASE_FIRESTORE }
