@@ -78,6 +78,15 @@ const AddRestaurantForm: React.FC = () => {
             <option value="italian">Italian</option>
             <option value="mexican">Mexican</option>
             <option value="chinese">Chinese</option>
+            </Form.Control>
+            <Form.Control
+            as="select"
+            name="price"
+          >
+            <option value="">Select Food Style</option>
+            <option value="$10-20">$10-20</option>
+            <option value="$20-50">$20-50</option>
+            <option value="50+">$50+</option>
             {/* Add more options as needed */}
           </Form.Control>
         </Form.Group>
