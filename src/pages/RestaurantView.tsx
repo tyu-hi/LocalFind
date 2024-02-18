@@ -31,49 +31,50 @@ const settings = {
 };
 
 interface MenuData {
-    id: number;
-    title: string;
-    description: string;
-  }
+  id: number;
+  title: string;
+  description: string;
+}
 
-  interface RestaurantData {
-    name: string;
-    image: string;
-    mapApi: string;
-    address: string;
-  }
+interface RestaurantData {
+  name: string;
+  image: string;
+  mapApi: string;
+  address: string;
+}
 
 const [restaurantInfo, setRestaurantInfo] = useState({
-    name: '',
-  image: '',
-  mapApi: '',
-  address: '',
+  name: "",
+  image: "",
+  mapApi: "",
+  address: "",
 });
-  const [menuItems, setMenuItems] = useState<MenuData[]>([]);
 
-  useEffect(() => {
-    // Fetch restaurant information from your database
-    // Example: fetch('/api/restaurant').then(response => response.json()).then(data => setRestaurantInfo(data));
-    // Fetch menu items from your database
-    // Example: fetch('/api/menu').then(response => response.json()).then(data => setMenuItems(data));
-    // Replace the above lines with the actual fetching logic from your database
-    // For demonstration purpose, let's assume you have static data
-    const restaurantData: RestaurantData = {
-      name: 'Restaurant Name',
-      image: 'restaurant-image-url',
-      mapApi: 'Map API',
-      address: 'Restaurant Address',
-    };
-    const menuData: MenuData[] = [
-      { id: 1, title: 'Item 1', description: 'Description for Item 1' },
-      { id: 2, title: 'Item 2', description: 'Description for Item 2' },
-      { id: 3, title: 'Item 3', description: 'Description for Item 3' },
-      { id: 4, title: 'Item 4', description: 'Description for Item 4' },
-      // Add more items as needed
-    ];
-    setRestaurantInfo(restaurantData);
-    setMenuItems(menuData);
-  }, []);
+const [menuItems, setMenuItems] = useState<MenuData[]>([]);
+
+useEffect(() => {
+  // Fetch restaurant information from your database
+  // Example: fetch('/api/restaurant').then(response => response.json()).then(data => setRestaurantInfo(data));
+  // Fetch menu items from your database
+  // Example: fetch('/api/menu').then(response => response.json()).then(data => setMenuItems(data));
+  // Replace the above lines with the actual fetching logic from your database
+  // For demonstration purpose, let's assume you have static data
+  const restaurantData: RestaurantData = {
+    name: "Restaurant Name",
+    image: "restaurant-image-url",
+    mapApi: "Map API",
+    address: "Restaurant Address",
+  };
+  const menuData: MenuData[] = [
+    { id: 1, title: "Item 1", description: "Description for Item 1" },
+    { id: 2, title: "Item 2", description: "Description for Item 2" },
+    { id: 3, title: "Item 3", description: "Description for Item 3" },
+    { id: 4, title: "Item 4", description: "Description for Item 4" },
+    // Add more items as needed
+  ];
+  setRestaurantInfo(restaurantData);
+  setMenuItems(menuData);
+}, []);
 
 function RestaurantView() {
   return (
@@ -104,9 +105,9 @@ function RestaurantView() {
         <Col>
           <h1>Menu</h1>
           <Slider {...settings}>
-            {menuItems.map(item => (
+            {menuItems.map((item) => (
               <div key={item.id}>
-                <Card style={{ width: '18rem' }}>
+                <Card style={{ width: "18rem" }}>
                   <Card.Img variant="top" src="holder.js/100px180" />
                   <Card.Body>
                     <Card.Title>{item.title}</Card.Title>
@@ -122,7 +123,6 @@ function RestaurantView() {
       <Row>
         <Col>Reviews</Col>
       </Row>
-
     </Container>
   );
 }
