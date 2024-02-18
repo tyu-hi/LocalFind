@@ -83,7 +83,7 @@ const AddRestaurantForm: React.FC = () => {
             as="select"
             name="price"
           >
-            <option value="">Select Food Style</option>
+            <option value="">Select Price Range</option>
             <option value="$10-20">$10-20</option>
             <option value="$20-50">$20-50</option>
             <option value="50+">$50+</option>
