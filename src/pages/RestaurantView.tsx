@@ -1,8 +1,6 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Button } from "react-bootstrap/lib/InputGroup";
-  //there is an issue here!
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -97,7 +95,7 @@ function RestaurantView() {
           <Row>{restaurantInfo.mapApi}</Row>
           <Row>{restaurantInfo.address}</Row>
           <Row>
-            <Button>Reserve</Button>
+            <h1>Reserve</h1>
           </Row>
         </Col>
       </Row>
