@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -5,14 +6,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Card from "react-bootstrap/Card";
-import { useEffect, useState } from "react";
 
 const settings = {
-  dots: true,
+  dots: false,
   infinite: true,
   speed: 500,
   slidesToShow: 4,
-  slidesToScroll: 1,
+  slidesToScroll: 2,
   responsive: [
     {
       breakpoint: 768,
@@ -42,40 +42,39 @@ interface RestaurantData {
   address: string;
 }
 
-const [restaurantInfo, setRestaurantInfo] = useState({
-  name: "",
-  image: "",
-  mapApi: "",
-  address: "",
-});
-
-const [menuItems, setMenuItems] = useState<MenuData[]>([]);
-
-useEffect(() => {
-  // Fetch restaurant information from your database
-  // Example: fetch('/api/restaurant').then(response => response.json()).then(data => setRestaurantInfo(data));
-  // Fetch menu items from your database
-  // Example: fetch('/api/menu').then(response => response.json()).then(data => setMenuItems(data));
-  // Replace the above lines with the actual fetching logic from your database
-  // For demonstration purpose, let's assume you have static data
-  const restaurantData: RestaurantData = {
-    name: "Restaurant Name",
-    image: "restaurant-image-url",
-    mapApi: "Map API",
-    address: "Restaurant Address",
-  };
-  const menuData: MenuData[] = [
-    { id: 1, title: "Item 1", description: "Description for Item 1" },
-    { id: 2, title: "Item 2", description: "Description for Item 2" },
-    { id: 3, title: "Item 3", description: "Description for Item 3" },
-    { id: 4, title: "Item 4", description: "Description for Item 4" },
-    // Add more items as needed
-  ];
-  setRestaurantInfo(restaurantData);
-  setMenuItems(menuData);
-}, []);
-
 function RestaurantView() {
+  const [restaurantInfo, setRestaurantInfo] = useState<RestaurantData>({
+    name: "",
+    image: "",
+    mapApi: "",
+    address: "",
+  });
+  const [menuItems, setMenuItems] = useState<MenuData[]>([]);
+
+  useEffect(() => {
+    // Fetch restaurant information from your database
+    // Example: fetch('/api/restaurant').then(response => response.json()).then(data => setRestaurantInfo(data));
+    // Fetch menu items from your database
+    // Example: fetch('/api/menu').then(response => response.json()).then(data => setMenuItems(data));
+    // Replace the above lines with the actual fetching logic from your database
+    // For demonstration purpose, let's assume you have static data
+    const restaurantData: RestaurantData = {
+      name: "Restaurant Name",
+      image: "restaurant-image-url",
+      mapApi: "Map API",
+      address: "Restaurant Address",
+    };
+    const menuData: MenuData[] = [
+      { id: 1, title: "Item 1", description: "Description for Item 1" },
+      { id: 2, title: "Item 2", description: "Description for Item 2" },
+      { id: 3, title: "Item 3", description: "Description for Item 3" },
+      { id: 4, title: "Item 4", description: "Description for Item 4" },
+      // Add more items as needed
+    ];
+    setRestaurantInfo(restaurantData);
+    setMenuItems(menuData);
+  }, []);
+
   return (
     <Container>
       <Row>
@@ -86,11 +85,11 @@ function RestaurantView() {
       </Row>
 
       <Row>
-        <Col sm={6}>
+        <Col md={6}>
           <Row>Title</Row>
           <Row>Description</Row>
         </Col>
-        <Col sm={{ span: 4, offset: 2 }}>
+        <Col md={{ span: 4, offset: 2 }}>
           <h1>Map Component</h1>
           <Row>{restaurantInfo.mapApi}</Row>
           <Row>{restaurantInfo.address}</Row>
