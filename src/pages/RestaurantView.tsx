@@ -5,11 +5,12 @@ import "slick-carousel/slick/slick-theme.css";
 
 
 const settings = {
+  focusOnSelect: true,
   dots: false,
   infinite: true,
   speed: 500,
   slidesToShow: 4,
-  slidesToScroll: 2,
+  slidesToScroll: 1,
   responsive: [
     {
       breakpoint: 768,
@@ -52,11 +53,12 @@ function RestaurantView() {
   const [menuItems, setMenuItems] = useState<MenuData[]>([]);
 
   const images = [
-    "https://example.com/image1.jpg",
-    "https://example.com/image2.jpg",
-    "https://example.com/image3.jpg",
-    // Add more image URLs as needed
+    "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "https://images.pexels.com/photos/3860097/pexels-photo-3860097.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "https://images.pexels.com/photos/3860097/pexels-photo-3860097.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   ];
+  
 
   useEffect(() => {
     // Fetch restaurant information from your database
@@ -123,7 +125,7 @@ function RestaurantView() {
               </div>
             ))}
           </Slider>
-          <div className="text-white px-2 py-2 rounded-lg text-2xl font-bold mt-4">
+          <div className="text-white px-2 py-2 rounded-lg mb-4 text-4xl font-extrabold ">
             {restaurantInfo.name}
           </div>
         </div>
@@ -131,13 +133,13 @@ function RestaurantView() {
         <div className="flex flex-col">
           <div className="flex gap-8">
             <div className="w-full md:w-2/2">
-              <h1 className="mb-4 text-white px-4">Description</h1>
+              <h1 className="mb-4 text-white px-4 text-xl font-medium">Description</h1>
               <div className="bg-gray-100 p-4 mb-6 rounded-lg">
                 <p className="text-gray-800">{restaurantInfo.info}</p>
               </div>
             </div>
             <div className="w-full md:w-1/3">
-              <h1 className="mb-4 text-white px-4">Map Component</h1>
+              <h1 className="mb-4 text-white px-4 text-xl font-medium">Map Component</h1>
               <div className="bg-gray-100 p-4 mb-6 rounded-lg">
                 <div className="flex flex-col">
                   <div className="bg-gray-900 p-4 mb-6 rounded-lg">
@@ -161,7 +163,7 @@ function RestaurantView() {
       </div>
 
       <div className="w-full">
-        <h1 className="mb-4 text-white px-4">Menu</h1>
+        <h1 className="mb-4 text-white px-4 text-xl font-medium">Menu</h1>
         <div className="bg-gray-100 p-4 rounded-lg mb-6">
           <div className="slider">
             <Slider {...settings}>
@@ -187,7 +189,7 @@ function RestaurantView() {
 
       <div className="grid grid-cols-1">
         <div className="flex flex-col">
-          <h1 className="mb-4 text-white px-4">Reviews</h1>
+          <h1 className="mb-4 text-white px-4 text-xl font-medium">Reviews</h1>
           <div className="bg-gray-100 p-4 rounded-lg">
             {/* Reviews content */}
           </div>

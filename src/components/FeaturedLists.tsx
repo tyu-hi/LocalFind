@@ -1,4 +1,7 @@
 import * as React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const FeaturedLists = () => {
   // Sample random image links
@@ -8,32 +11,29 @@ const FeaturedLists = () => {
     "https://www.modernfarmhouseeats.com/wp-content/uploads/2021/03/chili-lime-shrimp-ramen-2-scaled.jpg", // Example placeholder link
   ];
 
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    focusOnSelect: true,
+  };
+
   return (
     <div className="featured-lists">
       <h2>Featured Lists</h2>
-      <div className="card-container">
-        <div className="card">
-          <img src={randomImageLinks[0]} alt="Cuisine 1" />
-          <div className="card-content">
-            <h3>Cuisine Category 1</h3>
-            <p>Description of Cuisine Category 1</p>
+      <Slider {...settings}>
+        {randomImageLinks.map((image, index) => (
+          <div className="card" key={index}>
+            <img src={image} alt={`Cuisine ${index + 1}`} />
+            <div className="card-content">
+              <h3>Cuisine Category {index + 1}</h3>
+              <p>Description of Cuisine Category {index + 1}</p>
+            </div>
           </div>
-        </div>
-        <div className="card">
-          <img src={randomImageLinks[1]} alt="Cuisine 2" />
-          <div className="card-content">
-            <h3>Cuisine Category 2</h3>
-            <p>Description of Cuisine Category 2</p>
-          </div>
-        </div>
-        <div className="card">
-          <img src={randomImageLinks[2]} alt="Cuisine 3" />
-          <div className="card-content">
-            <h3>Cuisine Category 3</h3>
-            <p>Description of Cuisine Category 3</p>
-          </div>
-        </div>
-      </div>
+        ))}
+      </Slider>
     </div>
   );
 };
