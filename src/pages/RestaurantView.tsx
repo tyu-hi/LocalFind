@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Card from "react-bootstrap/Card";
+
 
 const settings = {
   dots: false,
@@ -33,6 +30,7 @@ interface MenuData {
   id: number;
   title: string;
   description: string;
+  imageUrl: string;
 }
 
 interface RestaurantData {
@@ -40,6 +38,7 @@ interface RestaurantData {
   image: string;
   mapApi: string;
   address: string;
+  info: string;
 }
 
 function RestaurantView() {
@@ -48,8 +47,16 @@ function RestaurantView() {
     image: "",
     mapApi: "",
     address: "",
+    info: "",
   });
   const [menuItems, setMenuItems] = useState<MenuData[]>([]);
+
+  const images = [
+    "https://example.com/image1.jpg",
+    "https://example.com/image2.jpg",
+    "https://example.com/image3.jpg",
+    // Add more image URLs as needed
+  ];
 
   useEffect(() => {
     // Fetch restaurant information from your database
@@ -60,15 +67,41 @@ function RestaurantView() {
     // For demonstration purpose, let's assume you have static data
     const restaurantData: RestaurantData = {
       name: "Restaurant Name",
-      image: "restaurant-image-url",
+      image:
+        "https://hips.hearstapps.com/hmg-prod/images/gettyimages-660714144-1516227341.jpg",
       mapApi: "Map API",
       address: "Restaurant Address",
+      info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec hendrerit, odio vitae ultricies consequat, odio tortor placerat libero, nec sodales justo elit sed dolor. In non purus vitae mauris dapibus mattis. Duis rutrum magna a erat suscipit, at ultrices libero luctus. Sed sed dolor vitae quam lobortis dictum. Curabitur non justo nec nisi vehicula posuere. Nam suscipit quam at convallis consequat. Integer consectetur nisi nec eros eleifend bibendum. Duis vel sapien quis mauris lobortis feugiat. Maecenas ac libero eget orci bibendum vehicula nec sed enim. Integer viverra nisi ut magna condimentum, sed ultricies felis posuere. Nam ullamcorper felis sit amet leo interdum, quis molestie ligula luctus. Aliquam tincidunt neque a nunc iaculis, eu dictum dolor tincidunt. Nulla nec quam eu odio consectetur hendrerit. Proin ut metus in magna gravida posuere",
     };
     const menuData: MenuData[] = [
-      { id: 1, title: "Item 1", description: "Description for Item 1" },
-      { id: 2, title: "Item 2", description: "Description for Item 2" },
-      { id: 3, title: "Item 3", description: "Description for Item 3" },
-      { id: 4, title: "Item 4", description: "Description for Item 4" },
+      {
+        id: 1,
+        title: "Item 1",
+        description: "Description for Item 1",
+        imageUrl:
+          "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      },
+      {
+        id: 2,
+        title: "Item 2",
+        description: "Description for Item 2",
+        imageUrl:
+          "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      },
+      {
+        id: 3,
+        title: "Item 3",
+        description: "Description for Item 3",
+        imageUrl:
+          "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      },
+      {
+        id: 4,
+        title: "Item 4",
+        description: "Description for Item 4",
+        imageUrl:
+          "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      },
       // Add more items as needed
     ];
     setRestaurantInfo(restaurantData);
@@ -76,52 +109,91 @@ function RestaurantView() {
   }, []);
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <h1>{restaurantInfo.name}</h1>
-          <img src={restaurantInfo.image} alt="Restaurant" />
-        </Col>
-      </Row>
-
-      <Row>
-        <Col md={6}>
-          <Row>Title</Row>
-          <Row>Description</Row>
-        </Col>
-        <Col md={{ span: 4, offset: 2 }}>
-          <h1>Map Component</h1>
-          <Row>{restaurantInfo.mapApi}</Row>
-          <Row>{restaurantInfo.address}</Row>
-          <Row>
-            <h1>Reserve</h1>
-          </Row>
-        </Col>
-      </Row>
-
-      <Row>
-        <Col>
-          <h1>Menu</h1>
+    <div className="container mx-auto">
+      <div className="grid grid-cols-1 gap-8">
+        <div className="relative">
           <Slider {...settings}>
-            {menuItems.map((item) => (
-              <div key={item.id}>
-                <Card style={{ width: "18rem" }}>
-                  <Card.Img variant="top" src="holder.js/100px180" />
-                  <Card.Body>
-                    <Card.Title>{item.title}</Card.Title>
-                    <Card.Text>{item.description}</Card.Text>
-                  </Card.Body>
-                </Card>
+            {images.map((image, index) => (
+              <div key={index}>
+                <img
+                  src={image}
+                  alt={`Slide ${index}`}
+                  className="w-full h-96 object-cover"
+                />
               </div>
             ))}
           </Slider>
-        </Col>
-      </Row>
+          <div className="text-white px-2 py-2 rounded-lg text-2xl font-bold mt-4">
+            {restaurantInfo.name}
+          </div>
+        </div>
 
-      <Row>
-        <Col>Reviews</Col>
-      </Row>
-    </Container>
+        <div className="flex flex-col">
+          <div className="flex gap-8">
+            <div className="w-full md:w-2/2">
+              <h1 className="mb-4 text-white px-4">Description</h1>
+              <div className="bg-gray-100 p-4 mb-6 rounded-lg">
+                <p className="text-gray-800">{restaurantInfo.info}</p>
+              </div>
+            </div>
+            <div className="w-full md:w-1/3">
+              <h1 className="mb-4 text-white px-4">Map Component</h1>
+              <div className="bg-gray-100 p-4 mb-6 rounded-lg">
+                <div className="flex flex-col">
+                  <div className="bg-gray-900 p-4 mb-6 rounded-lg">
+                    <h2 className="text-white">Map API</h2>
+                    <div className="text-gray-300">{restaurantInfo.mapApi}</div>
+                  </div>
+                  <div className="bg-gray-900 p-4 mb-6 rounded-lg">
+                    <h2 className="text-white">Address</h2>
+                    <div className="text-gray-300">
+                      {restaurantInfo.address}
+                    </div>
+                  </div>
+                  <button className="p-4 transition duration-300 bg-blue-500 hover:bg-blue-400 rounded-lg">
+                      <h2 className="text-white">Reserve</h2>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full">
+        <h1 className="mb-4 text-white px-4">Menu</h1>
+        <div className="bg-gray-100 p-4 rounded-lg mb-6">
+          <div className="slider">
+            <Slider {...settings}>
+              {menuItems.map((menuItem) => (
+                <div key={menuItem.id} className="p-4">
+                  <img
+                    src={menuItem.imageUrl}
+                    alt={menuItem.title}
+                    className="w-full h-64 object-cover rounded"
+                  />
+                  <div className="mt-2">
+                    <h3 className="text-xl font-semibold mb-2 text-gray-900">
+                      {menuItem.title}
+                    </h3>
+                    <p className="text-gray-900">{menuItem.description}</p>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1">
+        <div className="flex flex-col">
+          <h1 className="mb-4 text-white px-4">Reviews</h1>
+          <div className="bg-gray-100 p-4 rounded-lg">
+            {/* Reviews content */}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
