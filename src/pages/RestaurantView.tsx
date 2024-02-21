@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+//import * as React from 'react';
+import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import NavBar from "../components/NavBar";
 
 
 const settings = {
@@ -111,87 +113,90 @@ function RestaurantView() {
   }, []);
 
   return (
-    <div className="container mx-auto">
-      <div className="grid grid-cols-1 gap-8">
-        <div className="relative">
-          <Slider {...settings}>
-            {images.map((image, index) => (
-              <div key={index}>
-                <img
-                  src={image}
-                  alt={`Slide ${index}`}
-                  className="w-full h-96 object-cover"
-                />
-              </div>
-            ))}
-          </Slider>
-          <div className="text-white px-2 py-2 rounded-lg mb-4 text-4xl font-extrabold ">
-            {restaurantInfo.name}
-          </div>
-        </div>
-
-        <div className="flex flex-col">
-          <div className="flex gap-8">
-            <div className="w-full md:w-2/2">
-              <h1 className="mb-4 text-white px-4 text-xl font-medium">Description</h1>
-              <div className="bg-gray-100 p-4 mb-6 rounded-lg">
-                <p className="text-gray-800">{restaurantInfo.info}</p>
-              </div>
-            </div>
-            <div className="w-full md:w-1/3">
-              <h1 className="mb-4 text-white px-4 text-xl font-medium">Map Component</h1>
-              <div className="bg-gray-100 p-4 mb-6 rounded-lg">
-                <div className="flex flex-col">
-                  <div className="bg-gray-900 p-4 mb-6 rounded-lg">
-                    <h2 className="text-white">Map API</h2>
-                    <div className="text-gray-300">{restaurantInfo.mapApi}</div>
-                  </div>
-                  <div className="bg-gray-900 p-4 mb-6 rounded-lg">
-                    <h2 className="text-white">Address</h2>
-                    <div className="text-gray-300">
-                      {restaurantInfo.address}
-                    </div>
-                  </div>
-                  <button className="p-4 transition duration-300 bg-blue-500 hover:bg-blue-400 rounded-lg">
-                      <h2 className="text-white">Reserve</h2>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="w-full">
-        <h1 className="mb-4 text-white px-4 text-xl font-medium">Menu</h1>
-        <div className="bg-gray-100 p-4 rounded-lg mb-6">
-          <div className="slider">
+    <div>
+      <NavBar/>
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 gap-8">
+          <div className="relative">
             <Slider {...settings}>
-              {menuItems.map((menuItem) => (
-                <div key={menuItem.id} className="p-4">
+              {images.map((image, index) => (
+                <div key={index}>
                   <img
-                    src={menuItem.imageUrl}
-                    alt={menuItem.title}
-                    className="w-full h-64 object-cover rounded"
+                    src={image}
+                    alt={`Slide ${index}`}
+                    className="w-full h-96 object-cover"
                   />
-                  <div className="mt-2">
-                    <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                      {menuItem.title}
-                    </h3>
-                    <p className="text-gray-900">{menuItem.description}</p>
-                  </div>
                 </div>
               ))}
             </Slider>
+            <div className="text-white px-2 py-2 rounded-lg mb-4 text-4xl font-extrabold ">
+              {restaurantInfo.name}
+            </div>
+          </div>
+
+          <div className="flex flex-col">
+            <div className="flex gap-8">
+              <div className="w-full md:w-2/2">
+                <h1 className="mb-4 text-white px-4 text-xl font-medium">Description</h1>
+                <div className="bg-gray-100 p-4 mb-6 rounded-lg">
+                  <p className="text-gray-800">{restaurantInfo.info}</p>
+                </div>
+              </div>
+              <div className="w-full md:w-1/3">
+                <h1 className="mb-4 text-white px-4 text-xl font-medium">Map Component</h1>
+                <div className="bg-gray-100 p-4 mb-6 rounded-lg">
+                  <div className="flex flex-col">
+                    <div className="bg-gray-900 p-4 mb-6 rounded-lg">
+                      <h2 className="text-white">Map API</h2>
+                      <div className="text-gray-300">{restaurantInfo.mapApi}</div>
+                    </div>
+                    <div className="bg-gray-900 p-4 mb-6 rounded-lg">
+                      <h2 className="text-white">Address</h2>
+                      <div className="text-gray-300">
+                        {restaurantInfo.address}
+                      </div>
+                    </div>
+                    <button className="p-4 transition duration-300 bg-blue-500 hover:bg-blue-400 rounded-lg">
+                        <h2 className="text-white">Reserve</h2>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="grid grid-cols-1">
-        <div className="flex flex-col">
-          <h1 className="mb-4 text-white px-4 text-xl font-medium">Reviews</h1>
-          <div className="bg-gray-100 p-4 rounded-lg">
-            {/* Reviews content */}
+        <div className="w-full">
+          <h1 className="mb-4 text-white px-4 text-xl font-medium">Menu</h1>
+          <div className="bg-gray-100 p-4 rounded-lg mb-6">
+            <div className="slider">
+              <Slider {...settings}>
+                {menuItems.map((menuItem) => (
+                  <div key={menuItem.id} className="p-4">
+                    <img
+                      src={menuItem.imageUrl}
+                      alt={menuItem.title}
+                      className="w-full h-64 object-cover rounded"
+                    />
+                    <div className="mt-2">
+                      <h3 className="text-xl font-semibold mb-2 text-gray-900">
+                        {menuItem.title}
+                      </h3>
+                      <p className="text-gray-900">{menuItem.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1">
+          <div className="flex flex-col">
+            <h1 className="mb-4 text-white px-4 text-xl font-medium">Reviews</h1>
+            <div className="bg-gray-100 p-4 rounded-lg">
+              {/* Reviews content */}
+            </div>
           </div>
         </div>
       </div>

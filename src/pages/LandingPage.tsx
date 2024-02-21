@@ -14,6 +14,7 @@ const LandingPage = () => {
         <NavBar/>
         <h1 className="text-3xl mt-10 text-center font-bold ">
             Title
+            
         </h1>
         <SearchBar/>
         <FeaturedLists />
