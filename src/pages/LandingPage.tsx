@@ -12,7 +12,7 @@ const LandingPage = () => {
   return (
       <div>
         <NavBar/>
-        <h1 className="text-3xl mt-10 text-center font-bold ">
+        <h1 className="text-3xl mt-20 text-center font-bold ">
             Title
             
         </h1>

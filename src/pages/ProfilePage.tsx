@@ -9,11 +9,10 @@ const ProfilePage = () => {
   return (
     <div>
         <NavBar/>
+
         <div className="mx-auto max-w-md">
           
-
           <div className="flex flex-col items-center mb-10 mt-10">
-
             {/*top*/}
             <div className="flex flex-row mr-10">
               {/*change profile pic to passable {variable} later */}
@@ -30,7 +29,6 @@ const ProfilePage = () => {
               </div>
             </div>
              
-          
             {/*bottom*/}
             <div className="flex flex-row mt-4 w-full">
               {/*side bar*/}
@@ -50,11 +48,9 @@ const ProfilePage = () => {
               <div className="w-full h-100 bg-gray-200 border border-gray-400 p-4">
                 Map.
               </div>
-              
             </div> 
 
           </div>
-
         </div>
 
         <Footer/>
