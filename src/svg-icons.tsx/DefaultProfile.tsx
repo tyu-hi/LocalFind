@@ -2,8 +2,8 @@ export const DefaultProfile = () => {
     return (
         <svg 
             fill="#000000" 
-            width="200px" 
-            height="200px" 
+            width="250px" 
+            height="250px" 
             viewBox="0 0 32 32" 
             id="icon" 
             xmlns="http://www.w3.org/2000/svg"

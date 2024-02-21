@@ -10,13 +10,13 @@ const ProfilePage = () => {
     <div>
         <NavBar/>
 
-        <div className="mx-auto max-w-md">
+        <div className="mx-auto width-full p-10 ml-10 mr-10">
           
-          <div className="flex flex-col items-center mb-10 mt-10">
+          <div className="flex flex-col items-center mb-10 mt-10 w-full">
             {/*top*/}
-            <div className="flex flex-row mr-10">
+            <div className="flex flex-row">
               {/*change profile pic to passable {variable} later */}
-              <div className="w-full rounded-full overflow-hidden mr-8">
+              <div className="w-full rounded-full overflow-hidden">
                 <DefaultProfile />
               </div>
               {/*profile details*/}
@@ -30,10 +30,10 @@ const ProfilePage = () => {
             </div>
              
             {/*bottom*/}
-            <div className="flex flex-row mt-4 w-full">
+            <div className="flex flex-row mt-8 w-full">
               {/*side bar*/}
-              <div className="mr-6 w-full">
-                <div className="grid grid-cols-6 gap-4 text-center">
+              <div className=" w-40">
+                <div className="grid grid-cols-6 gap-4 text-center w-50">
                   {/* Array items */}
                   <div className="bg-gray-200 p-2 col-span-6">Map</div>
                   <div className="bg-gray-200 p-2 col-span-6">Reviews</div>
@@ -45,7 +45,7 @@ const ProfilePage = () => {
               </div>
 
               {/*map of resturants you ate at*/}
-              <div className="w-full h-100 bg-gray-200 border border-gray-400 p-4">
+              <div className="w-60 h-100 bg-gray-200 border p-4 ml-10">
                 Map.
               </div>
             </div> 
