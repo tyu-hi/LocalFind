@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage';
 import SignUp from './components/SignUp';
 import AddRestaurantPage from './pages/AddRestaurantPage';
 import RestaurantView from './pages/RestaurantView';
+import DestinationPage from './pages/DestinationPage';
 
 
 const App: React.FC = () => {
@@ -18,6 +19,7 @@ const App: React.FC = () => {
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/addrestraunt" element={<AddRestaurantPage/>} />
         <Route path="/view" element={<RestaurantView/>} />
+        <Route path="/destination" element={<DestinationPage/>} />
       </Routes>
     </Router>
   );
