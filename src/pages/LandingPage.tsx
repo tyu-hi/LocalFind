@@ -5,10 +5,19 @@ import SearchBar from '../components/SearchBar'
 import FeaturedLists from '../components/FeaturedLists'
 import Footer from '../components/Footer'
 import RecommendedRestaurants from '../components/RecommendedRestaurants'
+import { useNavigate } from 'react-router-dom'
+//import { useHistory } from 'react-router-dom'
 
 //import { Navbar } from 'react-bootstrap'
 
 const LandingPage = () => {
+  //get search query
+  const navigate = useNavigate();
+  //const urlParams = new URLSearchParams(window.location.search);
+  //const query = urlParams.get('query') || '';
+  const handleSearchSubmit = (searchValue: string) => {
+    navigate(`/destination?query=${searchValue}`);
+  }
   return (
       <div>
         <NavBar/>
@@ -16,7 +25,7 @@ const LandingPage = () => {
             Title
             
         </h1>
-        <SearchBar/>
+        <SearchBar onSubmit={handleSearchSubmit}/>
         <FeaturedLists />
         <RecommendedRestaurants />
         <Footer />
