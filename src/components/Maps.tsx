@@ -14,9 +14,9 @@ export default function Maps() {
   const [open, setOpen] = useState(false);
 
   return (
-    <APIProvider apiKey={"API KEY"}>
+    <APIProvider apiKey={"APIKEY"}>
       <div style={{ height: "40vh", width: "40vw" }}>
-        <Map zoom={9} center={position} mapId={"MAP ID"}>
+        <Map zoom={17} center={position} mapId={"MAPID"}>
           <AdvancedMarker position={position} onClick={() => setOpen(true)}>
             <Pin
               background={"red"}
@@ -27,7 +27,8 @@ export default function Maps() {
 
           {open && (
             <InfoWindow position={position} onCloseClick={() => setOpen(false)}>
-              <p>UCLA</p>
+              <h1 style={({ color: "black" })}>Test header</h1>
+              <p style={({ color: "black" })}>Hi this is ucla</p>
             </InfoWindow>
           )}
         </Map>
