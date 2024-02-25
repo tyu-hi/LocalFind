@@ -8,7 +8,6 @@ import AddRestaurantPage from './pages/AddRestaurantPage';
 import RestaurantView from './pages/RestaurantView';
 import DestinationPage from './pages/DestinationPage';
 
-
 const App: React.FC = () => {
   return (
     <Router>
