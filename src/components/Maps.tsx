@@ -36,3 +36,6 @@ export default function Maps() {
     </APIProvider>
   );
 }
+
+
+export default Maps
