@@ -60,6 +60,15 @@ const AddRestaurantForm: React.FC = () => {
         </Form.Group>
 
         <Form.Group className="mb-3">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            type="text"
+            name="description"
+            placeholder="Enter description"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
           <Form.Label>Restaurant Picture</Form.Label>
           <Form.Control
             type="file"
