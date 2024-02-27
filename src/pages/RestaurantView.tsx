@@ -4,6 +4,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import NavBar from "../components/NavBar";
+import ReviewList from "../components/ReviewList";
+import ReviewForm from "../components/ReviewForm";
 
 
 const settings = {
@@ -195,7 +197,8 @@ function RestaurantView() {
           <div className="flex flex-col">
             <h1 className="mb-4 text-white px-4 text-xl font-medium">Reviews</h1>
             <div className="bg-gray-100 p-4 rounded-lg">
-              {/* Reviews content */}
+                <ReviewForm restaurantId={restaurantId} />
+                <ReviewList restaurantId={restaurantId} />
             </div>
           </div>
         </div>
