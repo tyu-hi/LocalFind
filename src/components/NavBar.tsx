@@ -14,7 +14,10 @@ const NavBar = () => {
 
 	return (
 		<header>
-			<h3>LOGO</h3>
+			<Link to="/">
+				<h3>LOGO</h3>
+			</Link>
+
 			<nav ref={navRef}>
 				<Link to="/profile">Temp Profile</Link>
 				<Link to="/addrestraunt">Temp Add Restraunt</Link>
@@ -28,6 +31,7 @@ const NavBar = () => {
 					<FaTimes />
 				</button>
 			</nav>
+			
 			<button
 				className="nav-btn"
 				onClick={showNavbar}>

@@ -9,8 +9,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: black;
+  background-color: white;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -117,15 +117,16 @@ nav {
 .bar {
 	display: flex;
 	margin-right: 15%;
-	margin-left: 15%;
-	margin-top: 150px; /* Add margin-top to create buffer space below the navbar */
+	margin-left: 30%;
+	margin-top: 25px; /* Add margin-top to create buffer space below the navbar */
+	align-items: center;
   }
   
   .searchbar {
 	border-radius: 15px;
 	padding: 10px;
 	border: 1px solid #ccc;
-	width: 100%; /* Adjust the width as needed */
+	width: 70%; /* Adjust the width as needed */
   }
 
 
