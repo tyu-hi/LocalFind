@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { FIREBASE_FIRESTORE, FIREBASE_AUTH } from "../firebase/firebase";
 import { FIREBASE_STORAGE } from "../firebase/firebase";
 import { addDoc, collection } from "firebase/firestore";
-import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { useAuthState } from "react-firebase-hooks/auth";
-import NavBar from "./NavBar";
+
+
 
 interface ReviewFormProps {
   restaurantId: string;
@@ -14,21 +14,24 @@ interface ReviewFormProps {
 const ReviewForm: React.FC<ReviewFormProps> = ({ restaurantId }) => {
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>("");
+  const [user] = useAuthState(FIREBASE_AUTH);
+  const firestore = FIREBASE_FIRESTORE;
+  const reviewCollectionRef = collection(firestore, "reviews");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const userId = FIREBASE_AUTH.currentUser?.uid;
-    if (!userId) {
+    if (!user || !user.uid) {
       console.error("User not authenticated");
       return;
     }
     try {
-      await FIREBASE_FIRESTORE.collection("reviews").add({
-        userId,
+      await addDoc(reviewCollectionRef, {
+        userId: user.uid,
         restaurantId,
         rating,
         comment,
       });
+      console.log("Review added successfully!");
       setRating(0);
       setComment("");
     } catch (error) {
