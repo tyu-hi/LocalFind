@@ -12,11 +12,12 @@ interface ReviewListProps {
   restaurantId: string;
 }
 
+const db = FIREBASE_FIRESTORE;
 const ReviewList: React.FC<ReviewListProps> = ({ restaurantId }) => {
   const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
-    const unsubscribe = FIREBASE_FIRESTORE.collection('reviews')
+    const unsubscribe = db.collection('reviews')
       .where('restaurantId', '==', restaurantId)
       .onSnapshot((snapshot: any[]) => {
         const reviewsData: Review[] = [];
