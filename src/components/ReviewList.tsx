@@ -11,7 +11,7 @@ interface ReviewListProps {
   restaurantId: string;
 }
 
-const ReviewList: React.FC<ReviewListProps> = ({ restaurantId }) => {
+const ReviewList: React.FC<ReviewListProps> = ({ restaurantId }: ReviewListProps) => {
   const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {

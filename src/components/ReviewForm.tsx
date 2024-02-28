@@ -5,7 +5,7 @@ interface ReviewFormProps {
   restaurantId: string;
 }
 
-const ReviewForm: React.FC<ReviewFormProps> = ({ restaurantId }) => {
+const ReviewForm: React.FC<ReviewFormProps> = ({ restaurantId }: ReviewFormProps) => {
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>('');
 
