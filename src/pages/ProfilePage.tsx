@@ -1,7 +1,7 @@
 import NavBar from "../components/NavBar"
 import Footer from "../components/Footer"
 import { DefaultProfile } from "../svg-icons.tsx/DefaultProfile"
-
+import Map from '../components/Maps'
 //After use is logged in, I would like for the signup/sign in to disappear, 
 //and be replaced by the icon of the user
 
@@ -10,46 +10,51 @@ const ProfilePage = () => {
     <div>
         <NavBar/>
 
-        <div className="mx-auto width-full p-10 ml-10 mr-10">
+        <div className="mx-auto width-full">
           
-          <div className="flex flex-col items-center mb-10 mt-10 w-full">
+          <div className="flex flex-col items-center justfiy-center mb-10 mt-10 w-full">
             {/*top*/}
-            <div className="flex flex-row">
+            <div className="flex flex-row ">
               {/*change profile pic to passable {variable} later */}
-              <div className="w-full rounded-full overflow-hidden">
+              <div className="w-100 h-100 sm:w-100 sm:h-100 aspect-square rounded-full overflow-hidden ">
                 <DefaultProfile />
+                not fixed!!
               </div>
               {/*profile details*/}
-              <div className="mt-5 w-full">
-                <h2 className = "text-2x1 font-bold text-gray-700">User Name</h2>
+              <div className="ml-10 mt-7">
+                <h2 className = "text-lg sm:text-2xl md:text-4xl lg:text-5xl font-bold text-gray-700">User Name</h2>
                 {/*change location to passable {variable} later */}
-                <p className="text-gray-600">Location</p>
+                <p className="text-gray-600 mt-2">Location</p>
                 {/*change Bio/Stats to passable {variable} later */}
                 <p className="text-sm mb-2 text-gray-700 mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...</p>
               </div>
             </div>
              
             {/*bottom*/}
-            <div className="flex flex-row mt-8 w-full">
-              {/*side bar*/}
-              <div className=" w-40">
-                <div className="grid grid-cols-6 gap-4 text-center w-50">
-                  {/* Array items */}
-                  <div className="bg-gray-200 p-2 col-span-6">Map</div>
-                  <div className="bg-gray-200 p-2 col-span-6">Reviews</div>
-                  <div className="bg-gray-200 p-2 col-span-6">Bookmarks</div>
-                  <div className="bg-gray-200 p-2 col-span-6">Reservations</div>
-                  <div className="bg-gray-200 p-2 col-span-6">Friends</div>
-                  <div className="bg-gray-200 p-2 col-span-6">Acheivements</div>
-                </div>
-              </div>
 
-              {/*map of resturants you ate at*/}
-              <div className="w-60 h-100 bg-gray-200 border p-4 ml-10">
-                Map.
+            {/*map of resturants you ate at*/}
+            <div className="flex-row mt-10">
+                Your Map
+              <div className="bg-gray-200 border p-4 mt-3">
+                <Map/>
               </div>
-            </div> 
+            </div>
 
+            {/*reviews*/}
+            <div className="flex-row mt-10">
+              Your Reviews
+              <div className="bg-gray-200 border p-4 mt-3">
+                render reviews component by user
+              </div>
+            </div>
+
+            {/*Playlists*/}
+            <div className="flex-row mt-10">
+              Your Playlists
+              <div className="bg-gray-200 border p-4 mt-3">
+                render playlist component by user
+              </div>
+            </div>
           </div>
         </div>
 
