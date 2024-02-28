@@ -1,11 +1,5 @@
-import React, { useState } from "react";
-//firestore
-import { FIREBASE_FIRESTORE, FIREBASE_AUTH } from "../firebase/firebase";
-import { FIREBASE_STORAGE } from "../firebase/firebase";
-import { addDoc, collection } from "firebase/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
-
-
+import React, { useState } from 'react';
+import { FIREBASE_FIRESTORE, FIREBASE_AUTH } from '../firebase/firebase';
 
 interface ReviewFormProps {
   restaurantId: string;
@@ -13,29 +7,37 @@ interface ReviewFormProps {
 
 const ReviewForm: React.FC<ReviewFormProps> = ({ restaurantId }) => {
   const [rating, setRating] = useState<number>(0);
-  const [comment, setComment] = useState<string>("");
-  const [user] = useAuthState(FIREBASE_AUTH);
-  const firestore = FIREBASE_FIRESTORE;
-  const reviewCollectionRef = collection(firestore, "reviews");
+  const [comment, setComment] = useState<string>('');
+
+  const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRating(parseInt(e.target.value));
+  };
+
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(e.target.value);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user || !user.uid) {
-      console.error("User not authenticated");
+    const userId = FIREBASE_AUTH.currentUser?.uid; // Get logged-in user's ID
+    if (!userId) {
+      console.error('User not authenticated');
       return;
     }
     try {
-      await addDoc(reviewCollectionRef, {
-        userId: user.uid,
-        restaurantId,
-        rating,
-        comment,
+      // Add the review to Firestore
+      await FIREBASE_FIRESTORE.collection('reviews').add({
+        userId: userId,
+        restaurantId: restaurantId,
+        rating: rating,
+        comment: comment,
       });
-      console.log("Review added successfully!");
+      // Reset form fields
       setRating(0);
-      setComment("");
+      setComment('');
+      console.log('Review submitted successfully');
     } catch (error) {
-      console.error("Error adding review: ", error);
+      console.error('Error submitting review:', error);
     }
   };
 
@@ -47,7 +49,11 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ restaurantId }) => {
           type="number"
           id="rating"
           value={rating}
-          onChange={(e) => setRating(parseInt(e.target.value))}
+          onChange={handleRatingChange}
+          min={0}
+          max={5}
+          step={1}
+          required
         />
       </div>
       <div>
@@ -55,7 +61,8 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ restaurantId }) => {
         <textarea
           id="comment"
           value={comment}
-          onChange={(e) => setComment(e.target.value)}
+          onChange={handleCommentChange}
+          required
         />
       </div>
       <button type="submit">Submit Review</button>
