@@ -138,11 +138,11 @@ const AddRestaurantForm: React.FC = () => {
                 <option value="chinese">Chinese</option>
                 <option value="thai">Thai</option>
                 <option value="indian">Indian</option>
-                <option value="african">African</option>
                 <option value="italian">Italian</option>
                 <option value="mexican">Mexican</option>
+                <option value="medeterranian">Medeterranian</option>
                 <option value="vietnamese">Vietnamese</option>
-                <option value="fusion">Fusion</option>
+                <option value="japanese">Japanese</option>
               </select>
             </div>
             
