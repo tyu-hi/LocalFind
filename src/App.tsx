@@ -7,6 +7,7 @@ import SignUpForm from './components/SignUpForm';
 import AddRestaurantPage from './pages/AddRestaurantPage';
 import RestaurantView from './pages/RestaurantView';
 import DestinationPage from './pages/DestinationPage';
+import NearbySearch from './components/NearbySearch/NearbySearch';
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
         <Route path="/addrestraunt" element={<AddRestaurantPage/>} />
         <Route path="/view" element={<RestaurantView/>} />
         <Route path="/destination" element={<DestinationPage/>} />
+        <Route path="/search" element={<NearbySearch />} />
       </Routes>
     </Router>
   );
