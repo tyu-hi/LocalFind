@@ -131,7 +131,7 @@ function RestaurantView() {
                 </div>
               ))}
             </Slider>
-            <div className="text-white px-2 py-2 rounded-lg mb-4 text-4xl font-extrabold ">
+            <div className="text-black px-2 py-2 rounded-lg mb-4 text-4xl font-serif">
               {restaurantInfo.name}
             </div>
           </div>
@@ -139,13 +139,13 @@ function RestaurantView() {
           <div className="flex flex-col">
             <div className="flex gap-8">
               <div className="w-full md:w-2/2">
-                <h1 className="mb-4 text-white px-4 text-xl font-medium">Description</h1>
+                <h1 className="mb-4 text-black px-4 text-xl font-medium">Description</h1>
                 <div className="bg-gray-100 p-4 mb-6 rounded-lg">
                   <p className="text-gray-800">{restaurantInfo.info}</p>
                 </div>
               </div>
               <div className="w-full md:w-1/3">
-                <h1 className="mb-4 text-white px-4 text-xl font-medium">Map Component</h1>
+                <h1 className="mb-4 text-black px-4 text-xl font-medium">Map Component</h1>
                 <div className="bg-gray-100 p-4 mb-6 rounded-lg">
                   <div className="flex flex-col">
                     <div className="bg-gray-900 p-4 mb-6 rounded-lg">
@@ -169,7 +169,7 @@ function RestaurantView() {
         </div>
 
         <div className="w-full">
-          <h1 className="mb-4 text-white px-4 text-xl font-medium">Menu</h1>
+          <h1 className="mb-4 text-black px-4 text-xl font-medium">Menu</h1>
           <div className="bg-gray-100 p-4 rounded-lg mb-6">
             <div className="slider">
               <Slider {...settings}>
@@ -197,8 +197,7 @@ function RestaurantView() {
           <div className="flex flex-col">
             <h1 className="mb-4 text-white px-4 text-xl font-medium">Reviews</h1>
             <div className="bg-gray-100 p-4 rounded-lg">
-                <ReviewForm restaurantId={restaurantId} />
-                <ReviewList restaurantId={restaurantId} />
+               
             </div>
           </div>
         </div>

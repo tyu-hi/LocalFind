@@ -2,6 +2,8 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from "react-icons/fa";
 
+
+
 const NavBar = () => {
 
     const navRef = useRef<HTMLDivElement>(null);
