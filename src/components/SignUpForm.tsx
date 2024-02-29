@@ -9,13 +9,15 @@ import {addDoc} from "firebase/firestore";
 const SignUpForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [firstname, setFirstName] = useState("");
+    const [lastname, setLastName ] = useState("")
     const [favoriteCuisine, setFavoriteCuisine] = useState("");
     const [secondFavoriteCuisine, setSecondFavoriteCuisine] = useState("");
     const [thirdFavoriteCuisine, setThirdFavoriteCuisine] = useState("");
     const [preferredPriceRange, setPreferredPriceRange] = useState("");
     const [modeOfFood, setModeOfFood] = useState("");
-    const cuisines  = ["American", "Chinese", "Korean", "Fusion", "Thai", 
-        "Indian", "Medeterranian", "Mexican", "Vietnamese", "African" ];
+    const cuisines  = ["Select", "American", "Chinese", "Korean", "Thai", 
+        "Indian", "Medeterranian", "Mexican", "Vietnamese", "Italian", "Japanese"];
     const costRange = ["$10-20", "$20-$50", "$50+"];
     const modeOfFoodOptions = ["Foodtrucks", "Sit-down Restaurants"];
     //const [loading, setLoading] = useState(false);
@@ -32,6 +34,8 @@ const SignUpForm = () => {
             addDoc(colRef, {
                 uid: userCredentials.user.uid,
                 email: userCredentials.user.email,
+                firstname: firstname.trim(),
+                lastname: lastname.trim(),
                 favoriteCuisine: favoriteCuisine,
                 secondFavoriteCuisine: secondFavoriteCuisine,
                 thirdFavoriteCuisine: thirdFavoriteCuisine,
@@ -58,17 +62,27 @@ const SignUpForm = () => {
                 placeholder = "Enter your email" 
                 style={{ color: 'black' }}
                 value= {email} 
-                onChange = {(e) => setEmail(e.target.value)}></input>
+                onChange = {(e) => setEmail(e.target.value)} required></input>
                 <input type = "password" 
                 placeholder = "Enter your password" 
                 value= {password} 
                 style={{ color: 'black' }}
-                onChange = {(e) => setPassword(e.target.value)}></input>
+                onChange = {(e) => setPassword(e.target.value)} required></input>
+                <input type = "First Name" 
+                placeholder = "Enter your first name" 
+                value= {firstname} 
+                style={{ color: 'black' }}
+                onChange = {(e) => setFirstName(e.target.value)} required></input>
+                <input type = "Last Name" 
+                placeholder = "Enter your last name" 
+                value= {lastname} 
+                style={{ color: 'black' }}
+                onChange = {(e) => setLastName(e.target.value)} required></input>
                 <label htmlFor="favorite-cuisine">Select your favorite cuisine:</label>
                 <select
             value={favoriteCuisine}
           onChange={(e) => setFavoriteCuisine(e.target.value)}
-            >
+            required >
           {cuisines.map((cuisine, index) => (
             <option key={index} value={cuisine}>
               {cuisine}
@@ -79,7 +93,7 @@ const SignUpForm = () => {
         <select
             value={secondFavoriteCuisine}
           onChange={(e) => setSecondFavoriteCuisine(e.target.value)}
-            >
+            required>
           {cuisines.map((cuisine, index) => (
             <option key={index} value={cuisine}>
               {cuisine}
@@ -90,7 +104,7 @@ const SignUpForm = () => {
         <select
             value={thirdFavoriteCuisine}
             onChange={(e) => setThirdFavoriteCuisine(e.target.value)}
-            >
+            required>
           {cuisines.map((cuisine, index) => (
             <option key={index} value={cuisine}>
               {cuisine}
@@ -101,7 +115,7 @@ const SignUpForm = () => {
         <select
         value={preferredPriceRange}
           onChange={(e) => setPreferredPriceRange(e.target.value)}
-            >
+          required >
           {costRange.map((cost, index) => (
             <option key={index} value={cost}>
               {cost}
@@ -112,7 +126,7 @@ const SignUpForm = () => {
         <select
         value={modeOfFood}
           onChange={(e) => setModeOfFood(e.target.value)}
-            >
+            required >
           {modeOfFoodOptions.map((modeOptions, index) => (
             <option key={index} value={modeOptions}>
               {modeOptions}
