@@ -16,10 +16,10 @@ const SignUpForm = () => {
     const [thirdFavoriteCuisine, setThirdFavoriteCuisine] = useState("");
     const [preferredPriceRange, setPreferredPriceRange] = useState("");
     const [modeOfFood, setModeOfFood] = useState("");
-    const cuisines  = ["Select", "American", "Chinese", "Korean", "Thai", 
+    const cuisines  = ["American", "Chinese", "Korean", "Thai", 
         "Indian", "Medeterranian", "Mexican", "Vietnamese", "Italian", "Japanese"];
-    const costRange = ["Select", "$10-20", "$20-$50", "$50+"];
-    const modeOfFoodOptions = ["Select", "Foodtrucks", "Sit-down Restaurants"];
+    const costRange = [ "$10-20", "$20-$50", "$50+"];
+    const modeOfFoodOptions = ["Foodtrucks", "Sit-down Restaurants"];
     //const [loading, setLoading] = useState(false);
     const auth = FIREBASE_AUTH;
     const firestore = FIREBASE_FIRESTORE;
@@ -83,6 +83,9 @@ const SignUpForm = () => {
             value={favoriteCuisine}
           onChange={(e) => setFavoriteCuisine(e.target.value)}
             required >
+              <option disabled value="">
+          Select an option...
+        </option>
           {cuisines.map((cuisine, index) => (
             <option key={index} value={cuisine}>
               {cuisine}
@@ -94,6 +97,9 @@ const SignUpForm = () => {
             value={secondFavoriteCuisine}
           onChange={(e) => setSecondFavoriteCuisine(e.target.value)}
             required>
+              <option disabled value="">
+          Select an option...
+        </option>
           {cuisines.map((cuisine, index) => (
             <option key={index} value={cuisine}>
               {cuisine}
@@ -105,6 +111,9 @@ const SignUpForm = () => {
             value={thirdFavoriteCuisine}
             onChange={(e) => setThirdFavoriteCuisine(e.target.value)}
             required>
+              <option disabled value="">
+          Select an option...
+        </option>
           {cuisines.map((cuisine, index) => (
             <option key={index} value={cuisine}>
               {cuisine}
@@ -116,6 +125,9 @@ const SignUpForm = () => {
         value={preferredPriceRange}
           onChange={(e) => setPreferredPriceRange(e.target.value)}
           required >
+            <option disabled value="">
+          Select an option...
+        </option>
           {costRange.map((cost, index) => (
             <option key={index} value={cost}>
               {cost}
@@ -127,6 +139,9 @@ const SignUpForm = () => {
         value={modeOfFood}
           onChange={(e) => setModeOfFood(e.target.value)}
             required >
+              <option disabled value="">
+          Select an option...
+        </option>
           {modeOfFoodOptions.map((modeOptions, index) => (
             <option key={index} value={modeOptions}>
               {modeOptions}
