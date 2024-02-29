@@ -12,7 +12,6 @@
   "dependencies": {
     "@firebase/firestore": "^4.4.2",
     "@firebase/firestore-types": "^3.0.0",
-    "@react-google-maps/api": "^2.19.3",
     "@types/react-bootstrap": "^0.32.35",
     "@types/react-router-dom": "^5.3.3",
     "@types/reactstrap": "^8.7.2",
@@ -31,8 +30,6 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "@types/google.maps": "^3.55.3",
-    "@types/googlemaps": "^3.43.3",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.17",
     "@types/react-slick": "^0.23.13",
