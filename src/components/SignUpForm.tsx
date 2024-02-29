@@ -18,8 +18,8 @@ const SignUpForm = () => {
     const [modeOfFood, setModeOfFood] = useState("");
     const cuisines  = ["Select", "American", "Chinese", "Korean", "Thai", 
         "Indian", "Medeterranian", "Mexican", "Vietnamese", "Italian", "Japanese"];
-    const costRange = ["$10-20", "$20-$50", "$50+"];
-    const modeOfFoodOptions = ["Foodtrucks", "Sit-down Restaurants"];
+    const costRange = ["Select", "$10-20", "$20-$50", "$50+"];
+    const modeOfFoodOptions = ["Select", "Foodtrucks", "Sit-down Restaurants"];
     //const [loading, setLoading] = useState(false);
     const auth = FIREBASE_AUTH;
     const firestore = FIREBASE_FIRESTORE;
