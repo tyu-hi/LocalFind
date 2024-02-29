@@ -54,7 +54,7 @@ const AddRestaurantForm: React.FC = () => {
     }
 
     //add restraunt data to Firestore:
-    const colRef = collection(firestore, 'restaurants');
+    const colRef = collection(firestore, 'Restaurants');
     try {
       if (user && user.uid) {
 
