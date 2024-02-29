@@ -2,6 +2,7 @@ import NavBar from "../components/NavBar"
 import Footer from "../components/Footer"
 import { DefaultProfile } from "../svg-icons.tsx/DefaultProfile"
 import Map from '../components/Maps'
+import Playlists from "../components/Playlists"
 //After use is logged in, I would like for the signup/sign in to disappear, 
 //and be replaced by the icon of the user
 
@@ -51,6 +52,7 @@ const ProfilePage = () => {
             {/*Playlists*/}
             <div className="flex-row mt-10">
               Your Playlists
+              <Playlists/>
               <div className="bg-gray-200 border p-4 mt-3">
                 render playlist component by user
               </div>
