@@ -1,3 +1,9 @@
+//import * as React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+
 
 const RecommendedRestaurants = () => {
   // Function to generate restaurant cards
@@ -26,10 +32,18 @@ const RecommendedRestaurants = () => {
     ];
   };
 
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+  };
+
   return (
     <div className="featured-lists">
       <h2>Recommended Restaurants For You</h2>
-      <div className="card-container">
+      <Slider {...settings}>
         {generateRestaurantCards().map((restaurant, index) => (
           <div className="card" key={index}>
             <img src={restaurant.image} alt={restaurant.title} />
@@ -40,7 +54,7 @@ const RecommendedRestaurants = () => {
             </div>
           </div>
         ))}
-      </div>
+      </Slider>
     </div>
   );
 };

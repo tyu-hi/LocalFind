@@ -6,7 +6,7 @@ import {collection} from "firebase/firestore";
 import {addDoc} from "firebase/firestore";
 
 
-const SignUp = () => {
+const SignUpForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [favoriteCuisine, setFavoriteCuisine] = useState("");
@@ -128,7 +128,7 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default SignUpForm;
 
 
 // const signup = async () => {

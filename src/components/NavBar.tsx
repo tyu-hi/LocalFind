@@ -14,12 +14,16 @@ const NavBar = () => {
 
 	return (
 		<header>
-			<h3>LOGO</h3>
+			<Link to="/">
+				<h3>LOGO</h3>
+			</Link>
+
 			<nav ref={navRef}>
 				<Link to="/profile">Temp Profile</Link>
 				<Link to="/addrestraunt">Temp Add Restraunt</Link>
 				<Link to="/signup">Sign up</Link>
 				<Link to="/login">Login</Link>
+				<Link to="/view">Temp RestrauntView </Link>
 				
 				<button
 					className="nav-btn nav-close-btn"
@@ -27,6 +31,7 @@ const NavBar = () => {
 					<FaTimes />
 				</button>
 			</nav>
+			
 			<button
 				className="nav-btn"
 				onClick={showNavbar}>
