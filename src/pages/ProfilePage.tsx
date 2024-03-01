@@ -22,33 +22,41 @@ const ProfilePage = () => {
   /* HANDLE UPLOADING PROFILE IMAGE */
   const [photo, setPhoto] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
-  const [photoURL, setPhotoURL] = useState("https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F2%2F2c%2FDefault_pfp.svg%2F1200px-Default_pfp.svg.png&tbnid=t5PQpQ66IW5J4M&vet=12ahUKEwjApLK059GEAxWiJEQIHXLqB84QMygAegQIARBy..i&imgrefurl=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3ADefault_pfp.svg&docid=o_Ii_cyIO_p3fM&w=1200&h=1200&q=default%20profile%20picture%20&ved=2ahUKEwjApLK059GEAxWiJEQIHXLqB84QMygAegQIARBy");
+  const [photoURL, setPhotoURL] = useState("");
+  //https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F2%2F2c%2FDefault_pfp.svg%2F1200px-Default_pfp.svg.png&tbnid=t5PQpQ66IW5J4M&vet=12ahUKEwjApLK059GEAxWiJEQIHXLqB84QMygAegQIARBy..i&imgrefurl=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3ADefault_pfp.svg&docid=o_Ii_cyIO_p3fM&w=1200&h=1200&q=default%20profile%20picture%20&ved=2ahUKEwjApLK059GEAxWiJEQIHXLqB84QMygAegQIARBy
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-   if (e.target.files?.[0]) //not null
-   {
-    setPhoto(e.target.files[0])
-   }
+    if (e.target.files?.[0]) {
+      const file = e.target.files[0];
+      setPhoto(file);
+      
+      // Upload the file to Firestore
+      if (currentUser && file) {
+        upload(file, currentUser, setLoading).then((url) => {
+          // Update the photoURL state with the URL of the uploaded image
+          if (typeof url === 'string') {
+            setPhotoURL(url);
+          } else {
+            console.error('Error uploading image:', url);
+          }
+        }).catch((error) => {
+          console.error('Error uploading image:', error);
+        });
+      }
+    }
   };
 
   const handleClick = () => {
-    if (currentUser) {
+    if (currentUser) {  
       if (photo)
       {
+        console.log('at handleclik');
         upload(photo, currentUser, setLoading);
+        alert('Profile image changed!');
       }
     }
    
   };
-
-  //update photoURL
-  useEffect(() => {
-    if (currentUser && currentUser.photoURL) {
-      console.log(currentUser.photoURL);
-      setPhotoURL(currentUser.photoURL || "");
-    }
-  }, [currentUser]);
-  
 
   /* HANDLE UPLOADING FIRST AND LAST NAME*/
   const [firstname, setFirstName] = useState("");
@@ -56,7 +64,7 @@ const ProfilePage = () => {
   const firestore = FIREBASE_FIRESTORE;
   const colRef = collection(firestore, "Users");
   
-  //get user data
+  //get user data and update name and profile image
   useEffect(() => {
     if (currentUser) {
       const queryRef = query(colRef, where("uid", "==", currentUser.uid));
@@ -67,6 +75,7 @@ const ProfilePage = () => {
               const data = doc.data();
               setFirstName(data.firstname);
               setLastName(data.lastname);
+              setPhotoURL(data.photoURL || "");
             });
           }
         })
@@ -102,13 +111,30 @@ const ProfilePage = () => {
               <div className="w-100 h-100 sm:w-100 sm:h-100 relative group">
                 
                 {/*allow user to change profile pic*/}
-                <input type="file" onChange={handleChange} className="absolute inset-0 opacity-0 cursor-pointer"/>
-                <button disabled={loading || !photo} onClick={handleClick}
-                  className="absolute inset-0 bg-gray-900 bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-sm font-medium cursor-pointer">
+                {/* Input element for file selection */}
+                <input
+                  type="file"
+                  onChange={handleChange}
+                  className="absolute inset-0 opacity-0 cursor-pointer"
+                  style={{ width: '100%', height: '100%' }}
+                />
+                
+                {/* Profile picture */}
+                <img src={currentUser?.photoURL ?? 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F2%2F2c%2FDefault_pfp.svg%2F1200px-Default_pfp.svg.png&tbnid=t5PQpQ66IW5J4M&vet=12ahUKEwjApLK059GEAxWiJEQIHXLqB84QMygAegQIARBy..i&imgrefurl=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3ADefault_pfp.svg&docid=o_Ii_cyIO_p3fM&w=1200&h=1200&q=default%20profile%20picture%20&ved=2ahUKEwjApLK059GEAxWiJEQIHXLqB84QMygAegQIARBy'} 
+                  alt="Profile" 
+                  className="avatar" 
+                  title="Profile" //tooltip
+							/>
+                
+                {/* Change Image button */}
+                <button
+                  disabled={loading || !photo}
+                  onClick={handleClick}
+                  className="absolute bottom-0 left-0 right-0 mx-auto bg-gray-900 bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-sm font-medium cursor-pointer rounded-full p-2"
+                  style={{ width: 'fit-content' }}
+                >
                   Change Image
                 </button>
-                
-                <img src={photoURL} alt="Avatar" className="avatar"/>
                 
               </div>
               {/*profile details*/}
