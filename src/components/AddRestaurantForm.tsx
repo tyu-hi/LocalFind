@@ -133,16 +133,16 @@ const AddRestaurantForm: React.FC = () => {
                 text-gray-400"
               >
                 <option value="">Select Food Style</option>
-                <option value="american">American</option>
-                <option value="korean">Korean</option>
-                <option value="chinese">Chinese</option>
-                <option value="thai">Thai</option>
-                <option value="indian">Indian</option>
-                <option value="italian">Italian</option>
-                <option value="mexican">Mexican</option>
-                <option value="medeterranian">Medeterranian</option>
-                <option value="vietnamese">Vietnamese</option>
-                <option value="japanese">Japanese</option>
+                <option value="American">American</option>
+                <option value="Korean">Korean</option>
+                <option value="Chinese">Chinese</option>
+                <option value="Thai">Thai</option>
+                <option value="Indian">Indian</option>
+                <option value="Italian">Italian</option>
+                <option value="Mexican">Mexican</option>
+                <option value="Medeterranian">Medeterranian</option>
+                <option value="Vietnamese">Vietnamese</option>
+                <option value="Japanese">Japanese</option>
               </select>
             </div>
             
