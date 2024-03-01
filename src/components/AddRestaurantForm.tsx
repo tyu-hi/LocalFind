@@ -24,15 +24,6 @@ const AddRestaurantForm: React.FC = () => {
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => { //form element?
     e.preventDefault();
 
-    
-    /*
-    //Inman's:
-    const formData = new FormData(e.currentTarget);
-    const payload = Object.fromEntries(formData);
-    // Handle the payload as needed (e.g., send it to a server)
-    console.log(payload) //we will change what we do with this object later.
-    */
-    
 
     /* FIRESTORE IMPLEMENTATION */
     //Connect restraunt to Firestore
@@ -57,7 +48,6 @@ const AddRestaurantForm: React.FC = () => {
     const colRef = collection(firestore, 'restaurants');
     try {
       if (user && user.uid) {
-
       
       await addDoc(colRef, {
         userId: user?.uid,
@@ -68,6 +58,8 @@ const AddRestaurantForm: React.FC = () => {
         imageURL,
       });
       console.log('Restaurant added successfully!');
+      // Display alert
+      alert('Restaurant added successfully!');
 
       //reset form fields after submission
       setRestaurantName('');
@@ -138,11 +130,11 @@ const AddRestaurantForm: React.FC = () => {
                 <option value="chinese">Chinese</option>
                 <option value="thai">Thai</option>
                 <option value="indian">Indian</option>
-                <option value="african">African</option>
                 <option value="italian">Italian</option>
                 <option value="mexican">Mexican</option>
+                <option value="medeterranian">Medeterranian</option>
                 <option value="vietnamese">Vietnamese</option>
-                <option value="fusion">Fusion</option>
+                <option value="japanese">Japanese</option>
               </select>
             </div>
             
@@ -182,6 +174,8 @@ const AddRestaurantForm: React.FC = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
+
+            
             
             {/*Submit Form*/}
             <button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md">

@@ -1,9 +1,14 @@
 import {useState} from "react";
 import {FIREBASE_AUTH} from "../firebase/firebase";
 import {signInWithEmailAndPassword} from "firebase/auth";
+import {useNavigate} from "react-router-dom";
 
 
 const LoginForm = () => {
+    //redirect page
+    const navigate = useNavigate();
+
+    //login
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const auth = FIREBASE_AUTH;
@@ -12,7 +17,8 @@ const LoginForm = () => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email,password)
         .then((userCredentials) => {
-            console.log(userCredentials);
+            console.log(userCredentials);   //perhaps we shouldn't be showing this for privacy reasons!!
+            navigate("/");
         })
         .catch((error) => {
             console.log(error);

@@ -16,7 +16,7 @@ const LandingPage = () => {
   //const urlParams = new URLSearchParams(window.location.search);
   //const query = urlParams.get('query') || '';
   const handleSearchSubmit = (searchValue: string) => {
-    navigate(`/destination?query=${searchValue}`);
+    navigate(`/search?query=${searchValue}`);
   }
   return (
       <div>

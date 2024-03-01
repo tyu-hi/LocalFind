@@ -40,7 +40,25 @@
     background: #555;
 }
 
-
+/*added avatar for profile pic styling on ProfilePage*/
+.avatar {
+	vertical-align: middle;
+	width: 150px;
+	height: 150px;
+	border-radius: 100%;
+	/*border-width: 1px; */
+	border-color: gray;
+	border-style: outset;
+}
+.navBar-avatar {
+	vertical-align: middle;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	/*border-width: 1px; */
+	border-color: gray;
+	border-style: outset;
+}
 nav {
 	display: flex;
 	align-items: center;
