@@ -4,9 +4,14 @@ import {createUserWithEmailAndPassword} from "firebase/auth";
 import { Link } from "react-router-dom";
 import {collection, getDocs, query, where} from "firebase/firestore";
 import {addDoc} from "firebase/firestore";
+import {useNavigate} from "react-router-dom"
 
 
 const SignUpForm = () => {
+    //redirect page
+    const navigate = useNavigate();
+    
+    //signup
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [firstname, setFirstName] = useState("");
@@ -53,6 +58,8 @@ const SignUpForm = () => {
                   }).then(() => {
                       alert('Signup successful!'); // Indicate a successful signup
                       console.log("User data added to Firestore");
+                      navigate("/"); //redirect user to home page
+
                   }).catch((error) => {
                       console.error("Error adding user data to Firestore:", error);
                       alert('Sign up failed: ' + error.message);

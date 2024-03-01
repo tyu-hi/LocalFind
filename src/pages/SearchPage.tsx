@@ -4,7 +4,7 @@ import SearchBar from "../components/SearchBar"
 import { useLocation } from 'react-router-dom';
 
 
-const DestinationPage = () => {
+const SearchPage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get('query') || '';
@@ -35,4 +35,4 @@ const DestinationPage = () => {
   )
 }
 
-export default DestinationPage
+export default SearchPage

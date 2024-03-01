@@ -1,9 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged, User, updateProfile } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { useEffect, useState } from "react";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -32,6 +33,32 @@ const FIREBASE_FIRESTORE = getFirestore(FIREBASE_APP);
 
 //Intialize Firebase Storage
 const FIREBASE_STORAGE = getStorage(FIREBASE_APP);
+
+//custom hook for exporting useAuth
+export function useAuth() {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(FIREBASE_AUTH, user => setCurrentUser(user));
+    return unsub;
+  }, [])
+
+  return currentUser;
+}
+//upload profile pictures asynch
+export async function upload(file: File, currentUser: User, setLoading: (loading: boolean) => void) {
+  const fileRef = ref(FIREBASE_STORAGE, 'images/' + currentUser.uid + '.png');
+
+  setLoading(true);
+  
+  const snapshot = await uploadBytes(fileRef, file);
+  const photoURL = await getDownloadURL(fileRef);
+
+  updateProfile(currentUser, {photoURL});
+  
+  setLoading(false);
+  alert("Uploaded file!");
+}
 
 
 

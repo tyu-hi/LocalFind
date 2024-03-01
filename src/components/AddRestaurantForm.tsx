@@ -24,15 +24,6 @@ const AddRestaurantForm: React.FC = () => {
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => { //form element?
     e.preventDefault();
 
-    
-    /*
-    //Inman's:
-    const formData = new FormData(e.currentTarget);
-    const payload = Object.fromEntries(formData);
-    // Handle the payload as needed (e.g., send it to a server)
-    console.log(payload) //we will change what we do with this object later.
-    */
-    
 
     /* FIRESTORE IMPLEMENTATION */
     //Connect restraunt to Firestore
@@ -54,10 +45,9 @@ const AddRestaurantForm: React.FC = () => {
     }
 
     //add restraunt data to Firestore:
-    const colRef = collection(firestore, 'Restaurants');
+    const colRef = collection(firestore, 'restaurants');
     try {
       if (user && user.uid) {
-
       
       await addDoc(colRef, {
         userId: user?.uid,
@@ -68,6 +58,8 @@ const AddRestaurantForm: React.FC = () => {
         imageURL,
       });
       console.log('Restaurant added successfully!');
+      // Display alert
+      alert('Restaurant added successfully!');
 
       //reset form fields after submission
       setRestaurantName('');
