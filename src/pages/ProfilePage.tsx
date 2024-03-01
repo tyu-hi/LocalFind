@@ -4,15 +4,19 @@ import Footer from "../components/Footer"
 import { useAuth, upload } from "../firebase/firebase";
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { signOut } from 'firebase/auth';
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import Map from '../components/Maps'
 import Playlists from "../components/Playlists"
+
 //After use is logged in, I would like for the signup/sign in to disappear, 
 //and be replaced by the icon of the user
 
 const ProfilePage = () => {
 
+  const navigate = useNavigate();
+  //USE THIS FOR ALL FIRESBASE USER STUFF
   const currentUser = useAuth();
 
   /* HANDLE UPLOADING PROFILE IMAGE */
@@ -49,7 +53,6 @@ const ProfilePage = () => {
   /* HANDLE UPLOADING FIRST AND LAST NAME*/
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
-  const auth = FIREBASE_AUTH;
   const firestore = FIREBASE_FIRESTORE;
   const colRef = collection(firestore, "Users");
   
@@ -72,6 +75,18 @@ const ProfilePage = () => {
         });
     }
   }, [currentUser]);
+  
+  /*HANDLE LOGOUT*/
+  const handleLogOut = async () => {
+    try {
+      await signOut(FIREBASE_AUTH);
+      console.log('User signed out successfully');
+      alert('Logout successful!')
+      navigate("/"); //navigate back to home page
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
   
   return (
@@ -138,7 +153,20 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
+
+          {/*log out user*/}
+          <div className="flex justify-center">
+            <button
+              onClick={handleLogOut}
+              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md shadow-lg mb-20 mt-10"
+            >
+              Logout
+            </button>
+          </div>
         </div>
+
+
+        
 
         <Footer/>
     </div>
