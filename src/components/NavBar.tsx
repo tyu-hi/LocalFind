@@ -27,6 +27,8 @@ const NavBar = () => {
 				{/*if user is logged in, remove signup/log in*/}
 				{currentUser ? (
                     <>
+						TempReviews?
+						About?
                         <Link to="/search">Search</Link>
                         <Link to="/addrestraunt">Add Restaurant</Link>
                         <Link to="/view">Restaurant View</Link>
@@ -37,6 +39,7 @@ const NavBar = () => {
 								title="Profile" //tooltip
 							/>
 						</Link>
+						
 						
                     </>
                 ) : (
