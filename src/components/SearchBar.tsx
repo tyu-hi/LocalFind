@@ -29,7 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ defaultValue = "", onSubmit }) =>
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative">
+    <form onSubmit={handleSubmit} className="pt-36 relative">
       <div className="bar flex items-center ">
         <input
           className="searchbar bg-white shadow-lg text-gray-600 w-full p-3"

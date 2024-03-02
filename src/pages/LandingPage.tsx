@@ -28,7 +28,6 @@ const LandingPage = () => {
         <SearchBar onSubmit={handleSearchSubmit}/>
         <FeaturedLists />
         <RecommendedRestaurants />
-        <Footer />
         
       </div>
   )

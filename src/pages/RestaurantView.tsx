@@ -44,6 +44,7 @@ interface RestaurantData {
   mapApi: string;
   address: string;
   info: string;
+  MenuLink: string
 }
 
 function RestaurantView() {
@@ -53,6 +54,7 @@ function RestaurantView() {
     mapApi: "",
     address: "",
     info: "",
+    MenuLink: "",
   });
   const [menuItems, setMenuItems] = useState<MenuData[]>([]);
 
@@ -73,6 +75,7 @@ function RestaurantView() {
     // For demonstration purpose, let's assume you have static data
     const restaurantData: RestaurantData = {
       name: "Restaurant Name",
+      MenuLink: "link",
       image:
         "https://hips.hearstapps.com/hmg-prod/images/gettyimages-660714144-1516227341.jpg",
       mapApi: "Map API",
@@ -145,12 +148,16 @@ function RestaurantView() {
                 </div>
               </div>
               <div className="w-full md:w-1/3">
-                <h1 className="mb-4 text-black px-4 text-xl font-medium">Map Component</h1>
+                <h1 className="mb-4 text-black px-4 text-xl font-medium">Info</h1>
                 <div className="bg-gray-100 p-4 mb-6 rounded-lg">
                   <div className="flex flex-col">
                     <div className="bg-gray-900 p-4 mb-6 rounded-lg">
                       <h2 className="text-white">Map API</h2>
                       <div className="text-gray-300">{restaurantInfo.mapApi}</div>
+                    </div>
+                    <div className="bg-gray-900 p-4 mb-6 rounded-lg">
+                      <h2 className="text-white">Menu</h2>
+                      <div className="text-gray-300">{restaurantInfo.MenuLink}</div>
                     </div>
                     <div className="bg-gray-900 p-4 mb-6 rounded-lg">
                       <h2 className="text-white">Address</h2>
@@ -159,7 +166,7 @@ function RestaurantView() {
                       </div>
                     </div>
                     <button className="p-4 transition duration-300 bg-blue-500 hover:bg-blue-400 rounded-lg">
-                        <h2 className="text-white">Reserve</h2>
+                        <h2 className="text-white">Contact</h2>
                     </button>
                   </div>
                 </div>

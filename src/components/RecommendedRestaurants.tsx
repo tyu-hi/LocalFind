@@ -41,7 +41,14 @@ const RecommendedRestaurants = () => {
 
   return (
     <div>
-      <h2>Recommended Restaurants For You</h2>
+      <div className="pt-10 pb-10 ">
+        <div className="font-sans font-semibold text-2xl text-left mb-2 pl-12">
+          Recommended By Users
+        </div>
+        
+          <div className="w-72 border-b-2 border-black "></div>
+        
+      </div>
       <Slider {...settings}>
         {generateRestaurantCards().map((restaurant, index) => (
           <div

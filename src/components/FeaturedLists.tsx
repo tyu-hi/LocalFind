@@ -1,7 +1,7 @@
-import * as React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import * as React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const FeaturedLists = () => {
   // Sample random image links
@@ -28,7 +28,7 @@ const FeaturedLists = () => {
         link: "https://example.com/restaurant3",
       },
     ];
-  }
+  };
   const settings = {
     dots: false,
     infinite: true,
@@ -38,10 +38,16 @@ const FeaturedLists = () => {
     focusOnSelect: true,
   };
 
-
   return (
-    <div className="featured-lists">
-      <h2>Featured Lists</h2>
+    <div className="featured-lists pt-96">
+      <div className="pt-10 pb-10 ">
+        <div className="font-sans font-semibold text-2xl text-left mb-2 pl-12">
+          Featured Eats
+        </div>
+        <div className="pl-15">
+          <div className="w-32 md:w-48 lg:w-64 border-b-2 border-black "></div>
+        </div>
+      </div>
       <Slider {...settings}>
         {generateRestaurantCards().map((restaurant, index) => (
           <div
