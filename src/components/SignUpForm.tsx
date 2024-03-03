@@ -2,11 +2,16 @@ import {useState} from "react";
 import {FIREBASE_AUTH, FIREBASE_FIRESTORE} from "../firebase/firebase";
 import {createUserWithEmailAndPassword} from "firebase/auth";
 import { Link } from "react-router-dom";
-import {collection} from "firebase/firestore";
+import {collection, getDocs, query, where} from "firebase/firestore";
 import {addDoc} from "firebase/firestore";
+import {useNavigate} from "react-router-dom"
 
 
 const SignUpForm = () => {
+    //redirect page
+    const navigate = useNavigate();
+    
+    //signup
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [firstname, setFirstName] = useState("");
@@ -25,33 +30,52 @@ const SignUpForm = () => {
     const firestore = FIREBASE_FIRESTORE;
     const colRef = collection(firestore, 'Users');
 
-    const signUp = (e: any) =>{
-        e.preventDefault();
-        createUserWithEmailAndPassword(auth, email,password)
-        .then((userCredentials) => {
-            console.log(userCredentials);
+    const signUp = (e:any) => {
+      e.preventDefault();
+  
+      // Check if the account already exists
+      const queryRef = query(colRef, where("email", "==", email));
+      getDocs(queryRef).then((querySnapshot) => {
+          if (!querySnapshot.empty) {
+              // Account already exists
+              alert('An account with this email already exists.');
+          } else {
+              // Account does not exist, proceed with signup
+              createUserWithEmailAndPassword(auth, email, password)
+              .then((userCredentials) => {
+                  console.log(userCredentials);
+  
+                  addDoc(colRef, {
+                      uid: userCredentials.user.uid,
+                      email: userCredentials.user.email,
+                      firstname: firstname.trim(),
+                      lastname: lastname.trim(),
+                      favoriteCuisine: favoriteCuisine,
+                      secondFavoriteCuisine: secondFavoriteCuisine,
+                      thirdFavoriteCuisine: thirdFavoriteCuisine,
+                      preferredPriceRange: preferredPriceRange,
+                      modeOfFood: modeOfFood,
+                  }).then(() => {
+                      alert('Signup successful!'); // Indicate a successful signup
+                      console.log("User data added to Firestore");
+                      navigate("/"); //redirect user to home page
 
-            addDoc(colRef, {
-                uid: userCredentials.user.uid,
-                email: userCredentials.user.email,
-                firstname: firstname.trim(),
-                lastname: lastname.trim(),
-                favoriteCuisine: favoriteCuisine,
-                secondFavoriteCuisine: secondFavoriteCuisine,
-                thirdFavoriteCuisine: thirdFavoriteCuisine,
-                preferredPriceRange: preferredPriceRange,
-                modeOfFood : modeOfFood,
-            }).then(() => {
-            console.log("user data added to firestore")
-            }).catch((error: any) => {
-                console.error("Error adding user data to Firestore:", error);
-                alert('Sign up failed: ' + error.message);
-            });
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    };
+                  }).catch((error) => {
+                      console.error("Error adding user data to Firestore:", error);
+                      alert('Sign up failed: ' + error.message);
+                  });
+              })
+              .catch((error) => {
+                  console.error(error);
+                  alert('Sign up failed: ' + error.message);
+              });
+          }
+      }).catch((error) => {
+          console.error("Error querying Firestore:", error);
+          alert('An error occurred while checking for an existing account.');
+      });
+  };
+  
 
 
     return (
