@@ -6,7 +6,7 @@ import ProfilePage from './pages/ProfilePage';
 import SignUpForm from './components/SignUpForm';
 import AddRestaurantPage from './pages/AddRestaurantPage';
 import RestaurantView from './pages/RestaurantView';
-import DestinationPage from './pages/DestinationPage';
+import SearchPage from './pages/SearchPage';
 
 const App: React.FC = () => {
   return (
@@ -18,7 +18,7 @@ const App: React.FC = () => {
         <Route path="/signup" element={<SignUpForm/>} />
         <Route path="/addrestraunt" element={<AddRestaurantPage/>} />
         <Route path="/view" element={<RestaurantView/>} />
-        <Route path="/destination" element={<DestinationPage/>} />
+        <Route path="/search" element={<SearchPage/>} />
       </Routes>
     </Router>
   );
