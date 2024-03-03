@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { FIREBASE_FIRESTORE, FIREBASE_AUTH } from '../firebase/firebase';
+import { collection } from "firebase/firestore"
 
 interface ReviewFormProps {
   restaurantId: string;
 }
+
+const firestore = FIREBASE_FIRESTORE;
 
 const ReviewForm: React.FC<ReviewFormProps> = ({ restaurantId }: ReviewFormProps) => {
   const [rating, setRating] = useState<number>(0);
@@ -26,7 +29,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ restaurantId }: ReviewFormProps
     }
     try {
       // Add the review to Firestore
-      await FIREBASE_FIRESTORE.collection('reviews').add({
+      await firestore.collection('reviews').add({
         userId: userId,
         restaurantId: restaurantId,
         rating: rating,

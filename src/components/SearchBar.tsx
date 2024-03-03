@@ -29,10 +29,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ defaultValue = "", onSubmit }) =>
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative">
-      <div className="bar flex items-center bg-white">
+    <form onSubmit={handleSubmit} className="pt-36 relative">
+      <div className="bar flex items-center ">
         <input
-          className="searchbar bg-white text-gray-600"
+          className="searchbar bg-white shadow-lg text-gray-600 w-full p-3"
           placeholder="Enter location!"
           type="text"
           title="Search"

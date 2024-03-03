@@ -1,5 +1,5 @@
 import NavBar from "../components/NavBar"
-import Footer from "../components/Footer"
+
 //import { DefaultProfile } from "../svg-icons.tsx/DefaultProfile"
 import { useAuth, upload } from "../firebase/firebase";
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
@@ -194,7 +194,7 @@ const ProfilePage = () => {
 
         
 
-        <Footer/>
+        
     </div>
 
   )
