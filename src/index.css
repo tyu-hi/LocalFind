@@ -51,6 +51,36 @@
 	border-color: gray;
 	border-style: outset;
 }
+/*added chosen site colors*/
+.bg-lightgray {
+	background-color: #f9f9f9; /* Light Gray */
+  }
+.text-navyblue {
+	color: #004064
+}
+.bg-navyblue {
+	color: #004064
+}
+.border-navyblue {
+	color: #004064
+}
+.text-lightblue {
+	color: #38B6FF
+}
+.text-orange {
+	color: #F9A332
+}
+.border-orange {
+	color: #F9A332
+}
+.bg-orange {
+	color: #F9A332
+}
+
+
+
+
+
 .navBar-avatar {
 	vertical-align: middle;
 	width: 40px;
