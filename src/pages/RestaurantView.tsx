@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import NavBar from "../components/NavBar";
 import ReviewList from "../components/ReviewList";
 import ReviewForm from "../components/ReviewForm";
-
+import { FIREBASE_AUTH } from "../firebase/firebase";
 
 const settings = {
   focusOnSelect: true,
@@ -44,6 +44,7 @@ interface RestaurantData {
   mapApi: string;
   address: string;
   info: string;
+  MenuLink: string;
 }
 
 function RestaurantView() {
@@ -53,6 +54,7 @@ function RestaurantView() {
     mapApi: "",
     address: "",
     info: "",
+    MenuLink: "",
   });
   const [menuItems, setMenuItems] = useState<MenuData[]>([]);
 
@@ -62,17 +64,11 @@ function RestaurantView() {
     "https://images.pexels.com/photos/3860097/pexels-photo-3860097.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "https://images.pexels.com/photos/3860097/pexels-photo-3860097.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   ];
-  
 
   useEffect(() => {
-    // Fetch restaurant information from your database
-    // Example: fetch('/api/restaurant').then(response => response.json()).then(data => setRestaurantInfo(data));
-    // Fetch menu items from your database
-    // Example: fetch('/api/menu').then(response => response.json()).then(data => setMenuItems(data));
-    // Replace the above lines with the actual fetching logic from your database
-    // For demonstration purpose, let's assume you have static data
     const restaurantData: RestaurantData = {
       name: "Restaurant Name",
+      MenuLink: "link",
       image:
         "https://hips.hearstapps.com/hmg-prod/images/gettyimages-660714144-1516227341.jpg",
       mapApi: "Map API",
@@ -110,101 +106,97 @@ function RestaurantView() {
       },
       // Add more items as needed
     ];
+
+    const unsubscribe = FIREBASE_AUTH.onAuthStateChanged((user) => {
+      setUserLoggedIn(!!user); // Set to true if user is not null, false otherwise
+    });
+
     setRestaurantInfo(restaurantData);
     setMenuItems(menuData);
   }, []);
 
   return (
     <div>
-      <NavBar/>
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 gap-8">
-          <div className="relative">
-            <Slider {...settings}>
-              {images.map((image, index) => (
-                <div key={index}>
-                  <img
-                    src={image}
-                    alt={`Slide ${index}`}
-                    className="w-full h-96 object-cover"
-                  />
-                </div>
-              ))}
-            </Slider>
-            <div className="text-white px-2 py-2 rounded-lg mb-4 text-4xl font-extrabold ">
-              {restaurantInfo.name}
-            </div>
-          </div>
-
-          <div className="flex flex-col">
-            <div className="flex gap-8">
-              <div className="w-full md:w-2/2">
-                <h1 className="mb-4 text-white px-4 text-xl font-medium">Description</h1>
-                <div className="bg-gray-100 p-4 mb-6 rounded-lg">
-                  <p className="text-gray-800">{restaurantInfo.info}</p>
-                </div>
+    <NavBar />
+    <div className="container mx-auto">
+      <div className="grid grid-cols-1 border-black">
+        <div className="text-black px-2 py-2 rounded-lg mb-4 text-4xl font-serif">
+          {restaurantInfo.name}
+        </div>
+        <Slider {...settings}>
+            {images.map((image, index) => (
+              <div key={index}>
+                <img
+                  src={image}
+                  alt={`Slide ${index}`}
+                  className="w-full h-96 object-cover"
+                />
               </div>
-              <div className="w-full md:w-1/3">
-                <h1 className="mb-4 text-white px-4 text-xl font-medium">Map Component</h1>
-                <div className="bg-gray-100 p-4 mb-6 rounded-lg">
-                  <div className="flex flex-col">
-                    <div className="bg-gray-900 p-4 mb-6 rounded-lg">
-                      <h2 className="text-white">Map API</h2>
-                      <div className="text-gray-300">{restaurantInfo.mapApi}</div>
-                    </div>
-                    <div className="bg-gray-900 p-4 mb-6 rounded-lg">
-                      <h2 className="text-white">Address</h2>
-                      <div className="text-gray-300">
-                        {restaurantInfo.address}
-                      </div>
-                    </div>
-                    <button className="p-4 transition duration-300 bg-blue-500 hover:bg-blue-400 rounded-lg">
-                        <h2 className="text-white">Reserve</h2>
-                    </button>
-                  </div>
-                </div>
+            ))}
+          </Slider>
+      </div>
+        <div className="flex flex-col">
+          <div className="flex gap-8">
+            <div className="w-full md:w-2/2">
+              <h1 className="mb-4 text-black px-4 text-xl font-medium">
+                Description
+              </h1>
+              <div className="bg-gray-100 p-4 mb-6 rounded-lg">
+                <p className="text-gray-800">{restaurantInfo.info}</p>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="w-full">
-          <h1 className="mb-4 text-white px-4 text-xl font-medium">Menu</h1>
-          <div className="bg-gray-100 p-4 rounded-lg mb-6">
-            <div className="slider">
-              <Slider {...settings}>
-                {menuItems.map((menuItem) => (
-                  <div key={menuItem.id} className="p-4">
-                    <img
-                      src={menuItem.imageUrl}
-                      alt={menuItem.title}
-                      className="w-full h-64 object-cover rounded"
-                    />
-                    <div className="mt-2">
-                      <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                        {menuItem.title}
-                      </h3>
-                      <p className="text-gray-900">{menuItem.description}</p>
+            <div className="w-full md:w-1/3">
+              <h1 className="mb-4 text-black px-4 text-xl font-medium">
+                Info
+              </h1>
+              <div className="bg-gray-100 p-4 mb-6 rounded-lg">
+                <div className="flex flex-col">
+                  <div className="bg-gray-900 p-4 mb-6 rounded-lg">
+                    <h2 className="text-white">Map API</h2>
+                    <div className="text-gray-300">
+                      {restaurantInfo.mapApi}
                     </div>
                   </div>
-                ))}
-              </Slider>
+                  <div className="bg-gray-900 p-4 mb-6 rounded-lg">
+                    <h2 className="text-white">Menu</h2>
+                    <div className="text-gray-300">
+                      {restaurantInfo.MenuLink}
+                    </div>
+                  </div>
+                  <div className="bg-gray-900 p-4 mb-6 rounded-lg">
+                    <h2 className="text-white">Address</h2>
+                    <div className="text-gray-300">
+                      {restaurantInfo.address}
+                    </div>
+                  </div>
+                  <button className="p-4 transition duration-300 bg-gray-900 hover:bg-blue-400 rounded-lg">
+                    <h2 className="text-white">Contact</h2>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      
 
-        <div className="grid grid-cols-1">
-          <div className="flex flex-col">
-            <h1 className="mb-4 text-white px-4 text-xl font-medium">Reviews</h1>
-            <div className="bg-gray-100 p-4 rounded-lg">
-                <ReviewForm restaurantId={restaurantId} />
-                <ReviewList restaurantId={restaurantId} />
-            </div>
-          </div>
+      <div className="grid grid-cols-2">
+        <div className="flex flex-col">
+          <h1 className="mb-4 text-black px-4 text-xl font-medium">
+            Reviews
+          </h1>
+          <div className="bg-gray-100 p-4 rounded-lg"></div>
         </div>
+        {/* <div className="flex flex-col">
+        {userLoggedIn && <ReviewForm restaurantId={restaurantId} />}
+      </div> */}
       </div>
     </div>
+  </div>
+
   );
 }
 
 export default RestaurantView;
+function setUserLoggedIn(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}

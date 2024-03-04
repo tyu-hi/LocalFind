@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useAuth } from "../firebase/firebase";
 
+
+
 const NavBar = () => {
 
 	//get user from firebase

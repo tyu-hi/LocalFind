@@ -81,6 +81,6 @@ def recommend():
 
     userID = request.json.get('userID', '')
     recommendedRestaurants = createRecommendation(userID)
-
+    return jsonify(recommendedRestaurants)
 
 

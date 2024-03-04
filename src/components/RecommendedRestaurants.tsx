@@ -1,9 +1,8 @@
 //import * as React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
-
+import "./RecommendedRestaurants.css";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const RecommendedRestaurants = () => {
   // Function to generate restaurant cards
@@ -41,16 +40,39 @@ const RecommendedRestaurants = () => {
   };
 
   return (
-    <div className="featured-lists">
-      <h2>Recommended Restaurants For You</h2>
+    <div>
+      <div className="pt-10 pb-10 ">
+        <div className="font-sans font-semibold text-2xl text-left mb-2 pl-12">
+          Recommended By Users
+        </div>
+        
+          <div className="w-72 border-b-2 border-black "></div>
+        
+      </div>
       <Slider {...settings}>
         {generateRestaurantCards().map((restaurant, index) => (
-          <div className="card" key={index}>
-            <img src={restaurant.image} alt={restaurant.title} />
-            <div className="card-content">
+          <div
+            className="card mx-4 w-56 h-96 bg-white shadow-md rounded-lg overflow-hidden"
+            key={index}
+          >
+            {" "}
+            {/* Adjust width (w-64) and height (h-96) as needed */}
+            <img
+              src={restaurant.image}
+              alt={restaurant.title}
+              className="w-full h-36 object-cover rounded-t-lg"
+            />{" "}
+            {/* Adjust height (h-48) as needed */}
+            <div className="card-content p-4">
               <h3>{restaurant.title}</h3>
               <p>{restaurant.description}</p>
-              <a href={restaurant.link} target="_blank" rel="noopener noreferrer">Visit Restaurant</a>
+              <a
+                href={restaurant.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Visit Restaurant
+              </a>
             </div>
           </div>
         ))}
