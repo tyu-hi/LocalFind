@@ -70,19 +70,19 @@ const SignUpForm = () => {
   return (
     <div>
       <form onSubmit={signUp}>
-        <h1> Sign Up</h1>
+        <h1 className="sign-up"> Sign Up</h1>
         <input
           type="Name"
           placeholder="Name"
           value={name}
-          style={{ color: "black" }}
+          className="name"
           onChange={(e) => setName(e.target.value)}
           required
         ></input>
         <input
           type="email"
           placeholder="example@example.com"
-          style={{ color: "black" }}
+          className="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -91,15 +91,18 @@ const SignUpForm = () => {
           type="password"
           placeholder="password"
           value={password}
-          style={{ color: "black" }}
+          className="pass"
           onChange={(e) => setPassword(e.target.value)}
           required
         ></input>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="submit-button">Sign Up</button>
+        <img></img>
       </form>
-      Already have an account? <Link to="/login">Sign in</Link>
+      <div className="extra">Already have an account?  <Link to="/login">Sign in</Link></div>
     </div>
   );
 };
 
 export default SignUpForm;
+
+
