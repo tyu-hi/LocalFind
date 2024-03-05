@@ -3,7 +3,7 @@ import './App.css';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
-import SignUpForm from './components/SignUpForm';
+import SignUpForm from './pages/SignUpPage';
 import AddRestaurantPage from './pages/AddRestaurantPage';
 import RestaurantView from './pages/RestaurantView';
 import SearchPage from './pages/SearchPage';
