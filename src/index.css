@@ -61,10 +61,16 @@
 .bg-navyblue {
 	color: #004064
 }
+.bg-lightblue {
+	color: #38B6FF
+}
 .border-navyblue {
 	color: #004064
 }
 .text-lightblue {
+	color: #38B6FF
+}
+.border-lightblue {
 	color: #38B6FF
 }
 .text-orange {

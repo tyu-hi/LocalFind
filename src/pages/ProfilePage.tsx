@@ -139,7 +139,7 @@ const ProfilePage = () => {
                 
               </div>
               {/*profile details*/}
-              <div className="ml-10 mt-7">
+              <div className="ml-10 mt-3">
 
                 {/*user name*/}
                 <h2 className = "text-lg sm:text-2xl md:text-4xl lg:text-5xl font-bold text-black-900">
@@ -154,14 +154,14 @@ const ProfilePage = () => {
                   <Link to="/addrestraunt">
                         <button
                             
-                          className="text-white hover:bg-orange-200"
+                          className="text-white hover:bg-yellow-50"
                           style={{
                             boxSizing: 'border-box',
                             display: 'flex',
                             flexDirection: 'row',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            padding: '2px 14px',
+                            padding: '1px 12px',
                             gap: '5px',
                             border: '1px solid #38B6FF',
                             borderRadius: '30px',

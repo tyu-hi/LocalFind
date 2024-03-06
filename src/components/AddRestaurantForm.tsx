@@ -95,7 +95,7 @@ const AddRestaurantForm: React.FC = () => {
                 placeholder="Enter Restaurant Name"
                 value={restaurantName}
                 onChange={(e) => setRestaurantName(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="w-full px-3 py-2 bg-white border border-gray-300 border-2 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
       
@@ -109,7 +109,7 @@ const AddRestaurantForm: React.FC = () => {
                 placeholder="Enter Address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="w-full px-3 py-2 bg-white border border-gray-300 border-2 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
       
@@ -121,7 +121,7 @@ const AddRestaurantForm: React.FC = () => {
                 name="foodStyle"
                 value={foodStyle}
                 onChange={(e) => setFoodStyle(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
+                className="w-full px-3 py-2 bg-white border border-gray-300 border-2 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
                 text-gray-400"
               >
                 <option value="">Select Food Style</option>
@@ -146,7 +146,7 @@ const AddRestaurantForm: React.FC = () => {
                 name="price"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
+                className="w-full px-3 py-2 bg-white border border-gray-300 border-2 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
                 text-gray-400"
               >
                 <option value="">Select Price Range</option>
@@ -171,14 +171,14 @@ const AddRestaurantForm: React.FC = () => {
                     setImageFile(file);
                   }
                 }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="w-full px-3 py-2 border border-2 border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
 
             
             
             {/*Submit Form*/}
-            <button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md">
+            <button type="submit" className="w-full bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">
               Submit
             </button>
       
