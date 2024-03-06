@@ -6,6 +6,9 @@ export default {
     "./src/**/*.{html,js,ts,tsx}"
   ],
   theme: {
+    fontFamily: {
+      alata: ["Alata", "sans-serif"],
+    },
     extend: {
       colors: {
        

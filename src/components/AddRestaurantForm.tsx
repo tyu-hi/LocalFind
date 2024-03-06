@@ -82,7 +82,7 @@ const AddRestaurantForm: React.FC = () => {
       <NavBar/>
       <div className="p-6 mt-10">
           <div className="max-w-md mx-auto">
-          <h2 className="text-3xl font-bold mb-6">Add a Restaurant</h2>
+          <h2 className="text-3xl font-bold mb-6 text-navyblue">Add Business</h2>
           <form onSubmit={submitForm} className="space-y-6">
       
             {/*Restraunt Name*/}
