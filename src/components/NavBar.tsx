@@ -19,7 +19,7 @@ const NavBar = () => {
     };
 
 	return (
-		<div className='bg-lightgray text-navyblue font-semibold'>
+		<div className='bg-lightgray text-navyblue font-alata font-semibold'>
 			<header >
 				<Link to="/">
 					<h3>LOGO</h3>
