@@ -11,6 +11,7 @@ export default {
     },
     extend: {
       colors: {
+        navyblue: '#004064',
        
       }
     },
