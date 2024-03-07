@@ -37,60 +37,61 @@ userData["id"] = [i for i in range(0, userData.shape[0])]
 
 def restaurantImportantInfo(restaurantData):
   data = restaurantData.copy()
-  for i in range (0,  data.shape[0]):
-    data["info"] = data["foodStyle"] + ' ' + data["price"]
+  data["info"] = data["foodStyle"].fillna('') + ' ' + data["price"].fillna('')
   return data
-
-restaurantData = restaurantImportantInfo(restaurantData)
 
 def userImportantInfo(userData):
   data = userData.copy()
-  for i in range (0,  data.shape[0]):
-    data["info"] = data["favoriteCuisine"] + data["secondFavoriteCuisine"] + data["thirdFavoriteCuisine"] + data["preferredPriceRange"]
+  data["info"] = (
+      data["favoriteCuisine"].fillna('') + ' ' +
+      data["secondFavoriteCuisine"].fillna('') + ' ' +
+      data["thirdFavoriteCuisine"].fillna('') + ' ' +
+      data["preferredPriceRange"].fillna('')
+  )
   return data
 
 userData = userImportantInfo(userData)
+restaurantData = restaurantImportantInfo(restaurantData)
 
 
 def createRecommendation(userID):
+    print("great")
     combinedInfo = userData["info"].tolist() + restaurantData["info"].tolist()
     combined_vec = vec.fit_transform(combinedInfo)
 
     # Separate user and restaurant vectors
     userVec = combined_vec[:len(userData)]
     restaurantVec = combined_vec[len(userData):]
-
     # Calculate cosine similarity
     sim = cosine_similarity(userVec, restaurantVec)
 
     if userID not in userData["uid"].values:
         print("no person found")
-        return
+        return []
     user_id = userData[userData.uid == userID]["id"].values[0]
     scores = list(enumerate(sim[user_id]))
     sortedScores = sorted(scores, key = lambda x: x[1], reverse = True)
     sortedScores = sortedScores[1:]
     print(sortedScores)
     restaurants = [restaurantData[restaurants[0] == restaurantData["id"]]["restaurantName"].values[0] for restaurants in sortedScores]
-    top15restaurants = restaurants[slice(12)]
-    return top15restaurants
+    top12restaurants = restaurants[slice(12)]
+    return top12restaurants
 
 
 print(createRecommendation('sJzrkxCj56Q3MulZsOHMxyaWjud2'))
-
 # Route for serving frontend
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
+#print(createRecommendation('sJzrkxCj56Q3MulZsOHMxyaWjud2'))
 #retrieves data from the front end
 @app.route('/recommend', methods = ['POST'])
 def recommend():
 
     userID = request.json.get('userID', '')
     recommendedRestaurants = createRecommendation(userID)
-    return jsonify({"restaurants" : recommendedRestaurants})
+    return jsonify(recommendedRestaurants)
 
 
 if __name__ == '__main__':

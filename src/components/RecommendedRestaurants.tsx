@@ -76,11 +76,6 @@ const RecommendedRestaurants = () => {
   });
 }, [userID]);
 
-useEffect(() => {
-  console.log("Recommended Restaurants:", recommendedRestaurants);
-  setRecommendedRestaurants(recommendedRestaurants);
-  setFound(true)
-}, [recommendedRestaurants]);
 
 
   // Function to generate restaurant cards
@@ -88,7 +83,7 @@ useEffect(() => {
     
     // Logic to fetch restaurant data and generate cards can be added here
     // For now, returning a placeholder array
-    recommendedRestaurants
+    return recommendedRestaurants
   };
 
   const settings = {
@@ -99,19 +94,17 @@ useEffect(() => {
     slidesToScroll: 1,
   };
 
- // Render loading message if recommendedRestaurants is empty
- // Render loading message if loading
- if (!found) {
-  console.log("Data not found");
-  return <div>Data not found.</div>;
-}
+
 const restaurantsList = Array.isArray(recommendedRestaurants) ? recommendedRestaurants : [];
+console.log("just before", restaurantsList)
+console.log("Recommended Restaurants:", recommendedRestaurants);
+console.log("Type of recommendedRestaurants:", typeof recommendedRestaurants);
 return (
   <div>
     <h1>Recommended Restaurants:</h1>
     <ul>
       {restaurantsList.map((restaurant, index) => (
-        <li key={index}>{restaurant} hi</li>
+        <li key={index}>{restaurant}</li>
       ))}
     </ul>
   </div>
