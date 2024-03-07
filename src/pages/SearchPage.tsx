@@ -1,16 +1,61 @@
 //import React from 'react'
+import { useState, useEffect } from "react";
 import NavBar from "../components/NavBar"
 import SearchBar from "../components/SearchBar"
 import { useLocation } from 'react-router-dom';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { FIREBASE_FIRESTORE } from "../firebase/firebase";
 
 
 const SearchPage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const query = searchParams.get('query') || '';
+  const queryParam = searchParams.get('query') || '';
+
+  //firesstore query////////////////////////////
+  const [cityNotFound, setCityNotFound] = useState(false); // State to track if city is not found
+  const [city, setCity] = useState(queryParam);
+  const [restaurants, setRestaurants] = useState<{ 
+    id: string; 
+    address: string;
+    restaurantName: string; 
+    city: string; 
+    foodStyle: string; 
+    price: number; 
+    imageURL: string; }[]>([]);
+
+  useEffect(() => {
+    const fetchRestaurants = async () => {
+      const q = query(collection(FIREBASE_FIRESTORE, 'Restaurants'), where('city', '==', city));
+      const querySnapshot = await getDocs(q);
+      const fetchedRestaurants: { id: string, address: string, restaurantName: string, city: string, foodStyle: string, price: number, imageURL: string }[] = [];
+      querySnapshot.forEach((doc) => {
+        const restaurantData = doc.data();
+        fetchedRestaurants.push({ 
+          id: doc.id,
+          address: restaurantData.address || 'Search up a city and we will recommend you a local restaurant!',
+          restaurantName: restaurantData.restaurantName || 'What do you want to eat?',
+          city: restaurantData.city || 'Default City',
+          foodStyle: restaurantData.foodStyle || 'Cuisine?',
+          price: restaurantData.price || 'Price range?',
+          imageURL: restaurantData.imageURL || 'Default Image URL'  //Local Find logo?
+        });
+      });
+
+      
+      if (fetchedRestaurants.length === 0) {
+        setCityNotFound(true); // Set city not found if no restaurants found
+      } else {
+        setCityNotFound(false); // Reset city not found if restaurants found
+      }
+
+      setRestaurants(fetchedRestaurants);
+    };
+    fetchRestaurants();
+  }, [city]);
 
   const handleSubmit = (searchValue: string) => {
-    // Handle form submission here if needed
+    setCity(searchValue);
   };
 
   return (
@@ -19,13 +64,13 @@ const SearchPage = () => {
 
         {/*search*/}
         
-          <SearchBar onSubmit={handleSubmit} defaultValue={query}/>
+          <SearchBar onSubmit={handleSubmit} defaultValue={queryParam}/>
         
             {/*[300px_300px_300px] sets the individual width of each of the 3 columns in tailwind*/}
-            <div className="grid grid-cols-[400px_600px_300px] gap-2 mt-20">
+            <div className="mx-auto grid grid-cols-[400px_600px_300px] mt-20">
               {/* Sort by filters */}
-              <div className="col-span-1 ml-20">
-                  <div className="p-4 font-alata">
+              <div className="col-span-1">
+                  <div className="p-4 font-alata ml-20">
                       <h2 className="text-xl font-semibold mb-4">Filters</h2>
                       <div className="mb-4">
                           <h3 className="text-sm font-semibold mb-2">Tags</h3>
@@ -116,18 +161,39 @@ const SearchPage = () => {
 
               {/* Recommended Businesses */}
               <div className="col-span-1">
-                  <div className="p-4">
-                      <h2 className="text-md mb-4">Recommended restraunts near {query}</h2>
-
-                  </div>
+                <div className="p-4">
+                  {cityNotFound ? (
+                    <div className="flex items-center justify-center h-32">
+                      <p className="text-xl text-gray-500">We haven't added that city yet. Sorry :( </p>
+                    </div>
+                  ) : (
+                    <>
+                      <h2 className="text-md mb-4">Recommended restaurants near {city}</h2>
+                      {restaurants.map((restaurant) => (
+                        <div key={restaurant.id} className="flex items-center border border-navyblue border-2 rounded-lg p-4 mb-4">
+                          <img src={restaurant.imageURL} alt={restaurant.restaurantName} className="w-32 h-32 object-cover rounded-lg mr-4" />
+                          <div>
+                            <h3 className="text-2xl">{restaurant.restaurantName}</h3>
+                            <div className="flex mt-2">
+                              <div className="rounded-full bg-blue-900 text-white px-2 py-1 text-xs mr-2">{restaurant.foodStyle}</div>
+                              <div className="rounded-full bg-blue-900 text-white px-2 py-1 text-xs">{restaurant.price}</div>
+                            </div>
+                            <p className="text-sm mt-10">{restaurant.address}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </>
+                  )}
+                </div>
               </div>
 
               {/* Map */}
-              <div className="col-span-1">
+              <div className="col-span-1 ml-20">
                   <div className="bg-gray-200 p-4">
                       <h2 className="text-lg font-semibold mb-4">Map</h2>
                   </div>
               </div>
+
           </div>
 
 
