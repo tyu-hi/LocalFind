@@ -1,15 +1,13 @@
-import { Form, Button } from 'react-bootstrap'; // Example using Reactstrap forms
 import * as React from 'react';
 import { useState } from 'react';
 //firestore
-import { FIREBASE_FIRESTORE, FIREBASE_AUTH } from '../firebase/firebase';
-import { FIREBASE_STORAGE } from '../firebase/firebase';
-import { addDoc, collection} from "firebase/firestore"
-import { ref, uploadString, getDownloadURL} from 'firebase/storage';
+import { FIREBASE_FIRESTORE, FIREBASE_AUTH, upload } from '../firebase/firebase';
+import { addDoc, collection, query, where, getDocs} from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import NavBar from './NavBar';
 
-//Need to connect data with User's UID!!!!
+//Need to connect data with restraunt uid?
 
 const AddRestaurantForm: React.FC = () => {
   const [restaurantName, setRestaurantName] = useState('');
@@ -19,41 +17,73 @@ const AddRestaurantForm: React.FC = () => {
   const [website, setWebsite] = useState('');
   const [city, setCity] = useState('');
   const [zip, setZip] = useState('');
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [image, setImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState('');
+
+  //testign image
+  // Get a reference to the storage service, which is used to create references in your storage bucket
+  const storage = getStorage();
+
+  /////////////////////////////////////////////////
 
   //connct to user
   const [user] = useAuthState(FIREBASE_AUTH);
 
+  //testing image
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImage(file);
+    }
+  };
+
+  //image from const[ image...]
+  const uploadPhoto = async () => {
+    if (!image) {
+      console.error('No file selected');
+      return;
+    }
+  
+    const storageRef = ref(storage, 'restaurantImages/' + image.name);
+  
+    try {
+      // Upload file to storage
+      const snapshot = await uploadBytes(storageRef, image);
+      console.log('Uploaded a blob or file!', snapshot);
+  
+      // Get download URL
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      console.log('File available at', downloadURL);
+  
+      // Save download URL to Firestore or use it as needed
+      // ...
+      setImageUrl(downloadURL);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+
+  };
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => { //form element?
     e.preventDefault();
-
-
     /* FIRESTORE IMPLEMENTATION */
     //Connect restraunt to Firestore
     const firestore = FIREBASE_FIRESTORE;
 
-
-    //upluad image to Firebase Storage:
-    let imageURL = '';
-    if (imageFile) {
-      //images/ folder created in Firebase Storage
-      const imageRef = ref(FIREBASE_STORAGE, `images/${imageFile.name}`);
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        const dataUrl = e.target?.result as string;
-        await uploadString(imageRef, dataUrl, 'data_url');
-        imageURL = await getDownloadURL(imageRef);
-  };
-  reader.readAsDataURL(imageFile);
-    }
-
     //add restraunt data to Firestore:
-    const colRef = collection(firestore, 'restaurants');
+    const colRef = collection(firestore, 'Restaurants');
     try {
       if (user && user.uid) {
-      
+
+        const uploadPromise = uploadPhoto(); // Start uploading photo
+        const downloadUrlPromise = uploadPromise.then(() => imageUrl);
+        await Promise.all([uploadPromise, downloadUrlPromise]); // Wait for both promises to resolve
+
+        if (!imageUrl) {
+          throw new Error('Image URL is empty, or ignore cuz this is a bug'); //???
+        }
+
       await addDoc(colRef, {
-        userId: user?.uid,
+        userId: user?.uid,  //!!!!!!!!!!! this is the id of the user uploading it, we can say it's rsetraunt id as well
         restaurantName,
         address,
         city,
@@ -61,11 +91,13 @@ const AddRestaurantForm: React.FC = () => {
         foodStyle,
         price,
         website,
-        imageURL,
+        //imageURL,
+        imageURL: imageUrl,
       });
       console.log('Restaurant added successfully!');
       // Display alert
       alert('Restaurant added successfully!');
+
 
       //reset form fields after submission
       setRestaurantName('');
@@ -75,13 +107,18 @@ const AddRestaurantForm: React.FC = () => {
       setFoodStyle('');
       setPrice('');
       setWebsite('');
-      setImageFile(null);
+      setImage(null);
+      //setImageFile(null);
+      setImageUrl('');
+      
+      
       }
       else {
         throw new Error('User or user ID is undefined'); //meaning, not logged in
       }
     } catch (error) {
       console.error('Error adding restraunt: ', error);
+      alert("Error adding restraunt!");
     }
 
   };
@@ -198,19 +235,13 @@ const AddRestaurantForm: React.FC = () => {
 
             {/*Restraunt Picture*/}
             <div className="space-y-1">
-              <label htmlFor="restaurantPicture" className="block font-medium">Restaurant Picture</label>
+              <label htmlFor="imageURL" className="block font-medium">Restaurant Picture</label>
               <input
-                id="restaurantPicture"
+                id="imageURL"
                 type="file"
-                name="restaurantPicture"
-                accept="image/*"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  const file = e.target.files?.[0];
-                  if (file)
-                  {
-                    setImageFile(file);
-                  }
-                }}
+                name="imageURL"
+                //value={imageUrl}
+                onChange={handleImageChange}
                 className="w-full px-3 py-2 border border-2 border-gray-800 rounded-md focus:outline-none focus:ring-indigo-600 focus:border-indigo-500 sm:text-sm"
               />
             </div>
