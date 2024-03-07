@@ -47,7 +47,7 @@ export function useAuth() {
 }
 //upload profile pictures asynch
 export async function upload(file: File, currentUser: User, setLoading: (loading: boolean) => void) {
-  const fileRef = ref(FIREBASE_STORAGE, 'images/' + currentUser.uid + '.png');
+  const fileRef = ref(FIREBASE_STORAGE, 'profileImages/' + currentUser.uid + '.png');
 
   setLoading(true);
   
