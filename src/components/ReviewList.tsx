@@ -70,7 +70,7 @@ const ReviewList: React.FC<ReviewListProps> = ({
               </h3>
               <span className="text-sm text-gray-500">By {review.userId}</span>
             </div>
-            <p className="text-gray-600">{review.comment}</p>
+            <p className="text-gray-600">"{review.comment}"</p>
           </div>
         ))}
       </Slider>

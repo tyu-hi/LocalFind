@@ -216,17 +216,22 @@ function RestaurantView() {
                     <h2 className="text-black">Address</h2>
                     <div className="text-black">{restaurantInfo.address}</div>
                   </div>
-                  <button className="p-4 transition duration-300 bg-orange-400 hover:bg-blue-400 rounded-lg">
+                  <button className="p-4 transition duration-300 mb-6 bg-orange-400 hover:bg-blue-400 rounded-lg">
                     <h2 className="text-black">Contact</h2>
                   </button>
-                  
+
+                  <div className="bg-orange-400 p-4 mb-6 rounded-lg pt-8">
+                    <h2 className="text-black">Leave A Review!</h2>
+                    <ReviewForm />
+                  </div>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      </div>
   );
 }
 
