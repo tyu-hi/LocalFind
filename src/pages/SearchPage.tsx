@@ -36,9 +36,9 @@ const SearchPage = () => {
           address: restaurantData.address || 'Search up a city and we will recommend you a local restaurant!',
           restaurantName: restaurantData.restaurantName || 'What do you want to eat?',
           city: restaurantData.city || 'Default City',
-          foodStyle: restaurantData.foodStyle || 'Cuisine?',
-          price: restaurantData.price || 'Price range?',
-          imageURL: restaurantData.imageURL || 'Default Image URL'  //Local Find logo?
+          foodStyle: restaurantData.foodStyle || 'Feeling a specific cuisine?',
+          price: restaurantData.price || 'Have a price range?',
+          imageURL: restaurantData.imageURL || 'https://static.thenounproject.com/png/1181336-200.png'  //Local Find logo?
         });
       });
 
@@ -75,27 +75,27 @@ const SearchPage = () => {
                       <div className="mb-4">
                           <h3 className="text-sm font-semibold mb-2">Tags</h3>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag1" className="mr-2"/>
+                              <input type="checkbox" id="tag1" className="mr-2 bg-white"/>
                               <label htmlFor="tag1">Vegetarian</label>
                           </div>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag2" className="mr-2"/>
+                              <input type="checkbox" id="tag2" className="mr-2 bg-white"/>
                               <label htmlFor="tag2">Italian</label>
                           </div>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag3" className="mr-2"/>
+                              <input type="checkbox" id="tag3" className="mr-2 bg-white"/>
                               <label htmlFor="tag3">Chinese</label>
                           </div>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag4" className="mr-2"/>
+                              <input type="checkbox" id="tag4" className="mr-2 bg-white"/>
                               <label htmlFor="tag4">Korean</label>
                           </div>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag5" className="mr-2"/>
+                              <input type="checkbox" id="tag5" className="mr-2 bg-white"/>
                               <label htmlFor="tag5">Japanese</label>
                           </div>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag6" className="mr-2"/>
+                              <input type="checkbox" id="tag6" className="mr-2 bg-white"/>
                               <label htmlFor="tag6">...</label>
                           </div>
                       </div>
@@ -103,19 +103,19 @@ const SearchPage = () => {
                           <h3 className="text-sm font-semibold mb-2">Features</h3>
                           {/* Add checkboxes for features */}
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag1" className="mr-2"/>
+                              <input type="checkbox" id="tag1" className="mr-2 bg-white"/>
                               <label htmlFor="tag1">Outdoor seating</label>
                           </div>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag2" className="mr-2"/>
+                              <input type="checkbox" id="tag2" className="mr-2 bg-white"/>
                               <label htmlFor="tag2">Parking</label>
                           </div>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag3" className="mr-2"/>
+                              <input type="checkbox" id="tag3" className="mr-2 bg-white"/>
                               <label htmlFor="tag3">Takeout</label>
                           </div>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag4" className="mr-2"/>
+                              <input type="checkbox" id="tag4" className="mr-2 bg-white"/>
                               <label htmlFor="tag4">Delivery</label>
                           </div>
                           
@@ -124,19 +124,19 @@ const SearchPage = () => {
                           <h3 className="text-sm font-semibold mb-2">Budget</h3>
                           {/* Add checkboxes for budget */}
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag1" className="mr-2"/>
+                              <input type="checkbox" id="tag1" className="mr-2 bg-white"/>
                               <label htmlFor="tag1">$10-20</label>
                           </div>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag2" className="mr-2"/>
+                              <input type="checkbox" id="tag2" className="mr-2 bg-white"/>
                               <label htmlFor="tag2">$20-50</label>
                           </div>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag3" className="mr-2"/>
+                              <input type="checkbox" id="tag3" className="mr-2 bg-white"/>
                               <label htmlFor="tag3">$50+</label>
                           </div>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag4" className="mr-2"/>
+                              <input type="checkbox" id="tag4" className="mr-2 bg-white"/>
                               <label htmlFor="tag4">Korean</label>
                           </div>
                       </div>
@@ -144,15 +144,15 @@ const SearchPage = () => {
                           <h3 className="text-sm font-semibold mb-2">Distance</h3>
                           {/* Add checkboxes for distance */}
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag1" className="mr-2"/>
+                              <input type="checkbox" id="tag1" className="mr-2 bg-white"/>
                               <label htmlFor="tag1">5 miles</label>
                           </div>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag2" className="mr-2"/>
+                              <input type="checkbox" id="tag2" className="mr-2 bg-white"/>
                               <label htmlFor="tag2">5-10 miles</label>
                           </div>
                           <div className="flex items-center">
-                              <input type="checkbox" id="tag3" className="mr-2"/>
+                              <input type="checkbox" id="tag3" className="mr-2 bg-white"/>
                               <label htmlFor="tag3">10+ miles</label>
                           </div>
                       </div>
@@ -168,7 +168,7 @@ const SearchPage = () => {
                     </div>
                   ) : (
                     <>
-                      <h2 className="text-md mb-4">Recommended restaurants near {city}</h2>
+                      <h2 className="text-md mb-4">{city ? `Recommended restaurants near ${city}` : "Let us help you find a restaurant!"}</h2>
                       {restaurants.map((restaurant) => (
                         <div key={restaurant.id} className="flex items-center border border-navyblue border-2 rounded-lg p-4 mb-4">
                           <img src={restaurant.imageURL} alt={restaurant.restaurantName} className="w-32 h-32 object-cover rounded-lg mr-4" />
