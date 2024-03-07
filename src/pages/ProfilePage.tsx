@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import Map from '../components/Maps'
 import Playlists from "../components/Playlists"
 
+
 //After use is logged in, I would like for the signup/sign in to disappear, 
 //and be replaced by the icon of the user
 
@@ -76,7 +77,7 @@ const ProfilePage = () => {
               const data = doc.data();
               setFirstName(data.firstname);
               setLastName(data.lastname);
-              setPhotoURL(data.photoURL || "");
+              setPhotoURL(data.photoURL || '/Default_pfp.svg.png');
             });
           }
         })
