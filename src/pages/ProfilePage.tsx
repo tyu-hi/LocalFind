@@ -131,7 +131,7 @@ const ProfilePage = () => {
                 <button
                   disabled={loading || !photo}
                   onClick={handleClick}
-                  className="absolute bottom-0 left-0 right-0 mx-auto bg-gray-900 bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-sm font-medium cursor-pointer rounded-full p-2"
+                  className="absolute bottom-0 left-0 right-0 mx-auto bg-gray-900 bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xs font-medium cursor-pointer rounded-full p-2"
                   style={{ width: 'fit-content' }}
                 >
                   Change Image
@@ -154,7 +154,7 @@ const ProfilePage = () => {
                   <Link to="/addrestraunt">
                         <button
                             
-                          className="text-white hover:bg-yellow-50"
+                          className="text-white hover:bg-blue-50"
                           style={{
                             boxSizing: 'border-box',
                             display: 'flex',
