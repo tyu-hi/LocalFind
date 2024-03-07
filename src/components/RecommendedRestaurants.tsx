@@ -81,8 +81,7 @@ useEffect(() => {
   setRecommendedRestaurants(recommendedRestaurants);
   setFound(true)
 }, [recommendedRestaurants]);
-
-
+     
   // Function to generate restaurant cards
   const generateRestaurantCards = () => {
     

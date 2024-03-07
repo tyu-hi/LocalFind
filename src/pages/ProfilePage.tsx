@@ -7,6 +7,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { signOut } from 'firebase/auth';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import Map from '../components/Maps'
 import Playlists from "../components/Playlists"
 
@@ -50,7 +51,7 @@ const ProfilePage = () => {
     if (currentUser) {  
       if (photo)
       {
-        console.log('at handleclik');
+        console.log('at handleclick');
         upload(photo, currentUser, setLoading);
         alert('Profile image changed!');
       }
@@ -130,7 +131,7 @@ const ProfilePage = () => {
                 <button
                   disabled={loading || !photo}
                   onClick={handleClick}
-                  className="absolute bottom-0 left-0 right-0 mx-auto bg-gray-900 bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-sm font-medium cursor-pointer rounded-full p-2"
+                  className="absolute bottom-0 left-0 right-0 mx-auto bg-gray-900 bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xs font-medium cursor-pointer rounded-full p-2"
                   style={{ width: 'fit-content' }}
                 >
                   Change Image
@@ -138,17 +139,40 @@ const ProfilePage = () => {
                 
               </div>
               {/*profile details*/}
-              <div className="ml-10 mt-7">
+              <div className="ml-10 mt-3">
 
                 {/*user name*/}
-                <h2 className = "text-lg sm:text-2xl md:text-4xl lg:text-5xl font-bold text-gray-700">
+                <h2 className = "text-lg sm:text-2xl md:text-4xl lg:text-5xl font-bold text-black-900">
                   {firstname} {lastname}
                   </h2>
 
                 {/*change location to passable {variable} later */}
                 <p className="text-gray-600 mt-2">Location</p>
                 {/*change Bio/Stats to passable {variable} later */}
-                <p className="text-sm mb-2 text-gray-700 mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...</p>
+                <p className="text-sm mb-2 text-gray-700 mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
+                  {/* Circular button */}
+                  <Link to="/addrestraunt">
+                        <button
+                            
+                          className="text-white hover:bg-blue-50"
+                          style={{
+                            boxSizing: 'border-box',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            padding: '1px 12px',
+                            gap: '5px',
+                            border: '1px solid #38B6FF',
+                            borderRadius: '30px',
+                            color: '#38B6FF',
+                            marginTop: '10px', // Add margin top to separate from the paragraph
+                          }}
+                        >
+                            + add business
+                        </button>
+                    </Link>
+                  </p>
               </div>
             </div>
              
