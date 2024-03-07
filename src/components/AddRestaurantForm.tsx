@@ -16,6 +16,9 @@ const AddRestaurantForm: React.FC = () => {
   const [address, setAddress] = useState('');
   const [foodStyle, setFoodStyle] = useState('');
   const [price, setPrice] = useState('');
+  const [website, setWebsite] = useState('');
+  const [city, setCity] = useState('');
+  const [zip, setZip] = useState('');
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   //connct to user
@@ -53,8 +56,11 @@ const AddRestaurantForm: React.FC = () => {
         userId: user?.uid,
         restaurantName,
         address,
+        city,
+        zip,
         foodStyle,
         price,
+        website,
         imageURL,
       });
       console.log('Restaurant added successfully!');
@@ -64,8 +70,11 @@ const AddRestaurantForm: React.FC = () => {
       //reset form fields after submission
       setRestaurantName('');
       setAddress('');
+      setCity('');
+      setZip('');
       setFoodStyle('');
       setPrice('');
+      setWebsite('');
       setImageFile(null);
       }
       else {
@@ -80,13 +89,13 @@ const AddRestaurantForm: React.FC = () => {
   return (
     <div>
       <NavBar/>
-      <div className="p-6 mt-10">
-          <div className="max-w-md mx-auto">
-          <h2 className="text-3xl font-bold mb-6 text-navyblue">Add Business</h2>
+      <div className="p-6 mt-10 font-alata mb-10">
+          <div className="max-w-lg mx-auto">
+          <h2 className="text-5xl font-bold mb-6 text-navyblue">Add Business</h2>
           <form onSubmit={submitForm} className="space-y-6">
       
             {/*Restraunt Name*/}
-            <div className="space-y-1">
+            <div className="space-y-1 mt-10">
               <label htmlFor="name" className="block font-medium">Name</label>
               <input
                 id="name"
@@ -95,7 +104,7 @@ const AddRestaurantForm: React.FC = () => {
                 placeholder="Enter Restaurant Name"
                 value={restaurantName}
                 onChange={(e) => setRestaurantName(e.target.value)}
-                className="w-full px-3 py-2 bg-white border border-gray-300 border-2 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="w-full px-3 py-2 bg-white border border-gray-800 border-2 rounded-md focus:outline-none focus:ring-indigo-600 focus:border-indigo-500 sm:text-sm"
               />
             </div>
       
@@ -109,10 +118,41 @@ const AddRestaurantForm: React.FC = () => {
                 placeholder="Enter Address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                className="w-full px-3 py-2 bg-white border border-gray-300 border-2 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="w-full px-3 py-5 bg-white border border-gray-800 border-2 rounded-md focus:outline-none focus:ring-indigo-600 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-      
+            <div className="grid grid-cols-2 gap-20">
+              <div className='space-y-1 '>
+                <label htmlFor="city" className="block font-medium ">City</label>
+                <input
+                  id="city"
+                  type="text"
+                  name="city"
+                  placeholder=""
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className="w-full px-3 py-2 bg-white border border-gray-800 border-2 rounded-md focus:outline-none focus:ring-indigo-600 focus:border-indigo-500 sm:text-sm"
+                />
+              </div>
+              <div className='space-y-1'>
+                <label htmlFor="zip" className="block font-medium ">Zip Code</label>
+                  <input
+                    id="zip"
+                    type="text"
+                    name="zip"
+                    placeholder=""
+                    value={zip}
+                    onChange={(e) => setZip(e.target.value)}
+                    className="w-full px-3 py-2 bg-white border border-gray-800 border-2 rounded-md focus:outline-none focus:ring-indigo-600 focus:border-indigo-500 sm:text-sm"
+                  />
+              </div>
+            </div>
+            
+            {/*Restraunt Description*/}
+            <div className='space-y-3 font-bold text-2xl'>
+              Business Description
+            </div>
+
             {/*Restraunt Food Style*/}
             <div className="space-y-1">
               <label htmlFor="foodStyle" className="block font-medium">Food Style</label>
@@ -121,7 +161,7 @@ const AddRestaurantForm: React.FC = () => {
                 name="foodStyle"
                 value={foodStyle}
                 onChange={(e) => setFoodStyle(e.target.value)}
-                className="w-full px-3 py-2 bg-white border border-gray-300 border-2 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
+                className="w-full px-2 py-2 bg-white border border-gray-800 border-2 rounded-md focus:outline-none focus:ring-indigo-600 focus:border-indigo-500 sm:text-sm
                 text-gray-400"
               >
                 <option value="">Select Food Style</option>
@@ -146,7 +186,7 @@ const AddRestaurantForm: React.FC = () => {
                 name="price"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                className="w-full px-3 py-2 bg-white border border-gray-300 border-2 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
+                className="w-full px-2 py-2 bg-white border border-gray-800 border-2 rounded-md focus:outline-none focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm
                 text-gray-400"
               >
                 <option value="">Select Price Range</option>
@@ -171,14 +211,26 @@ const AddRestaurantForm: React.FC = () => {
                     setImageFile(file);
                   }
                 }}
-                className="w-full px-3 py-2 border border-2 border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="w-full px-3 py-2 border border-2 border-gray-800 rounded-md focus:outline-none focus:ring-indigo-600 focus:border-indigo-500 sm:text-sm"
               />
             </div>
 
-            
-            
+            {/*restraunt website*/}
+            <div className="spaace-y-1">
+              <label htmlFor="website" className="block font-medium">Website</label>
+                <input
+                  id="website"
+                  type="text"
+                  name="website"
+                  placeholder="Enter Website Link"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  className="w-full px-3 py-2 bg-white border border-gray-800 border-2 rounded-md focus:outline-none focus:ring-indigo-600 focus:border-indigo-500 sm:text-sm"
+                />
+            </div>
+
             {/*Submit Form*/}
-            <button type="submit" className="w-full bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">
+            <button type="submit" className="w-full bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md mt-10">
               Submit
             </button>
       

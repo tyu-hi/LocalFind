@@ -47,7 +47,23 @@ export function useAuth() {
 }
 //upload profile pictures asynch
 export async function upload(file: File, currentUser: User, setLoading: (loading: boolean) => void) {
-  const fileRef = ref(FIREBASE_STORAGE, 'images/' + currentUser.uid + '.png');
+  const fileRef = ref(FIREBASE_STORAGE, 'profileImages/' + currentUser.uid + '.png');
+
+  setLoading(true);
+  
+  await uploadBytes(fileRef, file);
+  const photoURL = await getDownloadURL(fileRef);
+
+  updateProfile(currentUser, {photoURL});
+  
+  setLoading(false);
+  alert("Uploaded file!");
+  window.location.reload();
+}
+
+//upload restraunt pictures asynch
+export async function uploadRestraunt(file: File, currentUser: User, setLoading: (loading: boolean) => void) {
+  const fileRef = ref(FIREBASE_STORAGE, 'restaurantImages/' + currentUser.uid + '.png');
 
   setLoading(true);
   

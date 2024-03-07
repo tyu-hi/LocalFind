@@ -51,7 +51,7 @@ const ProfilePage = () => {
     if (currentUser) {  
       if (photo)
       {
-        console.log('at handleclik');
+        console.log('at handleclick');
         upload(photo, currentUser, setLoading);
         alert('Profile image changed!');
       }
