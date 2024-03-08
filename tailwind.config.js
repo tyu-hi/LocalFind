@@ -8,6 +8,7 @@ export default {
   theme: {
     fontFamily: {
       alata: ["Alata", "sans-serif"],
+      inter: ["Inter", "sans-serif"],
     },
     extend: {
       colors: {

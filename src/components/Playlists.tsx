@@ -32,6 +32,8 @@ const Playlists = () => {
       {/* if clicked on a playlist, show the playlist below */}
       <div className="border rounded-md p-5 mt-5">
         expanded playlistName
+
+        
         
 
       </div>

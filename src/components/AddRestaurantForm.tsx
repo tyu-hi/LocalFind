@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useState } from 'react';
 //firestore
-import { FIREBASE_FIRESTORE, FIREBASE_AUTH, upload } from '../firebase/firebase';
-import { addDoc, collection, query, where, getDocs} from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { FIREBASE_FIRESTORE, FIREBASE_AUTH} from '../firebase/firebase';
+import { addDoc, collection} from "firebase/firestore";
+//import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import NavBar from './NavBar';
 
@@ -259,7 +259,9 @@ const AddRestaurantForm: React.FC = () => {
             {/*restraunt hours*/ }
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1"> 
+                <div className='text-lg'>
                 Hours
+                </div>
                 <div className="flex items-center">
                   <div></div>
                   <label htmlFor="mondayHours" className="block font-medium mr-10">Monday</label>
