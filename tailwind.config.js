@@ -12,6 +12,7 @@ export default {
     extend: {
       colors: {
         navyblue: '#004064',
+        orange: '#F9A332',
        
       }
     },
