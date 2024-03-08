@@ -185,6 +185,7 @@ const RecommendedRestaurants: React.FC = () => {
       <CardsContainer cardsData={cardsData} />
     </div>
   );
+}
  // Render loading message if recommendedRestaurants is empty
  // Render loading message if loading
 // if (!found) {
@@ -203,6 +204,6 @@ const RecommendedRestaurants: React.FC = () => {
   //</div>
 //);
 //
-//};
+//}; 
 
 export default RecommendedRestaurants;
