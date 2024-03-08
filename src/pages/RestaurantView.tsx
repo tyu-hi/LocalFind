@@ -31,11 +31,9 @@ const settings = {
   ],
 };
 
-interface MenuData {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl: string;
+interface StoreHours {
+  openTime: string; // in format "HH:mm"
+  closeTime: string; // in format "HH:mm"
 }
 
 interface RestaurantData {
@@ -44,86 +42,109 @@ interface RestaurantData {
   mapApi: string;
   address: string;
   info: string;
-  MenuLink: string;
+  menuLink: string;
+  isOpen: boolean;
+  closingTime: string;
+  rating: number;
+  numberOfRatings: number;
+  distance: number;
+  priceScale: string;
+  cuisineType: string;
+  storeHours: StoreHours;
 }
+
+// Function to check if the current time is within the store hours
+const isStoreOpen = (storeHours: StoreHours): boolean => {
+  const currentTime = new Date();
+  const openTime = new Date();
+  const closeTime = new Date();
+
+  const [openHours, openMinutes] = storeHours.openTime.split(":").map(Number);
+  const [closeHours, closeMinutes] = storeHours.closeTime
+    .split(":")
+    .map(Number);
+
+  openTime.setHours(openHours, openMinutes);
+  closeTime.setHours(closeHours, closeMinutes);
+
+  return currentTime >= openTime && currentTime <= closeTime;
+};
 
 function RestaurantView() {
   const [restaurantInfo, setRestaurantInfo] = useState<RestaurantData>({
-    name: "",
-    image: "",
-    mapApi: "",
-    address: "",
-    info: "",
-    MenuLink: "",
+    name: "Default Restaurant Name",
+    image: "default-image-url", // Replace with your default image URL
+    mapApi: "default-map-api", // Replace with your default map API key or URL
+    address: "123 Default Address",
+    info: "This is a default restaurant description.",
+    menuLink: "default-menu-link", // Replace with your default menu link
+    isOpen: false, // Default open status - would normally be computed
+    closingTime: "22:00", // Default closing time
+    rating: 0, // Default rating
+    numberOfRatings: 0, // Default number of ratings
+    distance: 0, // Default distance
+    priceScale: "$$", // Default price scale
+    cuisineType: "Default Cuisine Type", // Default cuisine type
+    storeHours: {
+      // Default store hours
+      openTime: "09:00", // Default opening time
+      closeTime: "22:00", // Default closing time
+    },
   });
-  const [menuItems, setMenuItems] = useState<MenuData[]>([]);
+
+  const isOpen = isStoreOpen(restaurantInfo.storeHours);
 
   const images = [
-    "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    "https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    "https://images.pexels.com/photos/3860097/pexels-photo-3860097.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    "https://images.pexels.com/photos/3860097/pexels-photo-3860097.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=800",
   ];
 
   useEffect(() => {
     const restaurantData: RestaurantData = {
       name: "Restaurant Name",
-      MenuLink: "link",
       image:
         "https://hips.hearstapps.com/hmg-prod/images/gettyimages-660714144-1516227341.jpg",
-      mapApi: "Map API",
-      address: "Restaurant Address",
-      info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec hendrerit, odio vitae ultricies consequat, odio tortor placerat libero, nec sodales justo elit sed dolor. In non purus vitae mauris dapibus mattis. Duis rutrum magna a erat suscipit, at ultrices libero luctus. Sed sed dolor vitae quam lobortis dictum. Curabitur non justo nec nisi vehicula posuere. Nam suscipit quam at convallis consequat. Integer consectetur nisi nec eros eleifend bibendum. Duis vel sapien quis mauris lobortis feugiat. Maecenas ac libero eget orci bibendum vehicula nec sed enim. Integer viverra nisi ut magna condimentum, sed ultricies felis posuere. Nam ullamcorper felis sit amet leo interdum, quis molestie ligula luctus. Aliquam tincidunt neque a nunc iaculis, eu dictum dolor tincidunt. Nulla nec quam eu odio consectetur hendrerit. Proin ut metus in magna gravida posuere",
+      mapApi: "Map API URL or Key",
+      address: "1234 Culinary Blvd, Foodtown, TX",
+      info: "This is a placeholder description for the restaurant. It offers a variety of dishes with a focus on farm-to-table fresh ingredients.",
+      menuLink: "http://example-restaurant-menu-link.com",
+      isOpen: true, // This would be dynamically calculated based on current time and store hours
+      closingTime: "22:00", // This would be part of the storeHours
+      rating: 4.5,
+      numberOfRatings: 350,
+      distance: 5.2,
+      priceScale: "$$$",
+      cuisineType: "Italian",
+      storeHours: {
+        openTime: "11:00", // Example opening time
+        closeTime: "22:00", // Example closing time
+      },
     };
-    const menuData: MenuData[] = [
-      {
-        id: 1,
-        title: "Item 1",
-        description: "Description for Item 1",
-        imageUrl:
-          "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      },
-      {
-        id: 2,
-        title: "Item 2",
-        description: "Description for Item 2",
-        imageUrl:
-          "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      },
-      {
-        id: 3,
-        title: "Item 3",
-        description: "Description for Item 3",
-        imageUrl:
-          "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      },
-      {
-        id: 4,
-        title: "Item 4",
-        description: "Description for Item 4",
-        imageUrl:
-          "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      },
-      // Add more items as needed
-    ];
 
     const unsubscribe = FIREBASE_AUTH.onAuthStateChanged((user) => {
       setUserLoggedIn(!!user); // Set to true if user is not null, false otherwise
     });
 
     setRestaurantInfo(restaurantData);
-    setMenuItems(menuData);
   }, []);
 
   return (
     <div>
-    <NavBar />
-    <div className="container mx-auto">
-      <div className="grid grid-cols-1 border-black">
-        <div className="text-black px-2 py-2 rounded-lg mb-4 text-4xl font-serif">
-          {restaurantInfo.name}
-        </div>
-        <Slider {...settings}>
+      <NavBar />
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 border-black pb-10">
+          <div className="text-black px-2 py-2  mb-4 ">
+            <div className="text-4xl font-serif rounded-lg">
+              {restaurantInfo.name}
+            </div>
+            <p className="text-gray-600 pl-2">
+              {restaurantInfo.cuisineType} · {restaurantInfo.priceScale}
+            </p>
+          </div>
+          <div className="mb-2"></div>
+          <Slider {...settings}>
             {images.map((image, index) => (
               <div key={index}>
                 <img
@@ -134,7 +155,7 @@ function RestaurantView() {
               </div>
             ))}
           </Slider>
-      </div>
+        </div>
         <div className="flex flex-col">
           <div className="flex gap-8">
             <div className="w-full md:w-2/2">
@@ -144,55 +165,73 @@ function RestaurantView() {
               <div className="bg-gray-100 p-4 mb-6 rounded-lg">
                 <p className="text-gray-800">{restaurantInfo.info}</p>
               </div>
-            </div>
-            <div className="w-full md:w-1/3">
+
               <h1 className="mb-4 text-black px-4 text-xl font-medium">
-                Info
+                Reviews
               </h1>
+              <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
+                {/* <div className="flex flex-col">
+        {userLoggedIn && <ReviewForm restaurantId={restaurantId} />}
+      </div> */}
+              </div>
+
+              <h1 className="mb-4 text-black px-4 text-xl font-medium">
+                Location
+              </h1>
+              <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
+                <p className="text-gray-800">map-api-content</p>
+              </div>
+            </div>
+
+            <div className="w-full md:w-1/3">
+              <h1 className="mb-4 text-black px-4 text-xl font-medium">Info</h1>
               <div className="bg-gray-100 p-4 mb-6 rounded-lg">
                 <div className="flex flex-col">
-                  <div className="bg-gray-900 p-4 mb-6 rounded-lg">
-                    <h2 className="text-white">Map API</h2>
-                    <div className="text-gray-300">
-                      {restaurantInfo.mapApi}
+                  <div className="bg-white p-4 mb-6 rounded-lg">
+                    <h2 className="text-black">Hours</h2>
+                    <div>
+                      {isOpen ? (
+                        <span className="text-green-600">
+                          Open now · Closes at{" "}
+                          {restaurantInfo.storeHours.closeTime}
+                        </span>
+                      ) : (
+                        <span className="text-red-600">
+                          Closed · Opens at {restaurantInfo.storeHours.openTime}
+                        </span>
+                      )}
                     </div>
                   </div>
-                  <div className="bg-gray-900 p-4 mb-6 rounded-lg">
-                    <h2 className="text-white">Menu</h2>
-                    <div className="text-gray-300">
-                      {restaurantInfo.MenuLink}
-                    </div>
+                  <a
+                    href={restaurantInfo.menuLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                  <div className="bg-orange-400 p-4 mb-6 rounded-lg">
+                    <h2 className="text-black">Menu</h2>
+      
                   </div>
-                  <div className="bg-gray-900 p-4 mb-6 rounded-lg">
-                    <h2 className="text-white">Address</h2>
-                    <div className="text-gray-300">
-                      {restaurantInfo.address}
-                    </div>
+                  </a>
+                  <div className="bg-orange-400 p-4 mb-6 rounded-lg">
+                    <h2 className="text-black">Address</h2>
+                    <div className="text-black">{restaurantInfo.address}</div>
                   </div>
-                  <button className="p-4 transition duration-300 bg-gray-900 hover:bg-blue-400 rounded-lg">
-                    <h2 className="text-white">Contact</h2>
+                  <button className="p-4 transition duration-300 mb-6 bg-orange-400 hover:bg-blue-400 rounded-lg">
+                    <h2 className="text-black">Contact</h2>
                   </button>
+
+                  <div className="bg-orange-400 p-4 mb-6 rounded-lg pt-8">
+                    <h2 className="text-black">Leave A Review!</h2>
+                    <ReviewForm />
+                  </div>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-      
-
-      <div className="grid grid-cols-2">
-        <div className="flex flex-col">
-          <h1 className="mb-4 text-black px-4 text-xl font-medium">
-            Reviews
-          </h1>
-          <div className="bg-gray-100 p-4 rounded-lg"></div>
-        </div>
-        {/* <div className="flex flex-col">
-        {userLoggedIn && <ReviewForm restaurantId={restaurantId} />}
-      </div> */}
       </div>
-    </div>
-  </div>
-
+      </div>
   );
 }
 
