@@ -26,7 +26,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     const fetchRestaurants = async () => {
-      const q = query(collection(FIREBASE_FIRESTORE, 'Restaurants'), where('city', '==', city));
+      const q = query(collection(FIREBASE_FIRESTORE, 'restaurants'), where('city', '==', city));
       const querySnapshot = await getDocs(q);
       const fetchedRestaurants: { id: string, address: string, restaurantName: string, city: string, foodStyle: string, price: number, imageURL: string }[] = [];
       querySnapshot.forEach((doc) => {
