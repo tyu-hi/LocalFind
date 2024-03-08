@@ -1,12 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import firebase_admin
 from firebase_admin import credentials, firestore
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import pandas as pd
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 cred =  credentials.Certificate('/Users/naomigong/Coding/LocalFind/src/local-find-cl-firebase-adminsdk-i2nmm-be6679f30c.json')
 firebase_app = firebase_admin.initialize_app(cred)
@@ -70,10 +72,17 @@ def createRecommendation(userID):
     sortedScores = sortedScores[1:]
     print(sortedScores)
     restaurants = [restaurantData[restaurants[0] == restaurantData["id"]]["restaurantName"].values[0] for restaurants in sortedScores]
-    return restaurants
+    top15restaurants = restaurants[slice(12)]
+    return top15restaurants
 
 
 print(createRecommendation('sJzrkxCj56Q3MulZsOHMxyaWjud2'))
+
+# Route for serving frontend
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 
 #retrieves data from the front end
 @app.route('/recommend', methods = ['POST'])
@@ -81,6 +90,8 @@ def recommend():
 
     userID = request.json.get('userID', '')
     recommendedRestaurants = createRecommendation(userID)
+    return jsonify({"restaurants" : recommendedRestaurants})
 
 
-
+if __name__ == '__main__':
+    app.run(port=5174)

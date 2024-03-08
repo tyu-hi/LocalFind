@@ -5,10 +5,16 @@ import { Link } from "react-router-dom";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { addDoc } from "firebase/firestore";
 
+//navigate user to signup user survey
+import { useNavigate } from "react-router-dom";
+
 const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+
+  //navigate usr
+  const navigate = useNavigate();
   
   //const [loading, setLoading] = useState(false);
   const auth = FIREBASE_AUTH;
@@ -44,11 +50,13 @@ const SignUpForm = () => {
                 .then(() => {
                   alert("Signup successful!"); // Indicate a successful signup
                   console.log("User data added to Firestore");
+                  navigate("/survey");
 
                   // Clear input fields by resetting state variables
                   setEmail("");
                   setPassword("");
                   setName("");
+
                 })
                 .catch((error) => {
                   console.error("Error adding user data to Firestore:", error);
