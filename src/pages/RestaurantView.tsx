@@ -42,7 +42,7 @@ interface RestaurantData {
   mapApi: string;
   address: string;
   info: string;
-  menuLink: string;
+  menu: string;
   isOpen: boolean;
   closingTime: string;
   rating: number;
@@ -77,7 +77,7 @@ function RestaurantView() {
     mapApi: "default-map-api", // Replace with your default map API key or URL
     address: "123 Default Address",
     info: "This is a default restaurant description.",
-    menuLink: "default-menu-link", // Replace with your default menu link
+    menu: "path/tofile", // Replace with your default menu link
     isOpen: false, // Default open status - would normally be computed
     closingTime: "22:00", // Default closing time
     rating: 0, // Default rating
@@ -109,7 +109,7 @@ function RestaurantView() {
       mapApi: "Map API URL or Key",
       address: "1234 Culinary Blvd, Foodtown, TX",
       info: "This is a placeholder description for the restaurant. It offers a variety of dishes with a focus on farm-to-table fresh ingredients.",
-      menuLink: "http://example-restaurant-menu-link.com",
+      menu: "https://images.pexels.com/photos/276147/pexels-photo-276147.jpeg?auto=compress&cs=tinysrgb&w=800",
       isOpen: true, // This would be dynamically calculated based on current time and store hours
       closingTime: "22:00", // This would be part of the storeHours
       rating: 4.5,
@@ -167,8 +167,17 @@ function RestaurantView() {
               </div>
 
               <h1 className="mb-4 text-black px-4 text-xl font-medium">
-                Reviews
+                Menu
               </h1>
+              <div className="bg-gray-100 p-4 mb-6 rounded-lg">
+                <img
+                src={restaurantInfo.menu}
+                alt={`${restaurantInfo.name} menu`}>
+                </img>
+              </div>
+
+              <ReviewForm />
+              
               <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
                 {/* <div className="flex flex-col">
         {userLoggedIn && <ReviewForm restaurantId={restaurantId} />}
@@ -220,10 +229,6 @@ function RestaurantView() {
                     <h2 className="text-black">Contact</h2>
                   </button>
 
-                  <div className="bg-orange-400 p-4 mb-6 rounded-lg pt-8">
-                    <h2 className="text-black">Leave A Review!</h2>
-                    <ReviewForm />
-                  </div>
 
                 </div>
               </div>
