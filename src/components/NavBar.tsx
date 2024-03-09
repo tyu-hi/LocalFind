@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useAuth } from "../firebase/firebase";
+import logo from "./localfind.png"
 
 
 
@@ -22,7 +23,7 @@ const NavBar = () => {
 		<div className='bg-lightgray text-navyblue font-alata font-semibold'>
 			<header >
 				<Link to="/">
-					<h3>LOGO</h3>
+				<img src={logo} alt="Brand Logo" className="h-11 mr-3 scale-150" /> {/* Adjust the h-10 class to fit the image size to your navbar */}
 				</Link>
 
 				<nav ref={navRef}>

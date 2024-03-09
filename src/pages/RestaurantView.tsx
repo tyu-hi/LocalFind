@@ -166,18 +166,16 @@ function RestaurantView() {
                 <p className="text-gray-800">{restaurantInfo.info}</p>
               </div>
 
-              <h1 className="mb-4 text-black px-4 text-xl font-medium">
-                Menu
-              </h1>
+              <h1 className="mb-4 text-black px-4 text-xl font-medium">Menu</h1>
               <div className="bg-gray-100 p-4 mb-6 rounded-lg">
                 <img
-                src={restaurantInfo.menu}
-                alt={`${restaurantInfo.name} menu`}>
-                </img>
+                  src={restaurantInfo.menu}
+                  alt={`${restaurantInfo.name} menu`}
+                ></img>
               </div>
 
               <ReviewForm />
-              
+
               <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
                 {/* <div className="flex flex-col">
         {userLoggedIn && <ReviewForm restaurantId={restaurantId} />}
@@ -193,50 +191,51 @@ function RestaurantView() {
             </div>
 
             <div className="w-full md:w-1/3">
-              <h1 className="mb-4 text-black px-4 text-xl font-medium">Info</h1>
-              <div className="bg-gray-100 p-4 mb-6 rounded-lg">
-                <div className="flex flex-col">
-                  <div className="bg-white p-4 mb-6 rounded-lg">
-                    <h2 className="text-black">Hours</h2>
-                    <div>
-                      {isOpen ? (
-                        <span className="text-green-600">
-                          Open now · Closes at{" "}
-                          {restaurantInfo.storeHours.closeTime}
-                        </span>
-                      ) : (
-                        <span className="text-red-600">
-                          Closed · Opens at {restaurantInfo.storeHours.openTime}
-                        </span>
-                      )}
+              <div className="max-w-sm mx-auto bg-white rounded-lg border-2 border-black">
+                <div className="p-5">
+                  <div className="text-center mb-4 border-b-2 border-black pb-4">
+                    <p className="text-xl font-bold font-alata">(123) 456 - 789</p>
+                  </div>
+                  {[
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday",
+                  ].map((day, index, array) => (
+                    <div
+                      key={day}
+                      className={`flex justify-between ${
+                        index !== array.length - 1 &&
+                        "border-b-2 border-black"
+                      } py-2`}
+                    >
+                      <span className="font-medium font-alata">{day}</span>
+                      <span className="text-gray-600 font-alata">7:00 AM - 9:00 PM</span>
                     </div>
+                  ))}
+                  <div className="text-center border-t-2 border-black pt-4">
+                    <p className="text-sm font-alata">350 Charles E Young Drive West</p>
                   </div>
-                  <a
-                    href={restaurantInfo.menuLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                  <div className="bg-orange-400 p-4 mb-6 rounded-lg">
-                    <h2 className="text-black">Menu</h2>
-      
+                  <div className="text-center mt-4">
+                    <a
+                      href="https://menu.dining.ucla.edu/menus/bruinplate"
+                      className="text-blue-500 font-alata hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      menu.dining.ucla.edu/menus/bruinplate
+                    </a>
                   </div>
-                  </a>
-                  <div className="bg-orange-400 p-4 mb-6 rounded-lg">
-                    <h2 className="text-black">Address</h2>
-                    <div className="text-black">{restaurantInfo.address}</div>
-                  </div>
-                  <button className="p-4 transition duration-300 mb-6 bg-orange-400 hover:bg-blue-400 rounded-lg">
-                    <h2 className="text-black">Contact</h2>
-                  </button>
-
-
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
+    </div>
   );
 }
 
