@@ -163,7 +163,7 @@ function RestaurantView() {
                 Description
               </h1>
               <div className="bg-gray-100 p-4 mb-6 rounded-lg">
-                <p className="text-gray-800">{restaurantInfo.info}</p>
+                <p className="text-gray-800 font-alata">{restaurantInfo.info}</p>
               </div>
 
               <h1 className="mb-4 text-black px-4 text-xl font-medium">Menu</h1>
@@ -176,17 +176,17 @@ function RestaurantView() {
 
               <ReviewForm />
 
-              <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
+               {/* <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
                 {/* <div className="flex flex-col">
         {userLoggedIn && <ReviewForm restaurantId={restaurantId} />}
       </div> */}
-              </div>
+              {/* </div>  */}
 
               <h1 className="mb-4 text-black px-4 text-xl font-medium">
-                Location
+                Reviews
               </h1>
               <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
-                <p className="text-gray-800">map-api-content</p>
+                <ReviewList />
               </div>
             </div>
 

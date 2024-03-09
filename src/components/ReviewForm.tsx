@@ -52,7 +52,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
           <h2 className="px-4 pt-3 pb-2 text-black font-medium text-xl">Review</h2>
           <div className="w-full md:w-full mb-2 mt-2">
             <textarea
-              className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
+              className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium font-alata placeholder-gray-700 focus:outline-none focus:bg-white"
               name="review"
               placeholder='Start your review here...'
               required
@@ -67,7 +67,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
                   key={index}
                   onClick={() => setRating(index + 1)}
                   className={`w-5 text-gray-500 cursor-pointer ${
-                    rating > index ? 'text-yellow-400' : 'text-gray-300'
+                    rating > index ? 'text-orange' : 'text-gray-300'
                   }`}
                   fill={rating > index ? 'currentColor' : 'none'}
                   strokeLinecap="round"
@@ -83,7 +83,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
             <div className="-mr-1 pt-2 px-3">
               <input
                 type='submit'
-                className="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
+                className="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100 font-alata"
                 value='Post'
               />
             </div>
