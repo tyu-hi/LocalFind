@@ -6,7 +6,12 @@ import "slick-carousel/slick/slick-theme.css";
 import NavBar from "../components/NavBar";
 import ReviewList from "../components/ReviewList";
 import ReviewForm from "../components/ReviewForm";
-import { FIREBASE_APP, FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
+import {
+  FIREBASE_APP,
+  FIREBASE_AUTH,
+  FIREBASE_FIRESTORE,
+} from "../firebase/firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 const settings = {
   focusOnSelect: true,
@@ -31,11 +36,6 @@ const settings = {
   ],
 };
 
-interface StoreHours {
-  openTime: string; // in format "HH:mm"
-  closeTime: string; // in format "HH:mm"
-}
-
 interface Restaurant {
   address: string;
   city: string;
@@ -48,46 +48,52 @@ interface Restaurant {
   zip: string;
 }
 
-// Function to check if the current time is within the store hours
-const isStoreOpen = (storeHours: StoreHours): boolean => {
-  const currentTime = new Date();
-  const openTime = new Date();
-  const closeTime = new Date();
-
-  const [openHours, openMinutes] = storeHours.openTime.split(":").map(Number);
-  const [closeHours, closeMinutes] = storeHours.closeTime
-    .split(":")
-    .map(Number);
-
-  openTime.setHours(openHours, openMinutes);
-  closeTime.setHours(closeHours, closeMinutes);
-
-  return currentTime >= openTime && currentTime <= closeTime;
-};
-
 function RestaurantView() {
-  const [restaurantInfo, setRestaurantInfo] = useState<Restaurant>({
-    name: "Default Restaurant Name",
-    image: "default-image-url", // Replace with your default image URL
-    mapApi: "default-map-api", // Replace with your default map API key or URL
-    address: "123 Default Address",
-    info: "This is a default restaurant description.",
-    menu: "path/tofile", // Replace with your default menu link
-    isOpen: false, // Default open status - would normally be computed
-    closingTime: "22:00", // Default closing time
-    rating: 0, // Default rating
-    numberOfRatings: 0, // Default number of ratings
-    distance: 0, // Default distance
-    priceScale: "$$", // Default price scale
-    cuisineType: "Default Cuisine Type", // Default cuisine type
-    storeHours: {
-      // Default store hours
-      openTime: "09:00", // Default opening time
-      closeTime: "22:00", // Default closing time
-    },
-  });
+  const [restaurantInfo, setRestaurant] = useState<Restaurant | null>(null); // Adjust initial state based on your needs
+  const [userID, setUserID] = useState("");
 
-  const isOpen = isStoreOpen(restaurantInfo.storeHours);
+  useEffect(() => {
+    const reassign = FIREBASE_AUTH.onAuthStateChanged((user) => {
+      if (user) {
+        setUserID(user.uid);
+        fetchRestaurantData(user.uid); // Fetch restaurant data when the user ID is set
+      }
+    });
+
+    return () => reassign();
+  }, []);
+
+  const fetchRestaurantData = async (uid: string) => {
+    const db = FIREBASE_FIRESTORE; // Ensure FIREBASE_FIRESTORE is correctly initialized Firestore instance
+    const restaurantsRef = collection(db, "Restaurants");
+    const q = query(restaurantsRef, where("userId", "==", uid));
+
+    try {
+      const querySnapshot = await getDocs(q);
+      const restaurantsList: Restaurant[] = querySnapshot.docs.map((doc) => ({
+        address: doc.data().address,
+        city: doc.data().city,
+        foodStyle: doc.data().foodStyle,
+        imageURL: doc.data().imageURL,
+        price: doc.data().price,
+        restaurantName: doc.data().restaurantName,
+        userId: doc.data().userId,
+        website: doc.data().website,
+        zip: doc.data().zip,
+      }));
+
+      if (restaurantsList.length > 0) {
+        setRestaurant(restaurantsList[0]); // Correctly typed as Restaurant
+      }
+    } catch (error) {
+      console.error("Error fetching restaurant data: ", error);
+    }
+  };
+
+  // Render your component based on the state of `restaurantInfo`
+  if (!restaurantInfo) {
+    return <div>Loading restaurant information...</div>;
+  }
 
   const images = [
     "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -96,17 +102,6 @@ function RestaurantView() {
     "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=800",
   ];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const db = FIREBASE_FIRESTORE;
-      const ref = FIREBASE_APP.db.collection('restaurants'); // Adjust the reference path as per your Firebase database structure
-      const snapshot = await ref.once('value');
-      setRestaurant(snapshot.val());
-    };
-
-    fetchData().catch(console.error);
-  }, []);
-
   return (
     <div className="font-alata">
       <NavBar />
@@ -114,10 +109,10 @@ function RestaurantView() {
         <div className="grid grid-cols-1 border-black pb-10">
           <div className="text-black px-2 py-2  mb-4 ">
             <div className="text-4xl font-serif rounded-lg mt-10">
-              {restaurantInfo.name}
+              {restaurantInfo.restaurantName}
             </div>
             <p className="text-gray-600 pl-2">
-              {restaurantInfo.cuisineType} · {restaurantInfo.priceScale}
+              {restaurantInfo.foodStyle} · {restaurantInfo.price}
             </p>
           </div>
           <div className="mb-2"></div>
@@ -140,20 +135,20 @@ function RestaurantView() {
                 Description
               </h1>
               <div className="bg-gray-100 p-4 mb-6 rounded-lg">
-                <p className="text-gray-800 font-alata">{restaurantInfo.info}</p>
+                <p className="text-gray-800 font-alata">Info</p>
               </div>
 
               <h1 className="mb-4 text-black px-4 text-xl font-medium">Menu</h1>
               <div className="bg-gray-100 p-4 mb-6 rounded-lg">
                 <img
-                  src={restaurantInfo.menu}
-                  alt={`${restaurantInfo.name} menu`}
+                  src={restaurantInfo.imageURL}
+                  alt={`${restaurantInfo.restaurantName} menu`}
                 ></img>
               </div>
 
               <ReviewForm />
 
-               {/* <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
+              {/* <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
                 {/* <div className="flex flex-col">
         {userLoggedIn && <ReviewForm restaurantId={restaurantId} />}
       </div> */}
@@ -171,7 +166,7 @@ function RestaurantView() {
               <div className="max-w-sm mx-auto bg-white rounded-lg border-2 border-black">
                 <div className="p-5">
                   <div className="text-center mb-4 border-b-2 border-black pb-4">
-                    <p className="text-xl font-bold font-alata">(123) 456 - 789</p>
+                    <p className="text-xl font-bold font-alata">805-665-7012</p>
                   </div>
                   {[
                     "Monday",
@@ -185,26 +180,31 @@ function RestaurantView() {
                     <div
                       key={day}
                       className={`flex justify-between ${
-                        index !== array.length - 1 &&
-                        "border-b-2 border-black"
+                        index !== array.length - 1 && "border-b-2 border-black"
                       } py-2`}
                     >
                       <span className="font-medium font-alata">{day}</span>
-                      <span className="text-gray-600 font-alata">7:00 AM - 9:00 PM</span>
+                      <span className="text-gray-600 font-alata">
+                        7:00 AM - 9:00 PM
+                      </span>
                     </div>
                   ))}
                   <div className="text-center border-t-2 border-black pt-4">
-                    <p className="text-sm font-alata">350 Charles E Young Drive West</p>
+                    <p className="text-sm font-alata">
+                      350 Charles E Young Drive West
+                    </p>
                   </div>
                   <div className="text-center mt-4">
-                    <a
-                      href="https://menu.dining.ucla.edu/menus/bruinplate"
-                      className="text-blue-500 font-alata hover:underline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      menu.dining.ucla.edu/menus/bruinplate
-                    </a>
+                    {restaurantInfo && (
+                      <a
+                        href={restaurantInfo.website}
+                        className="text-blue-500 font-alata hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {restaurantInfo.website}
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
