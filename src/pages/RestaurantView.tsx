@@ -131,12 +131,12 @@ function RestaurantView() {
   }, []);
 
   return (
-    <div>
+    <div className="font-alata">
       <NavBar />
       <div className="container mx-auto">
         <div className="grid grid-cols-1 border-black pb-10">
           <div className="text-black px-2 py-2  mb-4 ">
-            <div className="text-4xl font-serif rounded-lg">
+            <div className="text-4xl font-serif rounded-lg mt-10">
               {restaurantInfo.name}
             </div>
             <p className="text-gray-600 pl-2">
