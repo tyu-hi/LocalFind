@@ -1,3 +1,12 @@
+
+import * as React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore from 'swiper';
+import 'swiper/css';
+import 'swiper/css/pagination';
+// Import Swiper styles
+
+        
 //import * as React from 'react';
 import "./RecommendedRestaurants.css";
 import Slider from "react-slick";
