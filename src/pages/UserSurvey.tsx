@@ -6,8 +6,11 @@ import { Link } from "react-router-dom";
 import { collection, getDocs, query, where, doc } from "firebase/firestore";
 import { addDoc, updateDoc } from "firebase/firestore";
 import { Nav } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 
 const UserSurvey = () => {
+  const navigate = useNavigate();
+  
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [location, setLocation] = useState("");
@@ -70,6 +73,8 @@ const UserSurvey = () => {
           })
           .then(() => {
             alert("We have updated your information")
+            navigate("/");
+            
           })
         .catch((error) => {
           console.error("Error updating document", error);

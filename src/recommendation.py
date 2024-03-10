@@ -10,7 +10,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-cred =  credentials.Certificate('/Users/naomigong/Coding/LocalFind/src/local-find-cl-firebase-adminsdk-i2nmm-be6679f30c.json')
+cred =  credentials.Certificate('src/local-find-cl-firebase-adminsdk-i2nmm-631e2b2bb8.json')
 firebase_app = firebase_admin.initialize_app(cred)
 db = firestore.client()
 vec = TfidfVectorizer()

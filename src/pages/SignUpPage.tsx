@@ -77,7 +77,7 @@ const SignUpForm = () => {
 
   return (
     <div>
-      <img src={'public/3d_objects.png'} className="w-full h-full" alt="3D objects"/>
+      <img src={'/3d_objects.png'} className="w-full h-full" alt="3D objects"/>
       <form onSubmit={signUp}>
         <h1 className="sign-up"> Sign Up</h1>
         <input
