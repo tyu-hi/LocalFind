@@ -37,7 +37,7 @@ const NavBar = () => {
 							<Link to="/view" className='hover:text-blue-800'>Restaurant View</Link>
 							<Link to="/addrestraunt" className='hover:text-blue-800'>add business</Link>
 							<Link to="/profile">
-								<img src={currentUser.photoURL ?? 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F2%2F2c%2FDefault_pfp.svg%2F1200px-Default_pfp.svg.png&tbnid=t5PQpQ66IW5J4M&vet=12ahUKEwjApLK059GEAxWiJEQIHXLqB84QMygAegQIARBy..i&imgrefurl=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3ADefault_pfp.svg&docid=o_Ii_cyIO_p3fM&w=1200&h=1200&q=default%20profile%20picture%20&ved=2ahUKEwjApLK059GEAxWiJEQIHXLqB84QMygAegQIARBy'} 
+								<img src={currentUser.photoURL ?? 'public/Default_pfp.svg.png'} 
 									alt="Profile" 
 									className="navBar-avatar" 
 									title="Profile" //tooltip
