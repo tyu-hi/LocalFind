@@ -27,7 +27,7 @@ const LandingPage = () => {
 
       <section className="mt-56">
         <FeaturedLists />
-        <RecommendedRestaurants />
+        {/*recommended restraunts here*/}
         <QuickAndAffordableDinners />
       </section>
 
