@@ -25,12 +25,12 @@
 /*font family for tailwind css*/
 @font-face {
 	font-family: "Alata";
-	src: url("../public/fonts/Atlata/Alata-Regular.ttf")
+	src: url("../fonts/Alata/Alata-Regular.ttf")
 }
 
 @font-face {
 	font-family: "Inter";
-	src: url("public/fonts/Alata/Inter/Inter-VariableFont_slnt,wght.ttf");
+	src: url("../fonts/Alata/Inter/Inter-VariableFont_slnt,wght.ttf");
 	
 }
 .title {
@@ -56,8 +56,8 @@
 /*added avatar for profile pic styling on ProfilePage*/
 .avatar {
 	vertical-align: middle;
-	width: 150px;
-	height: 150px;
+	width: 200px;
+	height: 200px;
 	border-radius: 100%;
 	/*border-width: 1px; */
 	border-color: gray;
@@ -201,7 +201,7 @@ nav {
 	padding: 10px;
 	padding-left: 20px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
-	width: 80%; /* Adjust the width as needed */
+	width: 70%; /* Adjust the width as needed */
 	align-items: center;
 	justify-content: center;
 	display: flex;

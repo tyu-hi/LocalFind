@@ -32,11 +32,12 @@ const NavBar = () => {
 					{currentUser ? (
 						<>
 							
-							<Link to="/">home</Link>
-							<Link to="/search">search</Link>
-							<Link to="/view">Restaurant View</Link>
+							<Link to="/" className='hover:text-blue-800'>home</Link>
+							<Link to="/search" className='hover:text-blue-800'>search</Link>
+							<Link to="/view" className='hover:text-blue-800'>Restaurant View</Link>
+							<Link to="/addrestraunt" className='hover:text-blue-800'>add business</Link>
 							<Link to="/profile">
-								<img src={currentUser.photoURL ?? 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F2%2F2c%2FDefault_pfp.svg%2F1200px-Default_pfp.svg.png&tbnid=t5PQpQ66IW5J4M&vet=12ahUKEwjApLK059GEAxWiJEQIHXLqB84QMygAegQIARBy..i&imgrefurl=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3ADefault_pfp.svg&docid=o_Ii_cyIO_p3fM&w=1200&h=1200&q=default%20profile%20picture%20&ved=2ahUKEwjApLK059GEAxWiJEQIHXLqB84QMygAegQIARBy'} 
+								<img src={currentUser.photoURL ?? 'public/Default_pfp.svg.png'} 
 									alt="Profile" 
 									className="navBar-avatar" 
 									title="Profile" //tooltip
@@ -47,13 +48,13 @@ const NavBar = () => {
 						</>
 					) : (
 						<>
-							<Link to="/">home</Link>
-							<Link to="/search">search</Link>
-							<Link to="about">about</Link>
-							<div className="bg-yellow-50 border border-orange border-2 text-orange font-semibold py-2 px-1 ml-2 mr-4 rounded-md hover:bg-yellow-400 hover:text-white hover:border-0 transition-colors duration-300">
+							<Link to="/" className='hover:text-blue-800'>home</Link>
+							<Link to="/search" className='hover:text-blue-800'>search</Link>
+							<Link to="about" className='hover:text-blue-800'>about</Link>
+							<div className="bg-yellow-50 border border-orange border-2 text-orange font-semibold py-2 px-1 ml-2 mr-4 rounded-md hover:bg-yellow-400 hover:text-white hover:border-yellow-400 transition-colors duration-300">
 								<Link to="/signup">sign up</Link>
 							</div>
-							<div className="bg-yellow-50 border border-orange border-2 text-orange font-semibold py-2 px-3 rounded-md hover:bg-blue-400 hover:text-white hover:bg-yellow-400 hover:border-0 transition-colors duration-300">
+							<div className="bg-yellow-50 border border-orange border-2 text-orange font-semibold py-2 px-3 rounded-md hover:bg-blue-400 hover:text-white hover:bg-yellow-400 hover:border-yellow-400 transition-colors duration-300">
 								<Link to="/login">log in</Link>
 							</div>
 						</>
