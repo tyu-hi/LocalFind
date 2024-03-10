@@ -83,7 +83,6 @@ console.log("Recommended Restaurants:", recommendedRestaurants);
 setFound(true)
 }, [recommendedRestaurants]);
 
-
 // Render loading message if recommendedRestaurants is empty
 // Render loading message if loading
 if (recommendedRestaurants.length == 0) {
