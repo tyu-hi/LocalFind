@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import NavBar from "../components/NavBar";
 import ReviewList from "../components/ReviewList";
 import ReviewForm from "../components/ReviewForm";
-import { FIREBASE_AUTH } from "../firebase/firebase";
+import { FIREBASE_APP, FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
 
 const settings = {
   focusOnSelect: true,
@@ -36,21 +36,16 @@ interface StoreHours {
   closeTime: string; // in format "HH:mm"
 }
 
-interface RestaurantData {
-  name: string;
-  image: string;
-  mapApi: string;
+interface Restaurant {
   address: string;
-  info: string;
-  menu: string;
-  isOpen: boolean;
-  closingTime: string;
-  rating: number;
-  numberOfRatings: number;
-  distance: number;
-  priceScale: string;
-  cuisineType: string;
-  storeHours: StoreHours;
+  city: string;
+  foodStyle: string;
+  imageURL: string;
+  price: string;
+  restaurantName: string;
+  userId: string;
+  website: string;
+  zip: string;
 }
 
 // Function to check if the current time is within the store hours
@@ -71,7 +66,7 @@ const isStoreOpen = (storeHours: StoreHours): boolean => {
 };
 
 function RestaurantView() {
-  const [restaurantInfo, setRestaurantInfo] = useState<RestaurantData>({
+  const [restaurantInfo, setRestaurantInfo] = useState<Restaurant>({
     name: "Default Restaurant Name",
     image: "default-image-url", // Replace with your default image URL
     mapApi: "default-map-api", // Replace with your default map API key or URL
@@ -102,32 +97,14 @@ function RestaurantView() {
   ];
 
   useEffect(() => {
-    const restaurantData: RestaurantData = {
-      name: "Restaurant Name",
-      image:
-        "https://hips.hearstapps.com/hmg-prod/images/gettyimages-660714144-1516227341.jpg",
-      mapApi: "Map API URL or Key",
-      address: "1234 Culinary Blvd, Foodtown, TX",
-      info: "This is a placeholder description for the restaurant. It offers a variety of dishes with a focus on farm-to-table fresh ingredients.",
-      menu: "https://images.pexels.com/photos/276147/pexels-photo-276147.jpeg?auto=compress&cs=tinysrgb&w=800",
-      isOpen: true, // This would be dynamically calculated based on current time and store hours
-      closingTime: "22:00", // This would be part of the storeHours
-      rating: 4.5,
-      numberOfRatings: 350,
-      distance: 5.2,
-      priceScale: "$$$",
-      cuisineType: "Italian",
-      storeHours: {
-        openTime: "11:00", // Example opening time
-        closeTime: "22:00", // Example closing time
-      },
+    const fetchData = async () => {
+      const db = FIREBASE_FIRESTORE;
+      const ref = FIREBASE_APP.db.collection('restaurants'); // Adjust the reference path as per your Firebase database structure
+      const snapshot = await ref.once('value');
+      setRestaurant(snapshot.val());
     };
 
-    const unsubscribe = FIREBASE_AUTH.onAuthStateChanged((user) => {
-      setUserLoggedIn(!!user); // Set to true if user is not null, false otherwise
-    });
-
-    setRestaurantInfo(restaurantData);
+    fetchData().catch(console.error);
   }, []);
 
   return (
