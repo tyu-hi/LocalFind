@@ -25,12 +25,12 @@
 /*font family for tailwind css*/
 @font-face {
 	font-family: "Alata";
-	src: url("../public/fonts/Atlata/Alata-Regular.ttf")
+	src: url("../fonts/Alata/Alata-Regular.ttf")
 }
 
 @font-face {
 	font-family: "Inter";
-	src: url("public/fonts/Alata/Inter/Inter-VariableFont_slnt,wght.ttf");
+	src: url("../fonts/Alata/Inter/Inter-VariableFont_slnt,wght.ttf");
 	
 }
 .title {
