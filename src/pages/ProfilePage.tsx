@@ -206,10 +206,10 @@ const ProfilePage = () => {
             {/*bottom*/}
             
              {/*Playlists*/}
-             <div className="flex-row mt-10 text-lg">
+             <div className="flex-row mt-10 text-lg ">
               Your Playlists
               
-              <div className="border border-2 rounded-md p-4 mt-3">
+              <div >
                 <Playlists/>
 
               </div>
