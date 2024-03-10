@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { FIREBASE_FIRESTORE } from "../firebase/firebase";
+// import FIREBASE_FIRESTORE from './firebaseConfig'; // Uncomment this when integrating with Firebase
 
 interface Review {
   userId: string;
@@ -12,68 +12,88 @@ interface ReviewListProps {
   restaurantId: string;
 }
 
-const settings = {
-  focusOnSelect: true,
-  dots: false,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 2,
-      },
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-      },
-    },
-  ],
+const userNames: { [key: string]: string } = {
+  user1: "Alice",
+  user2: "Bob",
+  user3: "Charlie",
+  user4: "Diana",
 };
 
-const ReviewList: React.FC<ReviewListProps> = ({
-  restaurantId,
-}: ReviewListProps) => {
-  const [reviews, setReviews] = useState<Review[]>([]);
+const getUserName = (userId: string): string => {
+  return userNames[userId] || "Anonymous";
+};
 
-  useEffect(() => {
-    const unsubscribe = FIREBASE_FIRESTORE.collection("reviews")
-      .where("restaurantId", "==", restaurantId)
-      .onSnapshot((snapshot: any[]) => {
-        const reviewsData: Review[] = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          reviewsData.push({
-            userId: data.userId,
-            rating: data.rating,
-            comment: data.comment,
-          });
-        });
-        setReviews(reviewsData);
-      });
-    return () => unsubscribe();
-  }, [restaurantId]);
+const ReviewList: React.FC<ReviewListProps> = ({ restaurantId }) => {
+  const perPage = 2; // Define how many reviews you want per page
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const [reviews, setReviews] = useState<Review[]>([
+    {
+      userId: "user1",
+      rating: 5,
+      comment: "Fantastic experience, highly recommended!",
+    },
+    { userId: "user2", rating: 4, comment: "Great food, will come again." },
+    { userId: "user3", rating: 3, comment: "Good, but room for improvement." },
+    { userId: "user4", rating: 2, comment: "Below average, expected more." },
+  ]);
+
+  // Calculate the total number of pages
+  const pageCount = Math.ceil(reviews.length / perPage);
+
+  // Get the reviews for the current page
+  const paginatedReviews = reviews.slice(
+    currentPage * perPage,
+    (currentPage + 1) * perPage
+  );
+
+  const renderStars = (rating: number) => {
+    return [...Array(5)].map((_, i) => (
+      <span
+        key={i}
+        className={i < rating ? "text-orange" : "text-gray-300"}
+      >
+        ★
+      </span>
+    ));
+  };
+
+  // Generate the pagination dots
+  const renderPaginationDots = () => {
+    return [...Array(pageCount)].map((_, i) => (
+      <button
+        key={i}
+        onClick={() => setCurrentPage(i)}
+        className={`h-2 w-2 rounded-full mx-1 ${
+          currentPage === i ? "bg-blue-500" : "bg-gray-300"
+        }`}
+        aria-label={`Go to page ${i + 1}`}
+      />
+    ));
+  };
 
   return (
-    <div>
-      <h2>Reviews:</h2>
-      <Slider {...settings}>
-        {reviews.map((review) => (
-          <div className="p-4 bg-white rounded shadow">
-            <div className="flex justify-between items-center">
-              <h3 className="text-lg font-semibold mb-1">
-                Rating: {review.rating} / 5
-              </h3>
-              <span className="text-sm text-gray-500">By {review.userId}</span>
+    <div className="flex flex-col items-center">
+      {paginatedReviews.map((review, index) => (
+        <div
+          key={index}
+          className="bg-white shadow-md rounded-lg p-6 mb-4 w-full"
+        >
+          <div className="flex items-center mb-4">
+            <div>
+              <div className="text-lg font-alata font-semibold">
+                {getUserName(review.userId)}
+              </div>
+              {/* Optional: Add a date here if you have it in your data */}
             </div>
-            <p className="text-gray-600">{review.comment}</p>
           </div>
-        ))}
-      </Slider>
+          <div className="flex items-center mb-4">
+            {renderStars(review.rating)}
+          </div>
+          <p className="text-gray-700 font-alata">{review.comment}</p>
+        </div>
+      ))}
+      <div className="flex justify-center p-4">{renderPaginationDots()}</div>
     </div>
   );
 };

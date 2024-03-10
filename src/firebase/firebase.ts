@@ -51,15 +51,30 @@ export async function upload(file: File, currentUser: User, setLoading: (loading
 
   setLoading(true);
   
-  await uploadBytes(fileRef, file);
-  const photoURL = await getDownloadURL(fileRef);
+  try {
+    // Upload the file to Firestore
+    await uploadBytes(fileRef, file);
+    const photoURL = await getDownloadURL(fileRef);
 
-  updateProfile(currentUser, {photoURL});
-  
-  setLoading(false);
-  alert("Uploaded file!");
-  window.location.reload();
+    // Update the user's profile with the uploaded image URL
+    updateProfile(currentUser, { photoURL });
+    
+    setLoading(false);
+    alert("Uploaded file!");
+    window.location.reload();
+  } catch (error) {
+    console.error('Error uploading image:', error);
+
+    // Set the photoURL to the default value
+    const defaultPhotoURL = 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F2%2F2c%2FDefault_pfp.svg%2F1200px-Default_pfp.svg.png&tbnid=t5PQpQ66IW5J4M&vet=12ahUKEwjApLK059GEAxWiJEQIHXLqB84QMygAegQIARBy..i&imgrefurl=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3ADefault_pfp.svg&docid=o_Ii_cyIO_p3fM&w=1200&h=1200&q=default%20profile%20picture%20&ved=2ahUKEwjApLK059GEAxWiJEQIHXLqB84QMygAegQIARBy';
+    updateProfile(currentUser, { photoURL: defaultPhotoURL });
+
+    setLoading(false);
+    alert("There was an error uploading the image. Your profile picture has been set to the default.");
+    window.location.reload();
+  }
 }
+
 
 
 
