@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 import Map from '../components/Maps'
 import Playlists from "../components/Playlists"
 
-
 //After use is logged in, I would like for the signup/sign in to disappear, 
 //and be replaced by the icon of the user
 
@@ -77,7 +76,7 @@ const ProfilePage = () => {
               const data = doc.data();
               setFirstName(data.firstname);
               setLastName(data.lastname);
-              setPhotoURL(data.photoURL || '/Default_pfp.svg.png');
+              setPhotoURL(data.photoURL || "");
             });
           }
         })
@@ -104,7 +103,7 @@ const ProfilePage = () => {
     <div>
         <NavBar/>
         {/* if user is logged in show this profile page, if not tell user to log in | conditional rendering*/}
-        <div className="max-w-xl mx-auto width-full">
+        <div className="mx-auto width-full">
           
           <div className="flex flex-col items-center justfiy-center mb-10 mt-10 w-full">
             {/*top*/}
@@ -154,7 +153,7 @@ const ProfilePage = () => {
                   {/* Circular button */}
                   <Link to="/addrestraunt">
                         <button
-                          
+                            
                           className="text-white hover:bg-blue-50"
                           style={{
                             boxSizing: 'border-box',
@@ -178,17 +177,14 @@ const ProfilePage = () => {
             </div>
              
             {/*bottom*/}
-            
-             {/*Playlists*/}
-             <div className="flex-row mt-10">
-              Your Playlists
-              
-              <div className="border border-2 rounded-md p-4 mt-3">
-                <Playlists/>
 
+            {/*map of resturants you ate at*/}
+            <div className="flex-row mt-10">
+                Your Map
+              <div className="bg-gray-200 border p-4 mt-3">
+                <Map/>
               </div>
             </div>
-            
 
             {/*reviews*/}
             <div className="flex-row mt-10">
@@ -198,6 +194,14 @@ const ProfilePage = () => {
               </div>
             </div>
 
+            {/*Playlists*/}
+            <div className="flex-row mt-10">
+              Your Playlists
+              <Playlists/>
+              <div className="bg-gray-200 border p-4 mt-3">
+                render playlist component by user
+              </div>
+            </div>
           </div>
 
           {/*log out user*/}

@@ -86,6 +86,7 @@ const RecommendedRestaurants = () => {
 }, [userID]);
 
 
+<<<<<<< HEAD
 useEffect(() => {
   console.log("Recommended Restaurants:", recommendedRestaurants);
   setRecommendedRestaurants(recommendedRestaurants);
@@ -109,6 +110,9 @@ useEffect(() => {
   };
 
 <<<<<<< HEAD
+=======
+
+>>>>>>> parent of b428090 (RecommendRestaurants correct version)
 // Render loading message if recommendedRestaurants is empty
 // Render loading message if loading
 if (recommendedRestaurants.length == 0) {

@@ -12,11 +12,8 @@ import { IoIosSearch } from "react-icons/io";
 */}
 
 interface SearchBarProps {
-
   defaultValue?: string;
   onSubmit: (searchValue: string) => void;
-  className?: string; 
-  
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ defaultValue = "", onSubmit }) => {

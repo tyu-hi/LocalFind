@@ -2,7 +2,6 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useAuth } from "../firebase/firebase";
-import logo from "./localfind.png"
 
 
 
@@ -23,7 +22,7 @@ const NavBar = () => {
 		<div className='bg-lightgray text-navyblue font-alata font-semibold'>
 			<header >
 				<Link to="/">
-				<img src={logo} alt="Brand Logo" className="h-11 mr-3 scale-150" /> {/* Adjust the h-10 class to fit the image size to your navbar */}
+					<h3>LOGO</h3>
 				</Link>
 
 				<nav ref={navRef}>
@@ -50,10 +49,10 @@ const NavBar = () => {
 							<Link to="/">home</Link>
 							<Link to="/search">search</Link>
 							<Link to="about">about</Link>
-							<div className="bg-yellow-50 border border-orange border-2 text-orange font-semibold py-2 px-1 ml-2 mr-4 rounded-md hover:bg-yellow-400 hover:text-white hover:border-0 transition-colors duration-300">
+							<div className="bg-yellow-50 border border-orange-300 border-2 text-orange font-semibold py-2 px-1 ml-2 mr-4 rounded-md hover:bg-blue-400 hover:text-white hover:border-blue-600 transition-colors duration-300">
 								<Link to="/signup">sign up</Link>
 							</div>
-							<div className="bg-yellow-50 border border-orange border-2 text-orange font-semibold py-2 px-3 rounded-md hover:bg-blue-400 hover:text-white hover:bg-yellow-400 hover:border-0 transition-colors duration-300">
+							<div className="bg-yellow-50 border border-orange-300 border-2 text-orange font-semibold py-2 px-3 rounded-md hover:bg-blue-400 hover:text-white hover:border-blue-600 transition-colors duration-300">
 								<Link to="/login">log in</Link>
 							</div>
 						</>
