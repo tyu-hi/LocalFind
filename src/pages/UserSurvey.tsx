@@ -1,4 +1,5 @@
 import NavBar from '../components/NavBar'
+<<<<<<< HEAD
 import { useState } from "react";
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -91,82 +92,16 @@ const UserSurvey = () => {
     });
   }
 }
-  return (
-      <div>
-        <NavBar/>
-        <form onSubmit={signUp}>
-          <h1> Create An Account</h1>
-          <label htmlFor="favorite-cuisine">Select your favorite cuisine:</label>
-          <select
-            value={favoriteCuisine}
-            onChange={(e) => setFavoriteCuisine(e.target.value)}
-            required
-          >
-            {cuisines.map((cuisine, index) => (
-              <option key={index} value={cuisine}>
-                {cuisine}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="second-favorite-cuisine">
-            Select your second favorite cuisine:
-          </label>
-          <select
-            value={secondFavoriteCuisine}
-            onChange={(e) => setSecondFavoriteCuisine(e.target.value)}
-            required
-          >
-            {cuisines.map((cuisine, index) => (
-              <option key={index} value={cuisine}>
-                {cuisine}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="third-favorite-cuisine">
-            Select your third favorite cuisine:
-          </label>
-          <select
-            value={thirdFavoriteCuisine}
-            onChange={(e) => setThirdFavoriteCuisine(e.target.value)}
-            required
-          >
-            {cuisines.map((cuisine, index) => (
-              <option key={index} value={cuisine}>
-                {cuisine}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="preferredPriceRange">preferred price range? :</label>
-          <select
-            value={preferredPriceRange}
-            onChange={(e) => setPreferredPriceRange(e.target.value)}
-            required
-          >
-            {costRange.map((cost, index) => (
-              <option key={index} value={cost}>
-                {cost}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="mode">What is your preferred way to get food?:</label>
-          <select
-            value={modeOfFood}
-            onChange={(e) => setModeOfFood(e.target.value)}
-            required
-          >
-            {modeOfFoodOptions.map((modeOptions, index) => (
-              <option key={index} value={modeOptions}>
-                {modeOptions}
-              </option>
-            ))}
-          </select>
-          <button type="submit">Sign Up</button>
-        </form>
-        Already have an account? <Link to="/login">Login</Link>
-      </div>
-    );
+=======
 
+const UserSurvey = () => {
+>>>>>>> parent of 3986be2 (fixed python script for recommendations)
+  return (
+    <div>
+        <NavBar/>
+        User survey stuff
+    </div>
+  )
 }
 
-
-export default UserSurvey;
+export default UserSurvey

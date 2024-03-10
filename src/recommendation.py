@@ -15,34 +15,25 @@ firebase_app = firebase_admin.initialize_app(cred)
 db = firestore.client()
 vec = TfidfVectorizer()
 
+#add data cleaning
+#prepping the data to use
+restaurants = db.collection('restaurants')
+users = db.collection('Users')
+
+restaurantDocs = restaurants.get()
+userDocs = users.get()
 restaurantData = []
 userData = []
-
-def prepRestaurantData():
-  restaurants = db.collection('restaurants')
-  restaurantDocs = restaurants.get()
-
-  restaurantData = [doc.to_dict() for doc in restaurantDocs]
-  restaurantData = pd.DataFrame(restaurantData)
-  restaurantData["id"] = [i for i in range(0, restaurantData.shape[0])]
-  print(restaurantData.columns)
-
-  return restaurantData
+ 
+restaurantData = [doc.to_dict() for doc in restaurantDocs]
+restaurantData = pd.DataFrame(restaurantData)
+restaurantData["id"] = [i for i in range(0, restaurantData.shape[0])]
+print(restaurantData.columns)
 
 
-def prepUserData():
-  #add data cleaning
-  #prepping the data to use
-  users = db.collection('Users')
-
-  userDocs = users.get()
-
-
-  userData = [doc.to_dict() for doc in userDocs]
-  userData = pd.DataFrame(userData)
-  userData["id"] = [i for i in range(0, userData.shape[0])]
-
-  return userData
+userData = [doc.to_dict() for doc in userDocs]
+userData = pd.DataFrame(userData)
+userData["id"] = [i for i in range(0, userData.shape[0])]
 
 def restaurantImportantInfo(restaurantData):
   data = restaurantData.copy()
@@ -59,41 +50,35 @@ def userImportantInfo(userData):
   )
   return data
 
+userData = userImportantInfo(userData)
+restaurantData = restaurantImportantInfo(restaurantData)
 
 
 def createRecommendation(userID):
-    
-  userData = prepUserData()
-  restaurantData = prepRestaurantData()
+    print("great")
+    combinedInfo = userData["info"].tolist() + restaurantData["info"].tolist()
+    combined_vec = vec.fit_transform(combinedInfo)
 
-  userData = userImportantInfo(userData)
-  restaurantData = restaurantImportantInfo(restaurantData)
+    # Separate user and restaurant vectors
+    userVec = combined_vec[:len(userData)]
+    restaurantVec = combined_vec[len(userData):]
+    # Calculate cosine similarity
+    sim = cosine_similarity(userVec, restaurantVec)
 
-  print("great")
-  combinedInfo = userData["info"].tolist() + restaurantData["info"].tolist()
-  combined_vec = vec.fit_transform(combinedInfo)
-
-  # Separate user and restaurant vectors
-  userVec = combined_vec[:len(userData)]
-  restaurantVec = combined_vec[len(userData):]
-  # Calculate cosine similarity
-  sim = cosine_similarity(userVec, restaurantVec)
-
-  if userID not in userData["uid"].values:
-      print("no person found")
-      return []
-  user_id = userData[userData.uid == userID]["id"].values[0]
-  scores = list(enumerate(sim[user_id]))
-  sortedScores = sorted(scores, key = lambda x: x[1], reverse = True)
-  sortedScores = sortedScores[1:]
-  print(sortedScores)
-  restaurants = [restaurantData[restaurants[0] == restaurantData["id"]]["restaurantName"].values[0] for restaurants in sortedScores]
-  top12restaurants = restaurants[slice(12)]
-  print("restaurants:", top12restaurants)
-  return top12restaurants
+    if userID not in userData["uid"].values:
+        print("no person found")
+        return []
+    user_id = userData[userData.uid == userID]["id"].values[0]
+    scores = list(enumerate(sim[user_id]))
+    sortedScores = sorted(scores, key = lambda x: x[1], reverse = True)
+    sortedScores = sortedScores[1:]
+    print(sortedScores)
+    restaurants = [restaurantData[restaurants[0] == restaurantData["id"]]["restaurantName"].values[0] for restaurants in sortedScores]
+    top12restaurants = restaurants[slice(12)]
+    return top12restaurants
 
 
-
+print(createRecommendation('sJzrkxCj56Q3MulZsOHMxyaWjud2'))
 # Route for serving frontend
 @app.route('/')
 def index():
@@ -105,9 +90,8 @@ def index():
 def recommend():
 
     userID = request.json.get('userID', '')
-    print("Received userID:", userID)  # Debug print
     recommendedRestaurants = createRecommendation(userID)
-    return jsonify({"restaurants" : recommendedRestaurants})
+    return jsonify(recommendedRestaurants)
 
 
 if __name__ == '__main__':
