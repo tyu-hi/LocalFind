@@ -77,7 +77,7 @@ const ProfilePage = () => {
               const data = doc.data();
               setFirstName(data.firstname);
               setLastName(data.lastname);
-              setPhotoURL(data.photoURL || '/Default_pfp.svg.png');
+              setPhotoURL(data.photoURL || '/public/Default_pfp.svg.png');
             });
           }
         })
@@ -101,7 +101,7 @@ const ProfilePage = () => {
 
   
   return (
-    <div>
+    <div className="font-alata">
         <NavBar/>
         {/* if user is logged in show this profile page, if not tell user to log in | conditional rendering*/}
         <div className="max-w-xl mx-auto width-full">
@@ -143,37 +143,16 @@ const ProfilePage = () => {
               <div className="ml-10 mt-3">
 
                 {/*user name*/}
-                <h2 className = "text-lg sm:text-2xl md:text-4xl lg:text-5xl font-bold text-black-900">
+                <h2 className = "text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-black-900">
                   {firstname} {lastname}
                   </h2>
 
                 {/*change location to passable {variable} later */}
-                <p className="text-gray-600 mt-2">Location</p>
+                <p className="text-gray-800 text-lg mt-2">Location</p>
                 {/*change Bio/Stats to passable {variable} later */}
-                <p className="text-sm mb-2 text-gray-700 mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
-                  {/* Circular button */}
-                  <Link to="/addrestraunt">
-                        <button
-                          
-                          className="text-white hover:bg-blue-50"
-                          style={{
-                            boxSizing: 'border-box',
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            padding: '1px 12px',
-                            gap: '5px',
-                            border: '1px solid #38B6FF',
-                            borderRadius: '30px',
-                            color: '#38B6FF',
-                            marginTop: '10px', // Add margin top to separate from the paragraph
-                          }}
-                        >
-                            + add business
-                        </button>
-                    </Link>
-                  </p>
+                <p className="text-gray-500 text-sm mt-2">tell us about yourself!</p>
+                <p className="text-sm mb-2 text-gray-700 mt-4">playlists | reviews </p>
+                
               </div>
             </div>
              

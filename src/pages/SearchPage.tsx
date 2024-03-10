@@ -59,7 +59,7 @@ const SearchPage = () => {
   };
 
   return (
-    <div>
+    <div className="font-alata">
         <NavBar/>
 
         {/*search*/}
@@ -163,12 +163,15 @@ const SearchPage = () => {
               <div className="col-span-1">
                 <div className="p-4">
                   {cityNotFound ? (
-                    <div className="flex items-center justify-center h-32">
-                      <p className="text-xl text-gray-500">We haven't added that city yet. Sorry :( </p>
+                    <div className="flex flex-col items-center justify-center">
+                      <p className="text-3xl text-gray-900 mt-5">Let us help you find a restaurant! </p>
+                      <p className="text-lg text-gray-700 mt-5">Can't find your city? No worries, new cities coming soon! </p>
+                      <img src="/localfind.png" alt="localfind" />
                     </div>
+
                   ) : (
                     <>
-                      <h2 className="text-md mb-4">{city ? `Recommended restaurants near ${city}` : "Let us help you find a restaurant!"}</h2>
+                      <h2 className="text-md mb-4">{city ? `Recommended restaurants near ${city}` : ""}</h2>
                       {restaurants.map((restaurant) => (
                         <div key={restaurant.id} className="flex items-center border border-navyblue border-2 rounded-lg p-4 mb-4">
                           <img src={restaurant.imageURL} alt={restaurant.restaurantName} className="w-32 h-32 object-cover rounded-lg mr-4" />
