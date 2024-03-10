@@ -14,28 +14,48 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="relative font-alata">
+    <div className="relative font-alata auto">
       <NavBar />
 
       {/* Background image */}
       <div
-        className="absolute top-0 left-0 w-full h-3/6 bg-cover bg-center mb-10"
+        className="absolute top-0 w-full h-2/5 bg-cover bg-center mb-10"
         style={{
           backgroundImage:
-            "url(https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+            'url(/hamburgerPerson.png)',
           zIndex: -1,
         }}
       ></div>
 
       <div className="relative z-10">
-        <h1 className="text-4xl mt-80 mb-10 text-center font-bold text-white text-primary drop-shadow-[0_3px_1.5px_rgba(0,0,0,.8)]">
-          Unearth Local Flavors - Your Next Favorite Dish Awaits
-        </h1>
-        <SearchBar onSubmit={handleSearchSubmit}/>
+        <div className="mt-64">
+          <h1 className="text-4xl mb-10 text-center font-bold text-white text-primary drop-shadow-[0_3px_1.5px_rgba(0,0,0,.8)]">
+            Unearth Local Flavors, Your Next Favorite Dish Awaits
+          </h1>
 
-        <section className="mt-96">
-          <FeaturedLists />
-          {/* recommended restaurants here */}
+          <SearchBar onSubmit={handleSearchSubmit}/>
+        </div>
+        
+        <div className="flex flex-row relative">
+          <div className="text-md ml-24 text-orange mt-60 inline-block rounded-2xl px-4 bg-white border border-orange border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer">
+            featured
+          </div>  
+          <div className="text-md ml-6 text-orange mt-60 inline-block rounded-2xl px-4 bg-white border border-orange border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer">
+            recommended
+          </div> 
+          <div className="text-md ml-6 text-orange mt-60 inline-block rounded-2xl px-4 bg-white border border-orange border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer">
+            high ratings
+          </div> 
+          <div className="text-md ml-6 text-orange mt-60 inline-block rounded-2xl px-4 bg-white border border-orange border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer">
+            near me
+          </div>
+        </div>
+        <section>
+          <div className="mt-42">
+            <FeaturedLists />
+            {/* recommended restaurants here */}
+            
+          </div>
           <div className="mt-20">
             <QuickAndAffordableDinners />
           </div>
