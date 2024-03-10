@@ -85,8 +85,6 @@ const RecommendedRestaurants = () => {
   });
 }, [userID]);
 
-
-<<<<<<< HEAD
 useEffect(() => {
   console.log("Recommended Restaurants:", recommendedRestaurants);
   setRecommendedRestaurants(recommendedRestaurants);
@@ -109,10 +107,6 @@ useEffect(() => {
     slidesToScroll: 1,
   };
 
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of b428090 (RecommendRestaurants correct version)
 // Render loading message if recommendedRestaurants is empty
 // Render loading message if loading
 if (recommendedRestaurants.length == 0) {
@@ -120,12 +114,11 @@ if (recommendedRestaurants.length == 0) {
   return <div>Data not found.</div>;
 }
 console.log( "Recommended Restaurants to be returned" , recommendedRestaurants  )
-=======
+
 
 const restaurantsList = Array.isArray(recommendedRestaurants) ? recommendedRestaurants : [];
 console.log("just before", restaurantsList)
 console.log("Recommended Restaurants:", recommendedRestaurants);
->>>>>>> parent of 3986be2 (fixed python script for recommendations)
 console.log("Type of recommendedRestaurants:", typeof recommendedRestaurants);
 return (
   <div>

@@ -1,5 +1,4 @@
 import NavBar from '../components/NavBar'
-<<<<<<< HEAD
 import { useState } from "react";
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -92,10 +91,6 @@ const UserSurvey = () => {
     });
   }
 }
-=======
-
-const UserSurvey = () => {
->>>>>>> parent of 3986be2 (fixed python script for recommendations)
   return (
     <div>
         <NavBar/>
