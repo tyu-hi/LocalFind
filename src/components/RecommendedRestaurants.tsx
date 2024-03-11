@@ -152,7 +152,7 @@ return (
   <div>
       <div className="container mx-auto">
         <h1 className="text-2xl font-bold text-center my-8">
-          Quick And Affordable Dinners
+          Recommended For You!
         </h1>
         <CardsContainer cardsData={recommendedRestaurants.map(restaurant => ({ title: restaurant }))} />
       </div>
