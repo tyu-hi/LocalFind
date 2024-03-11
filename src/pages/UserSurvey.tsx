@@ -33,7 +33,6 @@ const UserSurvey = () => {
   const costRange = ["Select", "$10-20", "$20-$50", "$50+"];
   const modeOfFoodOptions = ["Select", "Foodtrucks", "Sit-down Restaurants"];
   //const [loading, setLoading] = useState(false);
-  const auth = FIREBASE_AUTH;
   const firestore = FIREBASE_FIRESTORE;
   const colRef = collection(firestore, "Users");
  
@@ -91,6 +90,30 @@ const UserSurvey = () => {
         <NavBar/>
         <form onSubmit={signUp}>
           <h1> Create An Account</h1>
+          <label htmlFor="firstname">First Name:</label>
+          <input
+                    type="text"
+                    name="firstname"
+                    placeholder="your first name"
+                    value={firstname}
+                    onChange={(e) => setFirstName(e.target.value)}
+          ></input>
+          <label htmlFor="lastname">Last Name:</label>
+          <input
+                    type="text"
+                    name="lasttname"
+                    placeholder="your last name"
+                    value={firstname}
+                    onChange={(e) => setLastName(e.target.value)}
+          ></input>
+          <label htmlFor="lastname">Where is your location:</label>
+          <input
+                    type="text"
+                    name="location"
+                    placeholder="location"
+                    value={firstname}
+                    onChange={(e) => setLocation(e.target.value)}
+          ></input>
           <label htmlFor="favorite-cuisine">Select your favorite cuisine:</label>
           <select
             value={favoriteCuisine}
