@@ -11,7 +11,14 @@ import {
   FIREBASE_AUTH,
   FIREBASE_FIRESTORE,
 } from "../firebase/firebase";
-import { collection, query, where, getDocs, getDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 import { useParams } from "react-router-dom";
 
 const settings = {
@@ -64,7 +71,6 @@ interface restaurantInfo {
   phoneNumber: string;
 }
 
-
 function RestaurantView() {
   const { id } = useParams<{ id?: string }>();
   const [restaurantInfo, setRestaurant] = useState<restaurantInfo | null>(null);
@@ -95,19 +101,17 @@ function RestaurantView() {
   if (!restaurantInfo) {
     return <div>Loading restaurant information...</div>;
   }
-  
-    // Rest of your component remains the same
-  
+
+  // Rest of your component remains the same
 
   // Render your component based on the state of `restaurantInfo`
-  
+
   const images = [
     "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800",
     "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800",
     "https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=800",
     "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=800",
   ];
-  
 
   return (
     <div className="font-alata">
@@ -139,21 +143,19 @@ function RestaurantView() {
           <div className="flex gap-8">
             <div className="w-full md:w-2/2">
               <h1 className="mb-4 text-black px-4 text-xl font-medium">Tags</h1>
-              <div className="bg-gray-100 p-4 mb-6 rounded-lg">
-                
-                  <div className="text-md ml-24 text-white inline-block rounded-2xl px-4 bg-blue-900 border border-white border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer">
-                    featured
-                  </div>
-                  <div className="text-md ml-6 text-white mt-60 inline-block rounded-2xl px-4 bg-blue-900 border border-white border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer">
-                    recommended
-                  </div>
-                  <div className="text-md ml-6 text-white mt-60 inline-block rounded-2xl px-4 bg-blue-900 border border-white border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer">
-                    high ratings
-                  </div>
-                  <div className="text-md ml-6 text-white mt-60 inline-block rounded-2xl px-4 bg-blue-900 border border-white border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer">
-                    near me
-                  </div>
-                
+              <div className="bg-gray-100 p-4 mb-6 rounded-lg flex flex-wrap">
+                <div className="text-md ml-24 text-white inline-block rounded-2xl px-4 bg-blue-900 border border-white border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer mb-4 mr-4">
+                  featured
+                </div>
+                <div className="text-md ml-6 text-white inline-block rounded-2xl px-4 bg-blue-900 border border-white border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer mb-4 mr-4">
+                  recommended
+                </div>
+                <div className="text-md ml-6 text-white inline-block rounded-2xl px-4 bg-blue-900 border border-white border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer mb-4 mr-4">
+                  high ratings
+                </div>
+                <div className="text-md ml-6 text-white inline-block rounded-2xl px-4 bg-blue-900 border border-white border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer mb-4">
+                  near me
+                </div>
               </div>
 
               <h1 className="mb-4 text-black px-4 text-xl font-medium">Menu</h1>
@@ -211,12 +213,8 @@ function RestaurantView() {
                     <p className="text-sm font-alata">
                       {restaurantInfo.address}
                     </p>
-                    <p className="text-sm font-alata">
-                      {restaurantInfo.city}
-                    </p>
-                    <p className="text-sm font-alata">
-                      {restaurantInfo.zip}
-                    </p>
+                    <p className="text-sm font-alata">{restaurantInfo.city}</p>
+                    <p className="text-sm font-alata">{restaurantInfo.zip}</p>
                   </div>
                   <div className="text-center mt-4">
                     {restaurantInfo && (
