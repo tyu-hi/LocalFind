@@ -58,6 +58,9 @@ const LandingPage = () => {
           <div className="mt-20">
             <QuickAndAffordableDinners />
           </div>
+          {/* <div className="mt-20">
+            <RecommendedRestaurants />
+          </div> */}
         </section>
 
         <footer className="mt-16 text-center p-4 bg-secondary-1 text-text-1 text-primary">

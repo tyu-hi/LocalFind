@@ -46,7 +46,23 @@ interface Restaurant {
   userId: string;
   website: string;
   zip: string;
+  mondayOpen: string;
+  mondayClose: string;
+  tuesdayOpen: string;
+  tuesdayClose: string;
+  wednesdayOpen: string;
+  wednesdayClose: string;
+  thursdayOpen: string;
+  thursdayClose: string;
+  fridayOpen: string;
+  fridayClose: string;
+  saturdayOpen: string;
+  saturdayClose: string;
+  sundayOpen: string;
+  sundayClose: string;
+  phoneNumber: string;
 }
+
 
 function RestaurantView() {
   const [restaurantInfo, setRestaurant] = useState<Restaurant | null>(null); // Adjust initial state based on your needs
@@ -80,7 +96,23 @@ function RestaurantView() {
         userId: doc.data().userId,
         website: doc.data().website,
         zip: doc.data().zip,
+        mondayOpen: doc.data().mondayOpen,
+        mondayClose: doc.data().mondayClose,
+        tuesdayOpen: doc.data().tuesdayOpen,
+        tuesdayClose: doc.data().tuesdayClose,
+        wednesdayOpen: doc.data().wednesdayOpen,
+        wednesdayClose: doc.data().wednesdayClose,
+        thursdayOpen: doc.data().thursdayOpen,
+        thursdayClose: doc.data().thursdayClose,
+        fridayOpen: doc.data().fridayOpen,
+        fridayClose: doc.data().fridayClose,
+        saturdayOpen: doc.data().saturdayOpen,
+        saturdayClose: doc.data().saturdayClose,
+        sundayOpen: doc.data().sundayOpen,
+        sundayClose: doc.data().sundayClose,
+        phoneNumber: doc.data().phoneNumber,
       }));
+      
 
       if (restaurantsList.length > 0) {
         setRestaurant(restaurantsList[0]); // Correctly typed as Restaurant
@@ -131,11 +163,22 @@ function RestaurantView() {
         <div className="flex flex-col">
           <div className="flex gap-8">
             <div className="w-full md:w-2/2">
-              <h1 className="mb-4 text-black px-4 text-xl font-medium">
-                Description
-              </h1>
+              <h1 className="mb-4 text-black px-4 text-xl font-medium">Tags</h1>
               <div className="bg-gray-100 p-4 mb-6 rounded-lg">
-                <p className="text-gray-800 font-alata">Info</p>
+                
+                  <div className="text-md ml-24 text-white inline-block rounded-2xl px-4 bg-blue-900 border border-white border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer">
+                    featured
+                  </div>
+                  <div className="text-md ml-6 text-white mt-60 inline-block rounded-2xl px-4 bg-blue-900 border border-white border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer">
+                    recommended
+                  </div>
+                  <div className="text-md ml-6 text-white mt-60 inline-block rounded-2xl px-4 bg-blue-900 border border-white border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer">
+                    high ratings
+                  </div>
+                  <div className="text-md ml-6 text-white mt-60 inline-block rounded-2xl px-4 bg-blue-900 border border-white border-2 drop-shadow-[0_3px_1px_rgba(0,0,0,.3)] hover:cursor-pointer">
+                    near me
+                  </div>
+                
               </div>
 
               <h1 className="mb-4 text-black px-4 text-xl font-medium">Menu</h1>
@@ -191,7 +234,13 @@ function RestaurantView() {
                   ))}
                   <div className="text-center border-t-2 border-black pt-4">
                     <p className="text-sm font-alata">
-                      350 Charles E Young Drive West
+                      {restaurantInfo.address}
+                    </p>
+                    <p className="text-sm font-alata">
+                      {restaurantInfo.city}
+                    </p>
+                    <p className="text-sm font-alata">
+                      {restaurantInfo.zip}
                     </p>
                   </div>
                   <div className="text-center mt-4">
