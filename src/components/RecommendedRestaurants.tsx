@@ -15,7 +15,54 @@ import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from 'react';
 import { FIREBASE_FIRESTORE, FIREBASE_AUTH } from '../firebase/firebase';
 import { FIREBASE_STORAGE } from '../firebase/firebase';
+import { JSX } from 'react/jsx-runtime';
 
+interface CardProps {
+  title: string;
+}
+
+interface CardsContainerProps {
+  cardsData: CardProps[];
+}
+
+const Card: React.FC<CardProps> = ({ title }) => {
+  return (
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <img
+        src= " https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        alt={`${title} image`}
+        className="w-full h-32 sm:h-48 object-cover"
+      />
+      <div className="p-4">
+        <h3 className="text-lg font-semibold">{title}</h3>
+        <div className="flex items-center my-2">
+          <span className="bg-yellow-400 text-white text-xs px-2 py-1 rounded-full mr-2">
+            4.3
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const CardsContainer: React.FC<CardsContainerProps> = ({ cardsData }) => {
+  return (
+    <Swiper
+      slidesPerView={3}
+      spaceBetween={30}
+      pagination={{
+        clickable: true,
+      }}
+      className="mySwiper"
+    >
+      {cardsData.map((  restaurant, index ) => (
+        <SwiperSlide key={index}>
+          <Card title = {restaurant.title} />
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  );
+};
 
 const getRecommendations = (uid : string): Promise<string[]> => {
   console.log("passing", uid);
@@ -103,15 +150,13 @@ console.log("Type of recommendedRestaurants:", typeof recommendedRestaurants);
 
 return (
   <div>
-    <h1> Recommended Restaurants: </h1>
-    <ul> 
-      {recommendedRestaurants.map((restaurant, index) => (
-        <li key = {index}> 
-        {restaurant}
-        </li>
-      ))}
-    </ul>
-  </div>
+      <div className="container mx-auto">
+        <h1 className="text-2xl font-bold text-center my-8">
+          Quick And Affordable Dinners
+        </h1>
+        <CardsContainer cardsData={recommendedRestaurants.map(restaurant => ({ title: restaurant }))} />
+      </div>
+    </div>
   );
  }
 
