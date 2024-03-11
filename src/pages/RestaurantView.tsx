@@ -11,7 +11,8 @@ import {
   FIREBASE_AUTH,
   FIREBASE_FIRESTORE,
 } from "../firebase/firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, getDoc, doc } from "firebase/firestore";
+import { useParams } from "react-router-dom";
 
 const settings = {
   focusOnSelect: true,
@@ -36,7 +37,7 @@ const settings = {
   ],
 };
 
-interface Restaurant {
+interface restaurantInfo {
   address: string;
   city: string;
   foodStyle: string;
@@ -65,74 +66,48 @@ interface Restaurant {
 
 
 function RestaurantView() {
-  const [restaurantInfo, setRestaurant] = useState<Restaurant | null>(null); // Adjust initial state based on your needs
-  const [userID, setUserID] = useState("");
+  const { id } = useParams<{ id?: string }>();
+  const [restaurantInfo, setRestaurant] = useState<restaurantInfo | null>(null);
 
   useEffect(() => {
-    const reassign = FIREBASE_AUTH.onAuthStateChanged((user) => {
-      if (user) {
-        setUserID(user.uid);
-        fetchRestaurantData(user.uid); // Fetch restaurant data when the user ID is set
+    const fetchRestaurantData = async (restaurantId: string) => {
+      const db = FIREBASE_FIRESTORE;
+      const restaurantRef = doc(db, "Restaurants", restaurantId);
+
+      try {
+        const docSnapshot = await getDoc(restaurantRef);
+        if (docSnapshot.exists()) {
+          const data = docSnapshot.data() as restaurantInfo;
+          setRestaurant(data);
+        } else {
+          console.log("No such restaurant exists!");
+        }
+      } catch (error) {
+        console.error("Error fetching restaurant data: ", error);
       }
-    });
+    };
 
-    return () => reassign();
-  }, []);
-
-  const fetchRestaurantData = async (uid: string) => {
-    const db = FIREBASE_FIRESTORE; // Ensure FIREBASE_FIRESTORE is correctly initialized Firestore instance
-    const restaurantsRef = collection(db, "Restaurants");
-    const q = query(restaurantsRef, where("userId", "==", uid));
-
-    try {
-      const querySnapshot = await getDocs(q);
-      const restaurantsList: Restaurant[] = querySnapshot.docs.map((doc) => ({
-        address: doc.data().address,
-        city: doc.data().city,
-        foodStyle: doc.data().foodStyle,
-        imageURL: doc.data().imageURL,
-        price: doc.data().price,
-        restaurantName: doc.data().restaurantName,
-        userId: doc.data().userId,
-        website: doc.data().website,
-        zip: doc.data().zip,
-        mondayOpen: doc.data().mondayOpen,
-        mondayClose: doc.data().mondayClose,
-        tuesdayOpen: doc.data().tuesdayOpen,
-        tuesdayClose: doc.data().tuesdayClose,
-        wednesdayOpen: doc.data().wednesdayOpen,
-        wednesdayClose: doc.data().wednesdayClose,
-        thursdayOpen: doc.data().thursdayOpen,
-        thursdayClose: doc.data().thursdayClose,
-        fridayOpen: doc.data().fridayOpen,
-        fridayClose: doc.data().fridayClose,
-        saturdayOpen: doc.data().saturdayOpen,
-        saturdayClose: doc.data().saturdayClose,
-        sundayOpen: doc.data().sundayOpen,
-        sundayClose: doc.data().sundayClose,
-        phoneNumber: doc.data().phoneNumber,
-      }));
-      
-
-      if (restaurantsList.length > 0) {
-        setRestaurant(restaurantsList[0]); // Correctly typed as Restaurant
-      }
-    } catch (error) {
-      console.error("Error fetching restaurant data: ", error);
+    if (id) {
+      fetchRestaurantData(id);
     }
-  };
+  }, [id]);
 
-  // Render your component based on the state of `restaurantInfo`
   if (!restaurantInfo) {
     return <div>Loading restaurant information...</div>;
   }
+  
+    // Rest of your component remains the same
+  
 
+  // Render your component based on the state of `restaurantInfo`
+  
   const images = [
     "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800",
     "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800",
     "https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=800",
     "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=800",
   ];
+  
 
   return (
     <div className="font-alata">
