@@ -1,6 +1,8 @@
 import {useState} from "react";
-import {FIREBASE_AUTH} from "../firebase/firebase";
+import NavBar from "../components/NavBar";
+import {FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
 import {signInWithEmailAndPassword} from "firebase/auth";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import { Link } from 'react-router-dom';
 
@@ -13,12 +15,21 @@ const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const auth = FIREBASE_AUTH;
+    const firestore = FIREBASE_FIRESTORE;
+    const colRef = collection(firestore, "Users");
 
     const signIn = (e: any) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email,password)
         .then((userCredentials) => {
-            console.log(userCredentials);   //perhaps we shouldn't be showing this for privacy reasons!!
+            // const user = userCredentials.user; 
+            // colRef.doc(user_email)
+            // .get()
+            // .then(function(user)){
+            //   if(user.exists){
+
+            //   }
+            // }
             navigate("/");
         })
         .catch((error) => {
@@ -29,6 +40,7 @@ const LoginPage = () => {
 
     return (
         <div className = "sign-in">
+          <NavBar />
             <form onSubmit = {signIn}>
                 <h1 className="big-header"> Welcome Back. <br />
                 Sign in to your account </h1>
@@ -43,8 +55,8 @@ const LoginPage = () => {
                 value= {password} 
                 onChange = {(e) => setPassword(e.target.value)}></input>
                 
-                <button type = "submit" className="submit-button">Sign In</button>
-                <hr />
+                <Link to="/"><button type = "submit" className="submit-button">Sign In</button></Link>
+                <div className="or"> or </div>
                 <Link to="/signup" ><button className='link-to-su'>Sign Up</button></Link>
                 
             </form>
