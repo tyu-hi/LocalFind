@@ -32,6 +32,7 @@ const ProfilePage = () => {
   /* HANDLE UPLOADING FIRST AND LAST NAME*/
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
+  const [location, setLocation] = useState("");
   const firestore = FIREBASE_FIRESTORE;
   const colRef = collection(firestore, "Users");
   
@@ -103,6 +104,7 @@ const ProfilePage = () => {
               const data = doc.data();
               setFirstName(data.firstname);
               setLastName(data.lastname);
+              setLocation(data.location);
               setPhotoURL(data.photoURL || 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png');
               setBioText(data.bioText);
             });
@@ -179,7 +181,7 @@ const ProfilePage = () => {
                   </h2>
 
                 {/*change location to passable {variable} later */}
-                <p className="text-gray-800 text-lg mt-2">Location</p>
+                <p className="text-lightblue text-lg mt-2 mb-3">{location} </p>
                 {/*change Bio/Stats to passable {variable} later */}
                 {isEditingBio ? (
                   <input

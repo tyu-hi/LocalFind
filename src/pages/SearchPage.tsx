@@ -30,7 +30,7 @@ const SearchPage = () => {
   useEffect(() => {
     const fetchRestaurants = async () => {
       const q = query(
-        collection(FIREBASE_FIRESTORE, "Restaurants"),
+        collection(FIREBASE_FIRESTORE, "restaurants"),
         where("city", "==", city)
       );
       const querySnapshot = await getDocs(q);
