@@ -224,7 +224,7 @@ function RestaurantView() {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {restaurantInfo.website}
+                        website
                       </a>
                     )}
                   </div>
