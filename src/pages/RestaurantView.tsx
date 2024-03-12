@@ -78,7 +78,7 @@ function RestaurantView() {
   useEffect(() => {
     const fetchRestaurantData = async (restaurantId: string) => {
       const db = FIREBASE_FIRESTORE;
-      const restaurantRef = doc(db, "Restaurants", restaurantId);
+      const restaurantRef = doc(db, "restaurants", restaurantId);
 
       try {
         const docSnapshot = await getDoc(restaurantRef);
