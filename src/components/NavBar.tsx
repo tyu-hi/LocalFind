@@ -50,7 +50,7 @@ const NavBar = () => {
 						<>
 							<Link to="/" className='hover:text-blue-800'>home</Link>
 							<Link to="/search" className='hover:text-blue-800'>search</Link>
-							<Link to="about" className='hover:text-blue-800'>about</Link>
+							<Link to="/about" className='hover:text-blue-800'>about</Link>
 							<div className="bg-yellow-50 border border-orange border-2 text-orange font-semibold py-2 px-1 ml-2 mr-4 rounded-md hover:bg-yellow-400 hover:text-white hover:border-yellow-400 transition-colors duration-300">
 								<Link to="/signup">sign up</Link>
 							</div>

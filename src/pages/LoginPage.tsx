@@ -22,6 +22,7 @@ const LoginPage = () => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email,password)
         .then((userCredentials) => {
+          console.log(userCredentials);
             // const user = userCredentials.user; 
             // colRef.doc(user_email)
             // .get()
@@ -39,7 +40,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div className = "sign-in">
+        <div className = "sign-in font-alata">
           <NavBar />
             <form onSubmit = {signIn}>
                 <h1 className="big-header"> Welcome Back. <br />
@@ -55,9 +56,9 @@ const LoginPage = () => {
                 value= {password} 
                 onChange = {(e) => setPassword(e.target.value)}></input>
                 
-                <Link to="/"><button type = "submit" className="submit-button">Sign In</button></Link>
-                <div className="or"> or </div>
-                <Link to="/signup" ><button className='link-to-su'>Sign Up</button></Link>
+                <button type = "submit" className="submit-button hover:bg-blue-900">Sign In</button>
+                <hr />
+                <Link to="/signup" ><button className='link-to-su hover:bg-gray-300'>Sign Up</button></Link> 
                 
             </form>
         </div>
