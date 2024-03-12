@@ -9,9 +9,7 @@ interface ReviewFormProps {
 
 const firestore = FIREBASE_FIRESTORE;
 
-const ReviewForm: React.FC<ReviewFormProps> = ({
-  restaurantId,
-}: ReviewFormProps) => {
+const ReviewForm: React.FC<ReviewFormProps> = ({ restaurantId }: ReviewFormProps) => {
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>("");
 
@@ -21,27 +19,27 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    // e.preventDefault();
-    // const userId = FIREBASE_AUTH.currentUser?.uid; // Get logged-in user's ID
-    // if (!userId) {
-    //   console.error("User not authenticated");
-    //   return;
-    // }
-    // try {
-    //   // Add the review to Firestore
-    //   await firestore.collection("reviews").add({
-    //     userId: userId,
-    //     restaurantId: restaurantId,
-    //     rating: rating,
-    //     comment: comment,
-    //   });
-    //   // Reset form fields
-    //   setRating(0);
-    //   setComment("");
-    //   console.log("Review submitted successfully");
-    // } catch (error) {
-    //   console.error("Error submitting review:", error);
-    // }
+    e.preventDefault();
+    const userId = FIREBASE_AUTH.currentUser?.uid; // Get logged-in user's ID
+    if (!userId) {
+      console.error("User not authenticated");
+      return;
+    }
+    try {
+      // Add the review to Firestore
+      await firestore.collection("reviews").add({
+        userId: userId,
+        restaurantId: restaurantId,
+        rating: rating,
+        comment: comment,
+      });
+      // Reset form fields
+      setRating(0);
+      setComment("");
+      console.log("Review submitted successfully");
+    } catch (error) {
+      console.error("Error submitting review:", error);
+    }
   };
 
   return (

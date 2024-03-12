@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
-// import FIREBASE_FIRESTORE from './firebaseConfig'; // Uncomment this when integrating with Firebase
+import { useEffect, useState } from "react";
+import { collection, query, where, getDocs, DocumentData } from "firebase/firestore";
+import { FIREBASE_FIRESTORE } from "../firebase/firebase";
 
+// Define the Review interface
 interface Review {
   userId: string;
   rating: number;
   comment: string;
 }
 
+// Define the props for the ReviewList component
 interface ReviewListProps {
   restaurantId: string;
 }
@@ -19,24 +21,16 @@ const userNames: { [key: string]: string } = {
   user4: "Diana",
 };
 
+// Function to get user name based on userId
 const getUserName = (userId: string): string => {
   return userNames[userId] || "Anonymous";
 };
 
+// ReviewList component
 const ReviewList: React.FC<ReviewListProps> = ({ restaurantId }) => {
   const perPage = 2; // Define how many reviews you want per page
   const [currentPage, setCurrentPage] = useState(0);
-
-  const [reviews, setReviews] = useState<Review[]>([
-    {
-      userId: "user1",
-      rating: 5,
-      comment: "Fantastic experience, highly recommended!",
-    },
-    { userId: "user2", rating: 4, comment: "Great food, will come again." },
-    { userId: "user3", rating: 3, comment: "Good, but room for improvement." },
-    { userId: "user4", rating: 2, comment: "Below average, expected more." },
-  ]);
+  const [reviews, setReviews] = useState<Review[]>([]);
 
   // Calculate the total number of pages
   const pageCount = Math.ceil(reviews.length / perPage);
@@ -47,6 +41,7 @@ const ReviewList: React.FC<ReviewListProps> = ({ restaurantId }) => {
     (currentPage + 1) * perPage
   );
 
+  // Function to render star ratings
   const renderStars = (rating: number) => {
     return [...Array(5)].map((_, i) => (
       <span
@@ -58,7 +53,7 @@ const ReviewList: React.FC<ReviewListProps> = ({ restaurantId }) => {
     ));
   };
 
-  // Generate the pagination dots
+  // Function to generate pagination dots
   const renderPaginationDots = () => {
     return [...Array(pageCount)].map((_, i) => (
       <button
@@ -72,6 +67,27 @@ const ReviewList: React.FC<ReviewListProps> = ({ restaurantId }) => {
     ));
   };
 
+  // Fetch reviews based on restaurantId when component mounts or restaurantId changes
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const db = FIREBASE_FIRESTORE;
+      const reviewsRef = collection(db, "reviews");
+      const q = query(reviewsRef, where("restaurantId", "==", restaurantId));
+      try {
+        const querySnapshot = await getDocs(q);
+        const fetchedReviews: Review[] = [];
+        querySnapshot.forEach((doc: DocumentData) => {
+          fetchedReviews.push(doc.data() as Review);
+        });
+        setReviews(fetchedReviews);
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
+    };
+    fetchReviews();
+  }, [restaurantId]);
+
+  // Render reviews and pagination dots
   return (
     <div className="flex flex-col items-center">
       {paginatedReviews.map((review, index) => (
@@ -99,3 +115,4 @@ const ReviewList: React.FC<ReviewListProps> = ({ restaurantId }) => {
 };
 
 export default ReviewList;
+
