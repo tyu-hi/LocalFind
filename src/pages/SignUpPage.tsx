@@ -1,5 +1,6 @@
 import { useState } from "react";
 import NavBar from "../components/NavBar";
+import logo from "/localfind.png"
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
@@ -108,6 +109,7 @@ const SignUpPage = () => {
         <button type="submit" className="submit-button hover:bg-blue-900">Sign Up</button>
       </form>
       <div className="extra">Already have an account?  <Link to="/login" color="#004D73" className="hover:text-blue-800 hover:underline">Sign in</Link></div>
+      <img src={logo} alt="Brand Logo" className="logo-img"></img>
     </div>
   );
 };

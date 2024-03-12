@@ -387,23 +387,23 @@ border-radius: 50px;
 
 }
 
-.or{
-	/* or */
+.logo-img{
+	/* Frame 47 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 147px 129px;
+gap: 10px;
 
 position: absolute;
-width: 20px;
-height: 21px;
-left: 367px;
-top: 654px;
+width: 900px;
+height: 900px;
+left: 600px;
+top: 70px;
 
-font-family: 'Futura';
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-line-height: 27px;
-text-align: center;
-
-color: #6C6C6C;
-
+/* background: #D9D9D9; */
 
 }
