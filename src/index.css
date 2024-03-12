@@ -208,61 +208,55 @@ nav {
 	margin: 0;
   }
 
-h1.sign-up {
+h1.big-header {
+/* Sign up */
+
 position: absolute;
 width: 546px;
-height: 53px;
+height: 72px;
 left: 140px;
-top: 214px;
+top: 183px;
 
-/* font-family: 'Inter';
-font-style: normal; */
-font-weight: 600;
+font-family: 'Futura';
+font-style: normal;
+font-weight: 500;
 font-size: 48px;
 line-height: 72px;
-/* or 150% */
+/* identical to box height, or 150% */
 
-color: #000000;
+/* Navy Blue */
+color: #004D73;
 }
 
 input.name{
+/* Frame 48 */
+
+box-sizing: border-box;
+
+/* Auto layout */
 display: flex;
 flex-direction: row;
 align-items: center;
 padding: 21px 31px;
 gap: 10px;
-	
+
 position: absolute;
 width: 475px;
 height: 76px;
 left: 139px;
-top: 311px;
-	
-background: #D9D9D9;
+top: 272px;
+
+border: 2px solid #000000;
+border-radius: 50px;
 }
 
 input.email{
 /* Frame 40 */
 
 /* Auto layout */
-display: flex;
-flex-direction: row;
-align-items: center;
-padding: 21px 31px;
-gap: 10px;
+/* Frame 40 */
 
-position: absolute;
-width: 475px;
-height: 76px;
-left: 140px;
-top: 405px;
-
-background: #D9D9D9;
-
-}
-
-input.pass{
-	/* Frame 41 */
+box-sizing: border-box;
 
 /* Auto layout */
 display: flex;
@@ -275,14 +269,42 @@ position: absolute;
 width: 475px;
 height: 76px;
 left: 140px;
-top: 499px;
+top: 366px;
 
-background: #D9D9D9;
+border: 2px solid #000000;
+border-radius: 50px;
+}
 
+input.pass{
+	/* Frame 41 */
+
+/* Auto layout */
+/* Frame 41 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 21px 31px;
+gap: 10px;
+
+position: absolute;
+width: 475px;
+height: 76px;
+left: 140px;
+top: 460px;
+
+border: 2px solid #000000;
+border-radius: 50px;
 }
 
 .submit-button{
 	/* Frame 42 */
+
+/* Auto layout */
+/* Frame 42 */
 
 /* Auto layout */
 display: flex;
@@ -291,36 +313,62 @@ justify-content: center;
 align-items: center;
 padding: 17px 163px;
 gap: 10px;
-color: white;
 
 position: absolute;
 width: 475px;
-height: 58px;
+height: 76px;
 left: 140px;
-top: 593px;
+top: 554px;
 
-background: #6C6C6C;
+/* Navy Blue
+
+Primary
+*/
+background: #004D73;
+color: white; 
+border-radius: 50px;
 
 }
 
 .extra{
 	/* Already have an account? Sign in */
 
+/* or */
 position: absolute;
-width: 250px;
-height: 19px;
-left: 253px;
-top: 806px;
+/* width: 20px; */
+height: 21px;
+left: 220px;
+top: 664px;
 
-font-family: 'Inter';
+font-family: 'Futura';
 font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 19px;
+font-weight: 500;
+font-size: 20px;
+line-height: 27px;
+text-align: center;
+
+color: #6C6C6C;
+}
+
+.link-to-su{
+	/* Frame 43 */
+
+/* Auto layout */
 display: flex;
+flex-direction: row;
+justify-content: center;
 align-items: center;
+padding: 17px 163px;
+gap: 10px;
 
-color: #000000;
+position: absolute;
+width: 475px;
+height: 76px;
+left: 140px;
+top: 723px;
 
+/* Grey */
+background: #D9D9D9;
+border-radius: 50px;
 
 }

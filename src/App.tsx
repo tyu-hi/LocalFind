@@ -8,6 +8,7 @@ import AddRestaurantPage from './pages/AddRestaurantPage';
 import RestaurantView from './pages/RestaurantView';
 import SearchPage from './pages/SearchPage';
 import UserSurvey from './pages/UserSurvey';
+import AboutPage from './pages/AboutPage';
 
 const App: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <Route path="/view/:id" element={<RestaurantView/>} />
         <Route path="/search" element={<SearchPage/>} />
         <Route path="/survey" element={<UserSurvey/>} />
+        <Route path="/about" element={<AboutPage/>} />
       </Routes>
     </Router>
   );

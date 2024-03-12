@@ -2,6 +2,7 @@ import {useState} from "react";
 import {FIREBASE_AUTH} from "../firebase/firebase";
 import {signInWithEmailAndPassword} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 
 const LoginForm = () => {
@@ -29,17 +30,22 @@ const LoginForm = () => {
     return (
         <div className = "sign-in">
             <form onSubmit = {signIn}>
-                <h1> Log In</h1>
+                <h1 className="big-header"> Welcome Back. <br />
+                Sign in to your account </h1>
                 <input type = "email" 
-                placeholder = "Enter your email" 
+                placeholder = "Email" 
+                className="email"
                 value= {email} 
                 onChange = {(e) => setEmail(e.target.value)}></input>
                 <input type = "password" 
-                placeholder = "Enter your password" 
+                placeholder = "Password" 
+                className="pass"
                 value= {password} 
                 onChange = {(e) => setPassword(e.target.value)}></input>
                 
-                <button type = "submit">Log In</button>
+                <button type = "submit" className="submit-button">Sign In</button>
+                <hr />
+                <button className=''><Link to="/signup" >Sign Up</Link></button>
                 
             </form>
         </div>

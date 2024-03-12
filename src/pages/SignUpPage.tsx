@@ -1,4 +1,5 @@
 import { useState } from "react";
+import NavBar from "../components/NavBar";
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
@@ -8,7 +9,7 @@ import { addDoc } from "firebase/firestore";
 //navigate user to signup user survey
 import { useNavigate } from "react-router-dom";
 
-const SignUpForm = () => {
+const SignUpPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -76,40 +77,41 @@ const SignUpForm = () => {
   };
 
   return (
-    <div>
+    <div className="font-alata">
+      <NavBar />
       <form onSubmit={signUp}>
-        <h1 className="sign-up"> Sign Up</h1>
+        <h1 className="big-header "> Sign Up</h1>
         <input
           type="Name"
           placeholder="Name"
           value={name}
-          className="name"
+          className="name bg-white"
           onChange={(e) => setName(e.target.value)}
           required
         ></input>
         <input
           type="email"
-          placeholder="example@example.com"
-          className="email"
+          placeholder="Email"
+          className="email bg-white"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         ></input>
         <input
           type="password"
-          placeholder="password"
+          placeholder="Password"
           value={password}
-          className="pass"
+          className="pass bg-white"
           onChange={(e) => setPassword(e.target.value)}
           required
         ></input>
-        <button type="submit" className="submit-button">Sign Up</button>
+        <button type="submit" className="submit-button hover:bg-blue-900">Sign Up</button>
       </form>
-      <div className="extra">Already have an account?  <Link to="/login">Sign in</Link></div>
+      <div className="extra">Already have an account?  <Link to="/login" color="#004D73" className="hover:text-blue-800 hover:underline">Sign in</Link></div>
     </div>
   );
 };
 
-export default SignUpForm;
+export default SignUpPage;
 
 
