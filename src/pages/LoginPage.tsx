@@ -1,9 +1,8 @@
 import {useState} from "react";
 import NavBar from "../components/NavBar";
 import logo from "/localfind.png"
-import {FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
+import {FIREBASE_AUTH,} from "../firebase/firebase";
 import {signInWithEmailAndPassword} from "firebase/auth";
-import { collection, getDocs, query, where } from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import { Link } from 'react-router-dom';
 
@@ -16,22 +15,12 @@ const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const auth = FIREBASE_AUTH;
-    const firestore = FIREBASE_FIRESTORE;
-    const colRef = collection(firestore, "Users");
 
     const signIn = (e: any) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email,password)
         .then((userCredentials) => {
           console.log(userCredentials);
-            // const user = userCredentials.user; 
-            // colRef.doc(user_email)
-            // .get()
-            // .then(function(user)){
-            //   if(user.exists){
-
-            //   }
-            // }
             navigate("/");
         })
         .catch((error) => {
