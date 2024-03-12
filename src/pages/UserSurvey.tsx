@@ -2,12 +2,15 @@ import NavBar from '../components/NavBar'
 import { useState } from "react";
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { collection, getDocs, query, where, doc } from "firebase/firestore";
 import { addDoc, updateDoc } from "firebase/firestore";
 import { Nav } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 
 const UserSurvey = () => {
+  const navigate = useNavigate();
+
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [location, setLocation] = useState("");
@@ -65,10 +68,15 @@ const UserSurvey = () => {
           secondFavoriteCuisine: secondFavoriteCuisine,
           thirdFavoriteCuisine: thirdFavoriteCuisine,
           preferredPriceRange: preferredPriceRange,
-          modeOfFood: modeOfFood
+          modeOfFood: modeOfFood,
+          firstname,
+          lastname,
+          location,
           })
           .then(() => {
             alert("We have updated your information")
+            navigate("/");
+
           })
         .catch((error) => {
           console.error("Error updating document", error);
@@ -101,17 +109,17 @@ const UserSurvey = () => {
           <label htmlFor="lastname">Last Name:</label>
           <input
                     type="text"
-                    name="lasttname"
+                    name="lastname"
                     placeholder="your last name"
-                    value={firstname}
+                    value={lastname}
                     onChange={(e) => setLastName(e.target.value)}
           ></input>
-          <label htmlFor="lastname">Where is your location:</label>
+          <label htmlFor="location">Where is your location:</label>
           <input
                     type="text"
                     name="location"
                     placeholder="location"
-                    value={firstname}
+                    value={location}
                     onChange={(e) => setLocation(e.target.value)}
           ></input>
           <label htmlFor="favorite-cuisine">Select your favorite cuisine:</label>
