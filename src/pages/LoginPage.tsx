@@ -28,24 +28,24 @@ const LoginPage = () => {
     };
 
     return (
-        <div className = "sign-in">
+        <div className = "sign-in font-alata">
             <form onSubmit = {signIn}>
                 <h1 className="big-header"> Welcome Back. <br />
                 Sign in to your account </h1>
                 <input type = "email" 
                 placeholder = "Email" 
-                className="email"
+                className="email bg-white"
                 value= {email} 
                 onChange = {(e) => setEmail(e.target.value)}></input>
                 <input type = "password" 
                 placeholder = "Password" 
-                className="pass"
+                className="pass bg-white"
                 value= {password} 
                 onChange = {(e) => setPassword(e.target.value)}></input>
                 
-                <button type = "submit" className="submit-button">Sign In</button>
+                <button type = "submit" className="submit-button hover:bg-blue-900">Sign In</button>
                 <hr />
-                <Link to="/signup" ><button className='link-to-su'>Sign Up</button></Link>
+                <Link to="/signup" ><button className='link-to-su hover:bg-gray-300'>Sign Up</button></Link>
                 
             </form>
         </div>
