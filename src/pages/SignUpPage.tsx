@@ -1,4 +1,5 @@
 import { useState } from "react";
+import NavBar from "../components/NavBar";
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
@@ -8,7 +9,7 @@ import { addDoc } from "firebase/firestore";
 //navigate user to signup user survey
 import { useNavigate } from "react-router-dom";
 
-const SignUpForm = () => {
+const SignUpPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -77,8 +78,9 @@ const SignUpForm = () => {
 
   return (
     <div>
+      <NavBar />
       <form onSubmit={signUp}>
-        <h1 className="sign-up"> Sign Up</h1>
+        <h1 className="big-header"> Sign Up</h1>
         <input
           type="Name"
           placeholder="Name"
@@ -105,11 +107,11 @@ const SignUpForm = () => {
         ></input>
         <button type="submit" className="submit-button">Sign Up</button>
       </form>
-      <div className="extra">Already have an account?  <Link to="/login">Sign in</Link></div>
+      <div className="extra">Already have an account?  <Link to="/login" color="#004D73">Sign in</Link></div>
     </div>
   );
 };
 
-export default SignUpForm;
+export default SignUpPage;
 
 
