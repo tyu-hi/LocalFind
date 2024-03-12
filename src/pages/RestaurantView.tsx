@@ -166,7 +166,7 @@ function RestaurantView() {
                 ></img>
               </div>
 
-              <ReviewForm />
+              <ReviewForm restaurantId={id} />
 
               {/* <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
                 {/* <div className="flex flex-col">
@@ -178,7 +178,7 @@ function RestaurantView() {
                 Reviews
               </h1>
               <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
-                <ReviewList />
+                <ReviewList restaurantId={id}/>
               </div>
             </div>
 
