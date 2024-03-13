@@ -178,7 +178,8 @@ function RestaurantView() {
                 Reviews
               </h1>
               <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
-                <ReviewList restaurantId={id}/>
+              <ReviewList restaurantId={id || ""} />
+
               </div>
             </div>
 
