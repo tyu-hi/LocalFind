@@ -143,7 +143,7 @@ setFound(true)
 // Render loading message if loading
 if (recommendedRestaurants.length == 0) {
   console.log("Data not found");
-  return <div>Data not found.</div>;
+  return
 }
 console.log( "Recommended Restaurants to be returned" , recommendedRestaurants  )
 console.log("Type of recommendedRestaurants:", typeof recommendedRestaurants);

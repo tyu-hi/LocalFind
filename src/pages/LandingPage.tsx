@@ -55,6 +55,11 @@ const LandingPage = () => {
             {/* recommended restaurants here */}
             
           </div>
+          <div className="mt-42">
+            <RecommendedRestaurants />
+            {/* recommended restaurants here */}
+            
+          </div>
           <div className="mt-20">
             <QuickAndAffordableDinners />
           </div>

@@ -107,6 +107,7 @@ def recommend():
     userID = request.json.get('userID', '')
     print("Received userID:", userID)  # Debug print
     recommendedRestaurants = createRecommendation(userID)
+    print(recommendedRestaurants)
     return jsonify({"restaurants" : recommendedRestaurants})
 
 
