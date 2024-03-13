@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 /* Tailwind source/input files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -17,7 +22,22 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/*font family for tailwind css*/
+@font-face {
+	font-family: "Alata";
+	src: url("../fonts/Alata/Alata-Regular.ttf")
+}
 
+@font-face {
+	font-family: "Inter";
+	src: url("../fonts/Alata/Inter/Inter-VariableFont_slnt,wght.ttf");
+	
+}
+.title {
+	font-family: 'Roboto', sans-serif;
+	font-size: 24px; /* Adjust the font size as needed */
+	font-weight: 700; /* Makes it bold. Use 400 for normal weight */
+  }
 
 /*added */
 ::-webkit-scrollbar{
@@ -33,7 +53,61 @@
     background: #555;
 }
 
+/*added avatar for profile pic styling on ProfilePage*/
+.avatar {
+	vertical-align: middle;
+	width: 200px;
+	height: 200px;
+	border-radius: 100%;
+	/*border-width: 1px; */
+	border-color: gray;
+	border-style: outset;
+}
+/*added chosen site colors*/
+.bg-lightgray {
+	background-color: #f9f9f9; /* Light Gray */
+  }
+.text-navyblue {
+	color: #004064
+}
+.bg-navyblue {
+	color: #004064
+}
+.bg-lightblue {
+	color: #38B6FF
+}
+.border-navyblue {
+	color: #004064
+}
+.text-lightblue {
+	color: #38B6FF
+}
+.border-lightblue {
+	color: #38B6FF
+}
+.text-orange {
+	color: #F9A332
+}
+.border-orange {
+	color: #F9A332
+}
+.bg-orange {
+	color: #F9A332
+}
 
+
+
+
+
+.navBar-avatar {
+	vertical-align: middle;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	/*border-width: 1px; */
+	border-color: gray;
+	border-style: outset;
+}
 nav {
 	display: flex;
 	align-items: center;
@@ -123,67 +197,213 @@ nav {
   }
   
   .searchbar {
-	border-radius: 15px;
+	border-radius: 30px;
 	padding: 10px;
-	border: 1px solid #ccc;
+	padding-left: 20px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
 	width: 70%; /* Adjust the width as needed */
-  }
-
-
-
-
-  .featured-lists {
-	padding-top: 10%;
-	margin: 100px;
-	text-align: center; /* Center the cards */
-  }
-  
-  .card-container {
+	align-items: center;
+	justify-content: center;
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: center; 
+	margin: 0;
   }
-  
-  .card {
-	margin: 10px;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 15px;
-	width: 300px;
-  }
-  
-  .card img {
-	width: 100%;
-	height: auto;
-	border-radius: 5px;
-  }
-  
-  .card-content {
-	padding: 10px;
-  }
-  
-  @media (max-width: 768px) {
-	.card {
-	  width: calc(100% - 20px);
-	}
-  }
-  
 
-  .footer {
-	display: flex;
-	justify-content: space-around;
-	flex-wrap: wrap;
-  }
-  
-  .footer-section {
-	flex: 1 1 25%;
-	margin-bottom: 20px;
-  }
-  
-  @media (max-width: 768px) {
-	.footer {
-	  flex-direction: column;
-	  align-items: center;
-	}
-  }
-  
+h1.big-header {
+/* Sign up */
+
+position: absolute;
+width: 546px;
+height: 72px;
+left: 140px;
+top: 183px;
+
+font-family: 'Futura';
+font-style: normal;
+font-weight: 500;
+font-size: 48px;
+line-height: 72px;
+/* identical to box height, or 150% */
+
+/* Navy Blue */
+color: #004D73;
+}
+
+input.name{
+/* Frame 48 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 21px 31px;
+gap: 10px;
+
+position: absolute;
+width: 475px;
+height: 76px;
+left: 139px;
+top: 272px;
+font-family: 'Futura';
+font-style: normal;
+
+border: 2px solid #000000;
+border-radius: 50px;
+}
+
+input.email{
+/* Frame 40 */
+
+/* Auto layout */
+/* Frame 40 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 21px 31px;
+gap: 10px;
+
+position: absolute;
+width: 475px;
+height: 76px;
+left: 140px;
+top: 366px;
+
+font-family: 'Futura';
+font-style: normal;
+
+border: 2px solid #000000;
+border-radius: 50px;
+}
+
+input.pass{
+	/* Frame 41 */
+
+/* Auto layout */
+/* Frame 41 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 21px 31px;
+gap: 10px;
+
+position: absolute;
+width: 475px;
+height: 76px;
+left: 140px;
+top: 460px;
+
+font-family: 'Futura';
+font-style: normal;
+
+border: 2px solid #000000;
+border-radius: 50px;
+}
+
+.submit-button{
+	/* Frame 42 */
+
+/* Auto layout */
+/* Frame 42 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 17px 163px;
+gap: 10px;
+
+font-family: 'Futura';
+font-style: normal;
+
+position: absolute;
+width: 475px;
+height: 76px;
+left: 140px;
+top: 554px;
+
+/* Navy Blue
+
+Primary
+*/
+background: #004D73;
+color: white; 
+border-radius: 50px;
+
+}
+
+.extra{
+	/* Already have an account? Sign in */
+
+/* or */
+position: absolute;
+/* width: 20px; */
+height: 21px;
+left: 220px;
+top: 664px;
+
+font-family: 'Futura';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 27px;
+text-align: center;
+
+color: #6C6C6C;
+}
+
+.link-to-su{
+	/* Frame 43 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 17px 163px;
+gap: 10px;
+
+position: absolute;
+width: 475px;
+height: 76px;
+left: 140px;
+top: 723px;
+
+font-family: 'Futura';
+font-style: normal;
+
+/* Grey */
+background: #D9D9D9;
+border-radius: 50px;
+
+}
+
+.logo-img{
+	/* Frame 47 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 147px 129px;
+gap: 10px;
+
+position: absolute;
+width: 900px;
+height: 900px;
+left: 600px;
+top: 70px;
+
+/* background: #D9D9D9; */
+
+}

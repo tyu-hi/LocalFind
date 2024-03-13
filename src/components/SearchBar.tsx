@@ -12,8 +12,11 @@ import { IoIosSearch } from "react-icons/io";
 */}
 
 interface SearchBarProps {
+
   defaultValue?: string;
   onSubmit: (searchValue: string) => void;
+  className?: string; 
+  
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ defaultValue = "", onSubmit }) => {
@@ -30,9 +33,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ defaultValue = "", onSubmit }) =>
 
   return (
     <form onSubmit={handleSubmit} className="relative">
-      <div className="bar flex items-center bg-white">
+      <div className="bar flex items-center ">
         <input
-          className="searchbar bg-white text-gray-600"
+          className="searchbar bg-white text-gray-600 p-3"
           placeholder="Enter location!"
           type="text"
           title="Search"
@@ -41,6 +44,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ defaultValue = "", onSubmit }) =>
         />
         <button type="submit">
           <IoIosSearch size={32} className="ml-1" />
+          
         </button>
       </div>
     </form>

@@ -3,10 +3,12 @@ import './App.css';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
-import SignUpForm from './components/SignUpForm';
+import SignUpForm from './pages/SignUpPage';
 import AddRestaurantPage from './pages/AddRestaurantPage';
 import RestaurantView from './pages/RestaurantView';
-import DestinationPage from './pages/DestinationPage';
+import SearchPage from './pages/SearchPage';
+import UserSurvey from './pages/UserSurvey';
+import AboutPage from './pages/AboutPage';
 
 const App: React.FC = () => {
   return (
@@ -17,8 +19,10 @@ const App: React.FC = () => {
         <Route path="/profile" element={<ProfilePage/>} />
         <Route path="/signup" element={<SignUpForm/>} />
         <Route path="/addrestraunt" element={<AddRestaurantPage/>} />
-        <Route path="/view" element={<RestaurantView/>} />
-        <Route path="/destination" element={<DestinationPage/>} />
+        <Route path="/view/:id" element={<RestaurantView/>} />
+        <Route path="/search" element={<SearchPage/>} />
+        <Route path="/survey" element={<UserSurvey/>} />
+        <Route path="/about" element={<AboutPage/>} />
       </Routes>
     </Router>
   );
