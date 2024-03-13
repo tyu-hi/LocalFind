@@ -94,102 +94,116 @@ const UserSurvey = () => {
   }
 }
   return (
-      <div>
-        <NavBar/>
-        <form onSubmit={signUp}>
-          <h1> Create An Account</h1>
-          <label htmlFor="firstname">First Name:</label>
-          <input
-                    type="text"
-                    name="firstname"
-                    placeholder="your first name"
-                    value={firstname}
-                    onChange={(e) => setFirstName(e.target.value)}
-          ></input>
-          <label htmlFor="lastname">Last Name:</label>
-          <input
-                    type="text"
-                    name="lastname"
-                    placeholder="your last name"
-                    value={lastname}
-                    onChange={(e) => setLastName(e.target.value)}
-          ></input>
-          <label htmlFor="location">Where is your location:</label>
-          <input
-                    type="text"
-                    name="location"
-                    placeholder="location"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-          ></input>
-          <label htmlFor="favorite-cuisine">Select your favorite cuisine:</label>
-          <select
-            value={favoriteCuisine}
-            onChange={(e) => setFavoriteCuisine(e.target.value)}
-            required
-          >
-            {cuisines.map((cuisine, index) => (
-              <option key={index} value={cuisine}>
-                {cuisine}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="second-favorite-cuisine">
-            Select your second favorite cuisine:
-          </label>
-          <select
-            value={secondFavoriteCuisine}
-            onChange={(e) => setSecondFavoriteCuisine(e.target.value)}
-            required
-          >
-            {cuisines.map((cuisine, index) => (
-              <option key={index} value={cuisine}>
-                {cuisine}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="third-favorite-cuisine">
-            Select your third favorite cuisine:
-          </label>
-          <select
-            value={thirdFavoriteCuisine}
-            onChange={(e) => setThirdFavoriteCuisine(e.target.value)}
-            required
-          >
-            {cuisines.map((cuisine, index) => (
-              <option key={index} value={cuisine}>
-                {cuisine}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="preferredPriceRange">preferred price range? :</label>
-          <select
-            value={preferredPriceRange}
-            onChange={(e) => setPreferredPriceRange(e.target.value)}
-            required
-          >
-            {costRange.map((cost, index) => (
-              <option key={index} value={cost}>
-                {cost}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="mode">What is your preferred way to get food?:</label>
-          <select
-            value={modeOfFood}
-            onChange={(e) => setModeOfFood(e.target.value)}
-            required
-          >
-            {modeOfFoodOptions.map((modeOptions, index) => (
-              <option key={index} value={modeOptions}>
-                {modeOptions}
-              </option>
-            ))}
-          </select>
-          <button type="submit">Sign Up</button>
-        </form>
-        Already have an account? <Link to="/login">Login</Link>
-      </div>
+    <div className="container mx-auto p-4">
+  <NavBar />
+  <form onSubmit={signUp} className="flex flex-col space-y-4 bg-white p-8 shadow-lg rounded-lg">
+    <h1 className="text-2xl font-bold">Create An Account</h1>
+    <label htmlFor="firstname" className="font-medium">First Name:</label>
+    <input
+      className="form-input px-4 py-2 border rounded"
+      type="text"
+      name="firstname"
+      placeholder="your first name"
+      value={firstname}
+      onChange={(e) => setFirstName(e.target.value)}
+    ></input>
+    <label htmlFor="lastname" className="font-medium">Last Name:</label>
+    <input
+      className="form-input px-4 py-2 border rounded"
+      type="text"
+      name="lastname"
+      placeholder="your last name"
+      value={lastname}
+      onChange={(e) => setLastName(e.target.value)}
+    ></input>
+    <label htmlFor="location" className="font-medium">Where is your location:</label>
+    <input
+      className="form-input px-4 py-2 border rounded"
+      type="text"
+      name="location"
+      placeholder="location"
+      value={location}
+      onChange={(e) => setLocation(e.target.value)}
+    ></input>
+    <label htmlFor="favorite-cuisine" className="font-medium">Select your favorite cuisine:</label>
+    <select
+      className="form-select px-4 py-2 border rounded"
+      value={favoriteCuisine}
+      onChange={(e) => setFavoriteCuisine(e.target.value)}
+      required
+    >
+      {cuisines.map((cuisine, index) => (
+        <option key={index} value={cuisine}>
+          {cuisine}
+        </option>
+      ))}
+    </select>
+    <label htmlFor="second-favorite-cuisine" className="font-medium">
+      Select your second favorite cuisine:
+    </label>
+    <select
+      className="form-select px-4 py-2 border rounded"
+      value={secondFavoriteCuisine}
+      onChange={(e) => setSecondFavoriteCuisine(e.target.value)}
+      required
+    >
+      {cuisines.map((cuisine, index) => (
+        <option key={index} value={cuisine}>
+          {cuisine}
+        </option>
+      ))}
+    </select>
+    <label htmlFor="third-favorite-cuisine" className="font-medium">
+      Select your third favorite cuisine:
+    </label>
+    <select
+      className="form-select px-4 py-2 border rounded"
+      value={thirdFavoriteCuisine}
+      onChange={(e) => setThirdFavoriteCuisine(e.target.value)}
+      required
+    >
+      {cuisines.map((cuisine, index) => (
+        <option key={index} value={cuisine}>
+          {cuisine}
+        </option>
+      ))}
+    </select>
+    <label htmlFor="preferredPriceRange" className="font-medium">preferred price range? :</label>
+    <select
+      className="form-select px-4 py-2 border rounded"
+      value={preferredPriceRange}
+      onChange={(e) => setPreferredPriceRange(e.target.value)}
+      required
+    >
+      {costRange.map((cost, index) => (
+        <option key={index} value={cost}>
+          {cost}
+        </option>
+      ))}
+    </select>
+    <label htmlFor="mode" className="font-medium">What is your preferred way to get food?:</label>
+    <select
+      className="form-select px-4 py-2 border rounded"
+      value={modeOfFood}
+      onChange={(e) => setModeOfFood(e.target.value)}
+      required
+    >
+      {modeOfFoodOptions.map((modeOptions, index) => (
+        <option key={index} value={modeOptions}>
+          {modeOptions}
+        </option>
+      ))}
+    </select>
+    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Sign Up
+    </button>
+  </form>
+  <div className="text-center">
+    Already have an account? <Link to="/login" className="text-blue-500 hover:text-blue-700">Login</Link>
+  </div>
+</div>
+
+  
     );
 
 }
