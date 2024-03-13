@@ -86,7 +86,7 @@ const SignUpPage = () => {
           type="Name"
           placeholder="Name"
           value={name}
-          className="name bg-white"
+          className="username bg-white"
           onChange={(e) => setName(e.target.value)}
           required
         ></input>

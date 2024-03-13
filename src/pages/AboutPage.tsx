@@ -11,8 +11,14 @@ import sophia from "../components/sophia.jpg"
 import tingyu from "../components/tingyu.png"
 import naomi from "../components/naomi.jpg"
 
+import { useNavigate } from "react-router-dom";
+
+
 
 const AboutPage = () => {
+
+  const navigate = useNavigate();
+
   return (
     <div>
         <NavBar/>
