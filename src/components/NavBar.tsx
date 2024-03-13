@@ -34,7 +34,7 @@ const NavBar = () => {
 							
 							<Link to="/" className='hover:text-blue-800'>home</Link>
 							<Link to="/search" className='hover:text-blue-800'>search</Link>
-							<Link to="about" className='hover:text-blue-800'>about</Link>
+							<Link to="/about" className='hover:text-blue-800'>about</Link>
 							<Link to="/addrestraunt" className='hover:text-blue-800'>add business</Link>
 							<Link to="/profile">
 								<img src={currentUser.photoURL ?? 'public/Default_pfp.svg.png'} 
