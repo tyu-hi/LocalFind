@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   APIProvider,
   Map,
@@ -8,13 +8,70 @@ import {
   Pin,
   InfoWindow,
 } from "@vis.gl/react-google-maps";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { FIREBASE_FIRESTORE } from "../firebase/firebase";
 
 // let geocoder: google.maps.Geocoder;
 
 const key = "";
 
 export default function Maps() {
-  //geocoder = new google.maps.Geocoder();
+  const [restaurants, setRestaurants] = useState<
+    {
+      id: string;
+      address: string;
+      restaurantName: string;
+      city: string;
+      foodStyle: string;
+      price: number;
+      imageURL: string;
+    }[]
+  >([]);
+  useEffect(() => {
+    const fetchRestaurants = async () => {
+      const q = query(collection(FIREBASE_FIRESTORE, "restaurants"));
+      const querySnapshot = await getDocs(q);
+      const fetchedRestaurants: {
+        id: string;
+        address: string;
+        restaurantName: string;
+        city: string;
+        foodStyle: string;
+        price: number;
+        imageURL: string;
+      }[] = [];
+      querySnapshot.forEach((doc) => {
+        const restaurantData = doc.data();
+        fetchedRestaurants.push({
+          id: doc.id,
+          address:
+            restaurantData.address ||
+            "Search up a city and we will recommend you a local restaurant!",
+          restaurantName:
+            restaurantData.restaurantName || "What do you want to eat?",
+          city: restaurantData.city || "Default City",
+          foodStyle: restaurantData.foodStyle || "Feeling a specific cuisine?",
+          price: restaurantData.price || "Have a price range?",
+          imageURL:
+            restaurantData.imageURL ||
+            "https://static.thenounproject.com/png/1181336-200.png", //Local Find logo?
+        });
+      });
+
+      setRestaurants(fetchedRestaurants);
+    };
+    fetchRestaurants();
+  }, []);
+
+  for (let i = 0; i < restaurants.length; i++) {
+    getCoords(restaurants[i].address).then((data) =>
+      markers.push({
+        lat: data["results"]["0"]["geometry"]["location"]["lat"],
+        lng: data["results"]["0"]["geometry"]["location"]["lng"],
+      })
+    );
+  }
+
   const position = { lat: 34.072208404541016, lng: -118.44091796875 };
   return (
     <APIProvider apiKey={key}>
@@ -44,17 +101,6 @@ async function getCoords(address: string) {
   let data = await response.json();
   return data;
 }
-
-// USE THIS CODE TO ADD MORE MARKERS W ADDRESSES
-getCoords("405 hilgard ave los angeles").then(
-  (data) => (
-    console.log(data["results"]["0"]["geometry"]["location"]["lat"]),
-    markers.push({
-      lat: data["results"]["0"]["geometry"]["location"]["lat"],
-      lng: data["results"]["0"]["geometry"]["location"]["lng"],
-    })
-  )
-);
 
 const markers = [{ lat: 0, lng: 0 }];
 
