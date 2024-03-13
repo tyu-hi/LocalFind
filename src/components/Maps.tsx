@@ -15,19 +15,11 @@ const key = "";
 
 export default function Maps() {
   //geocoder = new google.maps.Geocoder();
-  getCoords();
   const position = { lat: 34.072208404541016, lng: -118.44091796875 };
   return (
     <APIProvider apiKey={key}>
       <div style={{ height: "40vh", width: "auto" }}>
         <Map zoom={17} center={position} mapId={""}>
-          <AdvancedMarker position={position}>
-            <Pin
-              background={"red"}
-              borderColor={"green"}
-              glyphColor={"darkred"}
-            />
-          </AdvancedMarker>
           <Markers points={markers} />
         </Map>
       </div>
@@ -41,42 +33,30 @@ const geocode = async (address) => {
 };
 */
 
-function getCoords(): google.maps.LatLngLiteral {
-  let request = new XMLHttpRequest();
-  request.open(
-    "GET",
-    "https://maps.googleapis.com/maps/api/geocode/json?address=821+rigel+ln+foster+city+ca+94404&key=" +
+async function getCoords(address: string) {
+  let fixedAddress = encodeURIComponent(address);
+  let response = await fetch(
+    "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+      fixedAddress +
+      "&key=" +
       key
   );
-  request.send();
-  let obj;
-  request.onload = () => {
-    console.log(request);
-    if (request.status === 200) {
-      // by default the response comes in the string format, we need to parse the data into JSON
-      obj = JSON.parse(request.response);
-      console.log(obj);
-      console.log("hi im here" + request.response["0"]["geometry"]);
-      //return {lat:obj.results.geometry.location.lat, lng:obj.results.geometry.location.lat};
-    } else {
-      console.log("heyo");
-      // console.log(`error ${request.status} ${request.statusText}`);
-    }
-  };
-  return { lat: 0, lng: 0 };
+  let data = await response.json();
+  return data;
 }
 
-const markers = [
-  { lat: 34.072208404541016, lng: -118.44091796875 },
-  { lat: 35.072208404541016, lng: -118.44091796875 },
-  { lat: 36.072208404541016, lng: -118.44091796875 },
-  { lat: 37.072208404541016, lng: -118.44091796875 },
-  { lat: 38.072208404541016, lng: -118.44091796875 },
-  { lat: 39.072208404541016, lng: -118.44091796875 },
-  { lat: 40.072208404541016, lng: -118.44091796875 },
-  { lat: 41.072208404541016, lng: -118.44091796875 },
-  getCoords(),
-];
+// USE THIS CODE TO ADD MORE MARKERS W ADDRESSES
+getCoords("405 hilgard ave los angeles").then(
+  (data) => (
+    console.log(data["results"]["0"]["geometry"]["location"]["lat"]),
+    markers.push({
+      lat: data["results"]["0"]["geometry"]["location"]["lat"],
+      lng: data["results"]["0"]["geometry"]["location"]["lng"],
+    })
+  )
+);
+
+const markers = [{ lat: 0, lng: 0 }];
 
 type Point = google.maps.LatLngLiteral;
 type Props = { points: Point[] };
