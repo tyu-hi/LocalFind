@@ -657,3 +657,20 @@ left: 1040px;
 .dev-3{
 left: 1020px;
 }
+
+.new{
+position: absolute;
+/* width: 20px; */
+height: 21px;
+left: 300px;
+top: 664px;
+
+font-family: 'Futura';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 27px;
+text-align: center;
+
+color: #6C6C6C;
+}

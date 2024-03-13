@@ -48,7 +48,7 @@ const LoginPage = () => {
                 onChange = {(e) => setPassword(e.target.value)}></input>
                 
                 <button type = "submit" className="submit-button hover:bg-blue-900">Sign In</button>
-                <hr />
+                <div className="new">New to Local Find? </div>
                 <Link to="/signup" ><button className='link-to-su hover:bg-gray-300'>Sign Up</button></Link>
             </form>
             <img src={logo} alt="Brand Logo" className="logo-img"></img>
