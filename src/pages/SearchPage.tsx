@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import SearchBar from "../components/SearchBar";
+import Maps from "../components/Maps";
 import { useLocation } from "react-router-dom";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { FIREBASE_FIRESTORE } from "../firebase/firebase";
@@ -231,6 +232,7 @@ const SearchPage = () => {
         <div className="col-span-1 ml-20">
           <div className="bg-gray-200 p-4">
             <h2 className="text-lg font-semibold mb-4">Map</h2>
+            <Maps />
           </div>
         </div>
       </div>

@@ -9,11 +9,6 @@ import {
   InfoWindow,
 } from "@vis.gl/react-google-maps";
 
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-
 // let geocoder: google.maps.Geocoder;
 
 const key = "";
@@ -24,7 +19,7 @@ export default function Maps() {
   const position = { lat: 34.072208404541016, lng: -118.44091796875 };
   return (
     <APIProvider apiKey={key}>
-      <div style={{ height: "40vh", width: "40vw" }}>
+      <div style={{ height: "40vh", width: "auto" }}>
         <Map zoom={17} center={position} mapId={""}>
           <AdvancedMarker position={position}>
             <Pin
