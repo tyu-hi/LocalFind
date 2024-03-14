@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import NavBar from "../components/NavBar";
 import ReviewList from "../components/ReviewList";
 import ReviewForm from "../components/ReviewForm";
+import Maps from "../components/Maps";
 import {
   FIREBASE_APP,
   FIREBASE_AUTH,
@@ -178,7 +179,12 @@ function RestaurantView() {
                 Reviews
               </h1>
               <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
-                <ReviewList restaurantId={id}/>
+                <ReviewList restaurantId={id || ""} />
+              </div>
+
+              <h1 className="mb-4 text-black px-4 text-xl font-medium">Map</h1>
+              <div className="new-section bg-gray-100 p-4 mb-6 rounded-lg">
+                <Maps />
               </div>
             </div>
 

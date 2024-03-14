@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Rating from "@mui/material/Rating";
-import { FIREBASE_FIRESTORE, FIREBASE_AUTH } from "../firebase/firebase";
-import { collection } from "firebase/firestore";
+import { FIREBASE_FIRESTORE, FIREBASE_AUTH, FIREBASE_APP } from "../firebase/firebase";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+
 
 interface ReviewFormProps {
   restaurantId: string;
@@ -18,31 +19,38 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ restaurantId }: ReviewFormProps
     setComment(e.target.value);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    //working to fix this to match the userProfile logic
-    
-    // e.preventDefault();
-    // const userId = FIREBASE_AUTH.currentUser?.uid; // Get logged-in user's ID
-    // if (!userId) {
-    //   console.error("User not authenticated");
-    //   return;
-    // }
-    // try {
-    //   // Add the review to Firestore
-    //   await firestore.collection("reviews").add({
-    //     userId: userId,
-    //     restaurantId: restaurantId,
-    //     rating: rating,
-    //     comment: comment,
-    //   });
-    //   // Reset form fields
-    //   setRating(0);
-    //   setComment("");
-    //   console.log("Review submitted successfully");
-    // } catch (error) {
-    //   console.error("Error submitting review:", error);
-    // }
-  };
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault(); // Prevent default form submission behavior
+  const userId = FIREBASE_AUTH.currentUser?.uid; // Get logged-in user's ID
+  if (!userId) {
+    console.error("User not authenticated");
+    return;
+  }
+  try {
+    // Access Firestore instance
+    const firestore = getFirestore(FIREBASE_APP);
+
+    // Add the review to Firestore
+    await addDoc(collection(firestore, "reviews"), {
+      userId: userId,
+      restaurantId: restaurantId,
+      rating: rating,
+      comment: comment,
+    });
+
+    // Reset form fields
+    setRating(0);
+    setComment("");
+    console.log("Review submitted successfully");
+  } catch (error) {
+    console.error("Error submitting review:", error);
+  }
+};
+
+
+
+
 
   return (
    
