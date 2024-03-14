@@ -3,11 +3,10 @@ import NavBar from "../components/NavBar"
 //import { DefaultProfile } from "../svg-icons.tsx/DefaultProfile"
 import { useAuth, upload } from "../firebase/firebase";
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
-import { addDoc, doc, collection, getDocs, query, where, setDoc } from "firebase/firestore";
+import { doc, collection, getDocs, query, where, setDoc } from "firebase/firestore";
 import { signOut } from 'firebase/auth';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Map from '../components/Maps'
 import { CiEdit } from "react-icons/ci";
 import Playlists from "../components/Playlists";
 //After use is logged in, I would like for the signup/sign in to disappear, 
