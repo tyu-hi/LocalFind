@@ -11,19 +11,17 @@ import sophia from "../components/sophia.jpg"
 import tingyu from "../components/tingyu.png"
 import naomi from "../components/naomi.jpg"
 
-import { useNavigate } from "react-router-dom";
 
 
 
 const AboutPage = () => {
 
-  const navigate = useNavigate();
 
   return (
     <div>
         <NavBar/>
 
-        <h1 className='about-title'>Local Find</h1>
+        <h1 className='about-title font-alata'>Local Find</h1>
         <p className='about-description'>We are local food hunt apps that recommend authentic local street vendors/food 
           trucks/small restaurants to the users. This project aims to increase local food owners' 
           brand visibility to the customers as the leading food reviews website often shows franchises 
