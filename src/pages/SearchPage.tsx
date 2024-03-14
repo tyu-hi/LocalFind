@@ -88,7 +88,7 @@ const SearchPage = () => {
       <SearchBar onSubmit={handleSubmit} defaultValue={queryParam} />
 
       {/*[300px_300px_300px] sets the individual width of each of the 3 columns in tailwind*/}
-      <div className="mx-auto grid grid-cols-[400px_600px_300px] mt-20">
+      <div className="mx-auto grid grid-cols-[400px_600px_600px] mt-20">
         {/* Sort by filters */}
         <div className="col-span-1">
           <div className="p-4 font-alata ml-20">
@@ -233,7 +233,7 @@ const SearchPage = () => {
         {/* Map */}
         <div className="col-span-1 ml-20">
 
-          <div className="bg-gray-200 p-4">
+          <div className=" p-4">
             <h2 className="text-lg font-semibold mb-4">Map</h2>
             <Maps />
           </div>
