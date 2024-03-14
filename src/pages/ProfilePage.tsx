@@ -1,13 +1,12 @@
 import NavBar from "../components/NavBar"
-
+import { IoMdStarOutline } from "react-icons/io";
 //import { DefaultProfile } from "../svg-icons.tsx/DefaultProfile"
 import { useAuth, upload } from "../firebase/firebase";
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from "../firebase/firebase";
-import { addDoc, doc, collection, getDocs, query, where, setDoc } from "firebase/firestore";
+import { doc, collection, getDocs, query, where, setDoc } from "firebase/firestore";
 import { signOut } from 'firebase/auth';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Map from '../components/Maps'
 import { CiEdit } from "react-icons/ci";
 import Playlists from "../components/Playlists";
 //After use is logged in, I would like for the signup/sign in to disappear, 
@@ -219,13 +218,52 @@ const ProfilePage = () => {
             
 
             {/*reviews*/}
-            <div className="flex-row mt-10 text-lg">
+            <div className=" mt-10 text-lg mb-3 ">
               Your Reviews
-              <div className="bg-gray-200 border p-4 mt-3">
-                render reviews component by user
-              </div>
             </div>
+            <div className="flex flex-row text-lg">
+              
+              <div className="border border-2 border-orange rounded-lg text-gray-800 p-4 mr-5">
+                <div className="text-gray-800 text-lg">
+                  Title
+                  <div className="flex flex-row">
+                    <IoMdStarOutline />
+                    <IoMdStarOutline />
+                    <IoMdStarOutline />
+                    <IoMdStarOutline />
+                    <IoMdStarOutline />
+                  </div>
+                </div>
+                <div className="text-gray-500 text-sm">
+                   Restaurant
+                </div>
+                <div className="text-gray-800 text-md mt-4">
+                  Lorem ipsum...
 
+                </div>
+              </div>
+              <div className="border border-2 border-orange rounded-lg text-gray-800 p-4 ">
+                <div className="text-gray-800 text-lg">
+                  Title
+                  <div className="flex flex-row">
+                    <IoMdStarOutline />
+                    <IoMdStarOutline />
+                    <IoMdStarOutline />
+                    <IoMdStarOutline />
+                    <IoMdStarOutline />
+                  </div>
+                </div>
+                <div className="text-gray-500 text-sm">
+                   Restaurant
+                </div>
+                <div className="text-gray-800 text-md mt-4">
+                  Lorem ipsum...
+
+                </div>
+              </div>
+      
+
+            </div>
           </div>
 
           {/*log out user*/}

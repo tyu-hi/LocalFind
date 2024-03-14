@@ -493,7 +493,7 @@ const AddRestaurantForm: React.FC = () => {
                 //onChange={handleImageChange}
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                placeholder='Enter Phone Number'
+                placeholder='Enter a Phone Number'
                 className="w-full px-3 py-2 bg-white border border-2 border-gray-800 rounded-md focus:outline-none focus:ring-indigo-600 focus:border-indigo-500 sm:text-sm"
               />
             </div>
