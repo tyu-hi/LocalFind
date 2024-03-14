@@ -218,13 +218,7 @@ const ProfilePage = () => {
             
 
             {/*reviews*/}
-            <div className="flex-row mt-10 text-lg">
-              Your Reviews
-              <div className="bg-gray-200 border p-4 mt-3">
-                render reviews component by user
-              </div>
-            </div>
-
+            
           </div>
 
           {/*log out user*/}
