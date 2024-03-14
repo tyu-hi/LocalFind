@@ -165,12 +165,12 @@ const Playlists = () => {
             querySnapshot.forEach((doc) => {
               const data = doc.data();
               setPlaylistNameA(data.playlistNameA);
-              setPlaylistNameB(data.playlistNameA);
-              setPlaylistNameC(data.playlistNameA);
+              setPlaylistNameB(data.playlistNameB);
+              setPlaylistNameC(data.playlistNameC);
 
               setPlaylistImageA(data.playlistImageA);
               setPlaylistImageB(data.playlistImageB);
-              setPlaylistImageB(data.playlistImageC);
+              setPlaylistImageC(data.playlistImageC);
 
               AsetPlaylistRestaurant1(data.AplaylistRestaurant1);
               AsetPlaylistRestaurant2(data.AplaylistRestaurant2);
@@ -1053,7 +1053,7 @@ const Playlists = () => {
             onClick={handleAddFalseB}>
             Submit
           </button>
-          </form>
+        </form>
 
 
         </div>
@@ -1395,7 +1395,7 @@ const Playlists = () => {
                           type="text"
                           name="CplaylistRestaurant5"
                           placeholder="Enter Restaurant Name"
-                          value={CplaylistRestaurant3}
+                          value={CplaylistRestaurant5}
                           onChange={(e) => CsetPlaylistRestaurant5(e.target.value)}
                           className="w-full px-3 py-2 bg-white border border-gray-800 border-2 rounded-xl focus:outline-none focus:text-gray-900 focus:ring-indigo-600 focus:border-indigo-500 sm:text-sm mb-1"
                         />
@@ -1422,8 +1422,7 @@ const Playlists = () => {
             onClick={handleAddFalseC}>
             Submit
           </button>
-          </form>
-
+        </form>
 
         </div>
       </div>     
