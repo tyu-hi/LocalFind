@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+src/local-find-cl-firebase-adminsdk-i2nmm-be6679f30c.json
+src/firebase/firebase.ts
