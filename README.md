@@ -5,7 +5,7 @@ This is a website dedicated to introducing and supporting local restaurants to u
 Built with the following:
 - Design - Figma
 - Frontend - TypeScript, Tailwind CSS, React
-- Backend - Firebase
+- Backend - Firebase, Python
 
 ## About the site
 
